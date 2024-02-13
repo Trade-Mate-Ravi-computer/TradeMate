@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 //import java.util.logging.Logger;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-1j4p.vercel.app/"})
 @RequestMapping("/auth")
 public class AuthController {
  @Autowired

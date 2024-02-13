@@ -17,7 +17,7 @@ function Signup() {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization':`Bearer ${JSON.parse(localStorage.getItem('login')).token}` 
+                'Authorization':`Bearer ${localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).token:""}` 
               },
               body:JSON.stringify(singupDetails),
         }).then((resp)=>{

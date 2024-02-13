@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-1j4p.vercel.app/"})
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
@@ -25,5 +25,8 @@ public class UserController {
     public List<UserModel> getAllUsers(){
         return userService.getUsers();
     }
-
+@PostMapping("/byemail")
+    public UserModel getByEmail(@RequestBody UserModel user){
+        return userService.getByEmail(user.getEmail());
+}
 }

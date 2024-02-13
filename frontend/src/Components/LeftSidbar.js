@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 function LeftSidbar(props) {
-  console.log(props.opentab)
   return (
     <div>
       <div className=' border border-gray-100'>

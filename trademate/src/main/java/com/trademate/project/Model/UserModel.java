@@ -1,5 +1,6 @@
 package com.trademate.project.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,6 +28,12 @@ public class UserModel implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<StockItemModel> items;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<SaleModel> sales;
 
 
 

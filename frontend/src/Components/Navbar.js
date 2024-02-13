@@ -25,12 +25,12 @@ function Navbar(props) {
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <span className='flex flex-row'><img className="h-8 w-auto" src={favicon} alt="Your Company" /><span className='mx-2 my-auto font-semibold'><span>Trade</span><span className='text-red-600'>Mate</span></span></span>
+                <span className='flex flex-row'><img className="h-8 w-auto" src={favicon} alt="Trade Mate" /><span className='mx-2 my-auto font-semibold'><span>Trade</span><span className='text-red-600'>Mate</span></span></span>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
 
-                  <NavLink to="/" className=" text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</NavLink>
+                  <NavLink to="/" className=" text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{localStorage.getItem('login')?"Dashboard":"Home"}</NavLink>
                   {/* <NavLink to="/dashboard" className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</NavLink> */}
                   <NavLink to="/contact" className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</NavLink>
                   <NavLink to="/" className="text-gray-500 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</NavLink>
@@ -40,7 +40,7 @@ function Navbar(props) {
 
             <div className="relative ml-3">
               <div>
-                <button type="button" onClick={handleOnClick} className="relative p-2 flex border hover:border-grey-500 hover:text-white rounded-xl hover:bg-gray-800 hover:font-medium" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <button type="button" onClick={handleOnClick} className="relative py-2 px-4 flex border hover:border-grey-100 rounded-xl hover:bg-gray-200 transition-all" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   {store ? store.user : "Sign-Up"}
                 </button>
               </div>
