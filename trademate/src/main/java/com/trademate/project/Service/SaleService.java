@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,5 +57,9 @@ public class SaleService {
     }
     public List<SaleModel> salesWithRemainingBalance(){
         return saleRepository.salesWithRemainingBalance();
+    }
+    public List<SaleModel> grtById(long id){
+       SaleModel sale = saleRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("Not Found"));
+        return saleRepository.findByNameAndDate(sale.getCustomerName(),sale.getDate());
     }
 }

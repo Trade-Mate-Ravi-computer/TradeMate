@@ -4,6 +4,8 @@ import com.trademate.project.Model.SaleModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,5 +22,7 @@ public interface SaleRepository extends JpaRepository<SaleModel, Long> {
     List<SaleModel> salesWithRemainingBalance();
     @Query("select sum(s.profit) as sumOfProfit,sum(s.remaining) as sumOfRemaining,sum(s.totalAmmount) as sumOfTotalAmmount from SaleModel s")
     Map<String,Integer> sumOfTotalRemaining();
+    @Query("select s from SaleModel s where customerName = ?1 and date = ?2")
+    List<SaleModel> findByNameAndDate(String name, LocalDate date);
 
 }

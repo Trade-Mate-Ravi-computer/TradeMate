@@ -78,4 +78,8 @@ public class SaleController {
     public Object sumOfprofitByYear(@PathVariable int year){
         return saleRepository.sumOfRemainingByYear(year);
     }
+    @PostMapping("/byid/{id}")
+    public List<SaleModel> findById(@PathVariable long id){
+        return saleService.grtById(id);
+    }
 }
