@@ -145,45 +145,45 @@ console.log("Something went wrong")
                     <div className='flex '>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl'>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Profit in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{profitData.sumOfProfit}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">{profitData.sumOfProfit}</div>
                         </div>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl '>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Revenue in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{profitData.sumOfTotalAmmount}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">{profitData.sumOfTotalAmmount}</div>
                         </div>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl'>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Remaining in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{profitData.sumOfRemaining}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-red-600">{profitData.sumOfRemaining}</div>
                         </div>
                     </div>
                     <div className='w-full bg-green-700 p-1 text-white rounded-md text-center'>{`${currentYear} `} Report</div>
                     <div className='flex '>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl'>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Profit in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{yearlyData.sumOfProfit}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">{yearlyData.sumOfProfit}</div>
                         </div>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl '>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Revenue in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{yearlyData.sumOfTotalAmmount}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">{yearlyData.sumOfTotalAmmount}</div>
                         </div>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl'>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Remaining in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{yearlyData.sumOfRemaining}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-red-600">{yearlyData.sumOfRemaining}</div>
                         </div>
                     </div>
                     <div className='w-full bg-green-700 p-1 text-white rounded-md text-center'>All Time Report</div>
                     <div className='flex '>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl'>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Profit in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{allReport.sumOfProfit}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">{allReport.sumOfProfit}</div>
                         </div>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl '>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Revenue in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{allReport.sumOfTotalAmmount}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">{allReport.sumOfTotalAmmount}</div>
                         </div>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl'>
                             <div className=" text-green-600 font-bold border  border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Remaining in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-green-600">{allReport.sumOfRemaining}</div>
+                            <div className="flex justify-center m-6 font-bold text-3xl text-red-600">{allReport.sumOfRemaining}</div>
                         </div>
                     </div>
                 </div>
