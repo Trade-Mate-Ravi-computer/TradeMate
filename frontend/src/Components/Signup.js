@@ -39,7 +39,7 @@ setSingupDetails({
                 Welcome to <span className='text-semibold'>Trade</span><span className='text-red-400 font-bold'>Mate</span>
             </div>
             <div className='grid grid-cols-2 m-10'>
-                <div className="col1 flex justify-between p-12 flex-wrap">
+                <div className="col1 flex justify-between p-12 flex-wrap mt-20">
                     <Carasoul />
                     <Carasoul />
 
@@ -90,7 +90,7 @@ setSingupDetails({
                             </div> */}
 
                             <div>
-                                <button type="submit"  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
+                                <button type="submit"  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add User</button>
                             </div>
                             <div className="text-sm flex justify-end">
                                 <p className='mx-2'>Allready have an account </p><a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign in</a>

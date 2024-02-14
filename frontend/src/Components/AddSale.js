@@ -82,7 +82,8 @@ function AddSale() {
         setSaleDetail(prevSale => ({
             ...prevSale,
             [name]: value,
-            saleUserId: id
+            saleUserId: id,
+            itemName:sale
         }));
 
     }
