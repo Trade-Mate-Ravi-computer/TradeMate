@@ -18,6 +18,7 @@ function UpdateProduct() {
        
     }
     const {id} = useParams()
+    // console.log(id)
     const handleOnSubmit = (e)=>{
         e.preventDefault()
     fetch(`http://localhost:8080/stock/updateStock`,{
