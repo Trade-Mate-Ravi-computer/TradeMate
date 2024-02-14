@@ -55,7 +55,7 @@ function ProductLists() {
                             </tr>
                         </thead>
                         {productDetailss.reverse().map((productDetails, index) => (
-                          shortData?!productDetails.itemName.includes(shortData)?'':  <tbody key={index + 1} className='border border-x-2 my-10'>
+                          shortData?!productDetails.itemName.toLowerCase().includes(shortData.toLowerCase())?'':  <tbody key={index + 1} className='border border-x-2 my-10'>
                           <tr className="border border-gray-200 align-middle">
                               <td scope="row" className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                   {index + 1}
