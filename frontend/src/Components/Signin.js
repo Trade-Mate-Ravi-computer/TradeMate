@@ -79,7 +79,7 @@ setLoginDetails(
         <button   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
       </div>
       <div className="text-sm flex justify-end">
-            <p className='mx-2'>Dont's have account </p><a href="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign up</a>
+            {/* <p className='mx-2'>Dont's have account </p><a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign up</a> */}
           </div>
     </form>
     </div>

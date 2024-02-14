@@ -95,11 +95,13 @@ function AddProduct() {
     }
     return (
         <div>
-            <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Add new Product</h1></div>
-            <div className='gridstyle grid grid-cols-4'>
+            <div ><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Add new Product</h1></div>
+             <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar addpurchase="bold" />
                 <div className='border border-gray-100 justify-center col-span-2'>
                     <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
+                    <div className='w-full text-center p-2 border border-red-400 rounded-md shadow-sm '> <span className='font-bold text-red-500'>Importent !</span> Product Name Format Exp:-  if Product is Mouse And Brand is Dell this Name should be <span className='text-blue-600 underline font-bold'> Mouse-Dell</span></div>
+          
                         <div>
                             <label for="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Product name</label>
                             <input id="itemName" value={itemDetail.itemName} onChange={(e) => handleOnChange(e)} name="itemName" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />

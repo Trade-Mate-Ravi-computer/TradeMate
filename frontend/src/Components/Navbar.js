@@ -11,7 +11,7 @@ function Navbar(props) {
   localStorage.clear();
   navigate("/")
  }else{
-  navigate('/signup')
+  navigate('/')
  }
  window.location.reload();
   }
@@ -48,7 +48,6 @@ function Navbar(props) {
           </div>
         </div>
       </nav>
-
     </div>
   )
 }
