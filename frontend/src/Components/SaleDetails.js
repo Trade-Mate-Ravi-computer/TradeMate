@@ -76,7 +76,7 @@ function SaleDetails() {
                         </tr>
                     </thead>
                     {saleDetails.reverse().map((saleDetail, index) => (
-                        shortData ? !saleDetail.customerName.includes(shortData) ? '' : <tbody key={saleDetail.id} className='border border-x-2 my-10 cursor-pointer'>
+                        shortData ? !saleDetail.customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' : <tbody key={saleDetail.id} className='border border-x-2 my-10 cursor-pointer'>
                             <tr className="border-b border-gray-200 dark:border-gray-700">
 
                                 <th scope="row" className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
