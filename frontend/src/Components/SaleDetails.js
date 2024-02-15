@@ -83,7 +83,7 @@ function SaleDetails() {
                                     {saleDetail.customerName.length > 25 ? saleDetail.customerName.slice(0, 22) + "..." : saleDetail.customerName}
                                 </th>
                                 <td className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                    {saleDetail.item.itemName.length > 19 ? saleDetail.item.itemName.slice(0, 16) + "..." : saleDetail.item.itemName}
+                                    {saleDetail.itemName.length > 19 ? saleDetail.itemName.slice(0, 16) + "..." : saleDetail.itemName}
                                 </td>
                                 <td className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                     {saleDetail.quantity}
@@ -116,7 +116,7 @@ function SaleDetails() {
                                     {saleDetail.customerName.length > 25 ? saleDetail.customerName.slice(0, 22) + "..." : saleDetail.customerName}
                                 </th>
                                 <td className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                    {saleDetail.item.itemName.length > 19 ? saleDetail.item.itemName.slice(0, 16) + "..." : saleDetail.item.itemName}
+                                    {saleDetail.itemName.length > 19 ? saleDetail.itemName.slice(0, 16) + "..." : saleDetail.itemName}
                                 </td>
                                 <td className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                     {saleDetail.quantity}
