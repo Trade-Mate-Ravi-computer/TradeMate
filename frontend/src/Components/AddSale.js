@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
+import axios from 'axios'
+
 
 function AddSale() {
     const [sale, setSale] = useState();
@@ -29,7 +31,16 @@ function AddSale() {
     })
     useEffect(() => {
         loadUser()
+        loadProducts()
     }, [])
+    const loadProducts = async () => {
+        const productDetails = await axios.get("http://localhost:8080/stock/all", {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+            }
+        });
+        localStorage.setItem('saleDetails', JSON.stringify(productDetails.data))
+    }
     const loadUser = () => {
         fetch('http://localhost:8080/user/byemail', {
             "method": "POST",

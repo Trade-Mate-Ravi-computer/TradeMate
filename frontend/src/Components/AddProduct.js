@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
-
 function AddProduct() {
     useEffect(() => {
         loadUser()
