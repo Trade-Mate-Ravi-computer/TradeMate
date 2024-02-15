@@ -5,6 +5,50 @@ import { NavLink, json } from 'react-router-dom';
 function SaleDetails() {
     const [saleDetails, setSaleDetails] = useState([])
     const [shortData, setShortData] = useState('')
+    function changeNumberToMonth(currentMonth) {
+        let month = ""
+        switch (currentMonth) {
+            case 1:
+                month = "Jan"
+                break;
+            case 2:
+                month = "Feb"
+                break;
+            case 3:
+                month = "Mar"
+                break;
+            case 4:
+                month = "Apr"
+                break;
+            case 5:
+                month = "May"
+                break;
+            case 6:
+                month = "June"
+                break;
+            case 7:
+                month = "July"
+                break;
+            case 8:
+                month = "Aug"
+                break;
+            case 9:
+                month = "Sep"
+                break;
+            case 10:
+                month = "Oct"
+                break;
+            case 11:
+                month = "Nov"
+                break;
+            case 12:
+                month = "Dec"
+                break;
+            default:
+                month = null
+        }
+        return month;
+    }
     useEffect(() => {
         loadSaleDetails();
     }, [])
@@ -103,7 +147,7 @@ function SaleDetails() {
                                         {saleDetails[i].receivedAmmount}
                                     </td>
                                     <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                        {saleDetails[i].date.split('-')[2] + "/" + saleDetails[i].date.split('-')[1] + '/' + saleDetails[i].date.split('-')[0]}
+                                        {saleDetails[i].date.split('-')[2] + "/" + changeNumberToMonth(parseInt( saleDetails[i].date.split('-')[1])) + '/' + saleDetails[i].date.split('-')[0]}
                                     </td>
                                     <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                         {saleDetails[i].remaining}
@@ -138,7 +182,7 @@ function SaleDetails() {
                                         {saleDetails[i].receivedAmmount}
                                     </td>
                                     <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                        {saleDetails[i].date.split('-')[2] + "/" + saleDetails[i].date.split('-')[1] + '/' + saleDetails[i].date.split('-')[0]}
+                                        {saleDetails[i].date.split('-')[2] + "/" +changeNumberToMonth(parseInt( saleDetails[i].date.split('-')[1])) + '/' + saleDetails[i].date.split('-')[0]}
                                     </td>
                                     <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                         {saleDetails[i].remaining}
