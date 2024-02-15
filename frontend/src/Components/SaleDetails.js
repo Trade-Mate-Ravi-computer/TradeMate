@@ -50,6 +50,9 @@ function SaleDetails() {
 
                     <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
                         <tr>
+                        <th scope="col" className="px-6 py-3 text-white bg-gray-400 text-center">
+                                Sr.no
+                            </th>
                             <th scope="col" className="px-6 py-3 text-white bg-gray-400 text-center">
                                 Customer Name
                             </th>
@@ -78,7 +81,9 @@ function SaleDetails() {
                     {saleDetails.reverse().map((saleDetail, index) => (
                         shortData ? !saleDetail.customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' : <tbody key={saleDetail.id} className='border border-x-2 my-10 cursor-pointer'>
                             <tr className="border-b border-gray-200 dark:border-gray-700">
-
+                            <th scope="row" className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                    {index+1}
+                                </th>
                                 <th scope="row" className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                     {saleDetail.customerName.length > 25 ? saleDetail.customerName.slice(0, 22) + "..." : saleDetail.customerName}
                                 </th>
@@ -111,7 +116,9 @@ function SaleDetails() {
 
                         </tbody> : <tbody key={saleDetail.id} className='border border-x-2 my-10 cursor-pointer'>
                             <tr className="border-b border-gray-200 dark:border-gray-700">
-
+                            <th scope="row" className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                    {index+1}
+                                </th>
                                 <th scope="row" className={` px-6 py-4 font-medium ${saleDetail.remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetail.remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                     {saleDetail.customerName.length > 25 ? saleDetail.customerName.slice(0, 22) + "..." : saleDetail.customerName}
                                 </th>

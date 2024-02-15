@@ -98,20 +98,20 @@ function AddSale() {
             body: JSON.stringify(saleDetail)
         }).then((resp) => {
             if (resp.ok) {
-                setSaleDetail({
-                    item: {
-                        itemName: ""
-                    },
-                    itemName: '',
-                    quantity: 0,
-                    date: 0,
-                    customerName: "",
-                    rate: 0,
-                    receivedAmmount: 0,
-                    user: {
-                        id: 0
-                    }
-                })
+                // setSaleDetail({
+                //     item: {
+                //         itemName: ""
+                //     },
+                //     itemName: '',
+                //     quantity: 0,
+                //     date: 0,
+                //     customerName: "",
+                //     rate: 0,
+                //     receivedAmmount: 0,
+                //     user: {
+                //         id: 0
+                //     }
+                // })
                 upStatus();
                 // window.location.reload()
             } else {
