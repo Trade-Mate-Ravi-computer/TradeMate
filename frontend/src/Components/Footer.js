@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div>
       <footer className="text-gray-600 body-font">
-        <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+        <div className="container px-3 py-4 mx-auto flex items-center sm:flex-row flex-col">
           <a href='/' className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
 
             <span className="ml-3 text-xl">Trade<span className='text-red-600'>Mate</span></span>
