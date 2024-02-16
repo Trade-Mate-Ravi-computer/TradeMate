@@ -17,6 +17,7 @@ public class StockItemController {
 
         @PostMapping("/add")
     public ResponseEntity<StockItemModel> addStock(@RequestBody StockItemModel item){
+            item.setItemName(item.getItemName().trim().replaceAll("/","-"));
         return service.addStock(item);
     }
     @GetMapping("/all")

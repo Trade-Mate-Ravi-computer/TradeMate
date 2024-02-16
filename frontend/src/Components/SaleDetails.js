@@ -85,14 +85,14 @@ function SaleDetails() {
         <div className="">
 
             
-                <div className="w-full  flex justify-end pr-14">
-                    <span className='mr-4 font-semibold text-md '>Search By Name</span>
+                <div className="w-full  flex justify-end  pr-14">
+                    <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
                     <input type='text' className='border border-gray-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
                 </div>
           
-            <div style={{ height: 555 }}  className=' px-10 overflow-y-auto'>
+            <div style={{ height: 555 }}  className=' px-10 overflow-y-auto '>
 
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border border-black">
 
                     <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 z-10 sticky top-0">
                         <tr>

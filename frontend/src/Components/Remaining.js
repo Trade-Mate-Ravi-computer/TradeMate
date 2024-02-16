@@ -1,15 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { NavLink, json } from 'react-router-dom';
-import RightSidebar from './RightSidebar';
-import LeftSidbar from './LeftSidbar';
+import { NavLink } from 'react-router-dom';
+
 
 function Remaining() {
     const [saleDetails, setSaleDetails] = useState([])
     const [shortData, setShortData] = useState('')
+    const remainings = []
     useEffect(() => {
         loadSaleDetails();
     }, [])
+    function sumArray(arr) {
+        let sum = 0;
+        arr.forEach(num => {
+            sum += num;
+        });
+        return sum;
+    }
     const loadSaleDetails = async () => {
         const saleDetail = await axios.get("http://localhost:8080/sales/allsaledetails", {
             headers: {
@@ -20,22 +27,7 @@ function Remaining() {
 
         // console.log(saleDetail.data.reverse())
     }
-    const deleteOnClick = async (id, e) => {
-        e.preventDefault()
-        const confirm = window.confirm("Are you Sure to Delete")
-        console.log(confirm)
-        if (confirm) {
-            await axios.delete(`http://localhost:8080/sales/delete/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
-                }
-            })
-        }
-        loadSaleDetails()
-    }
-    const viewSale = (id) => {
-        console.log("clicked on :-", id)
-    }
+
     const shortEvent = (e) => {
         setShortData(e.target.value)
     }
@@ -53,12 +45,15 @@ function Remaining() {
                         </div> */}
             </div>
 
-            <div style={{height:521}} className="col-span-3 overflow-y-auto">
+            <div style={{ height: 521 }} className="col-span-3 overflow-y-auto">
 
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
 
                     <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 sticky z-10 top-0">
                         <tr>
+                            <th scope="col" className="px-6 py-3 text-white bg-gray-400 text-center">
+                                Sr no.
+                            </th>
                             <th scope="col" className="px-6 py-3 text-white bg-gray-400 text-center">
                                 Customer Name
                             </th>
@@ -84,10 +79,22 @@ function Remaining() {
                     <tbody className='border border-x-2 my-10 cursor-pointer '>
                         {(() => {
                             const items = []
+                            let j = 0;
+                            let k=0
                             for (let i = saleDetails.length - 1; i >= 0; i--) {
+                                if (saleDetails[i].remaining > 0 ) {
+                                    k++
+                                    if(shortData && saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase())){
+                                        remainings.push(saleDetails[i].remaining)
+                                        j++
+                                    }
+                                }
+                              
                                 items.push(saleDetails[i].remaining > 0 ? shortData ? !saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
                                     <tr className="border-b border-gray-200 dark:border-gray-700">
-
+                                        <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                            {shortData?j:k}
+                                        </th>
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {saleDetails[i].customerName.length > 25 ? saleDetails[i].customerName.slice(0, 22) + "..." : saleDetails[i].customerName}
                                         </th>
@@ -118,7 +125,9 @@ function Remaining() {
 
                                     :
                                     <tr className="border-b border-gray-200 dark:border-gray-700">
-
+                                        <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                            {shortData?j:k}
+                                        </th>
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {saleDetails[i].customerName.length > 25 ? saleDetails[i].customerName.slice(0, 22) + "..." : saleDetails[i].customerName}
                                         </th>
@@ -144,19 +153,21 @@ function Remaining() {
                                             {/* <NavLink onClick={(e) => deleteOnClick(saleDetails[i].id, e)} className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</NavLink>
                                         <NavLink className='border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/invoice/${saleDetails[i].id}`}>Invoice</NavLink> */}
                                         </td>
-                                    </tr>
-
-
-                                    : ''
+                                    </tr> : ''
                                 );
 
 
 
                             }
                             return items;
+
                         })()}
+                        {
+                            console.log(remainings)
+                        }
                     </tbody>
                 </table>
+                {!shortData?'':<div className='w-full text-center mt-3'><span className='text-red-600 font-bold border border-red-300 p-2 '>Total Remaining on Screen :-<span className='text-xl'> {sumArray(remainings)}</span></span></div>}
             </div>
 
 

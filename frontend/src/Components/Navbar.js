@@ -19,7 +19,7 @@ function Navbar(props) {
 
   return (
 
-    <div>
+    <div className='bg-gray-200'>
       <nav className="bg-white-800">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
@@ -40,7 +40,7 @@ function Navbar(props) {
 
             <div className="relative ml-3">
               <div>
-                <button type="button" onClick={handleOnClick} className="relative py-2 px-4 flex border hover:border-grey-100 rounded-xl hover:bg-gray-200 transition-all" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <button type="button" onClick={handleOnClick} className="relative bg-gray-300 py-2 px-4 flex border hover:border-grey-300 rounded-xl hover:bg-gray-400 transition-all" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   {store ? store.user : "Sign-Up"}
                 </button>
               </div>

@@ -13,23 +13,23 @@ function UpdateSale() {
             ...saleDetail,
             [e.target.name]: e.target.value
         })
-       
+
     }
-    const {id} = useParams()
-    const handleOnSubmit = (e)=>{
+    const { id } = useParams()
+    const handleOnSubmit = (e) => {
         e.preventDefault()
-    fetch(`http://localhost:8080/sales/editsale/${id}`,{
-        method:"PUT",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization':`Bearer ${localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).token:""}`
-          },
-          body:JSON.stringify(saleDetail)
-    }).then((resp)=>{
-        if(resp.ok){
-navigate('/saledetails')
-        }
-    })
+        fetch(`http://localhost:8080/sales/editsale/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+            },
+            body: JSON.stringify(saleDetail)
+        }).then((resp) => {
+            if (resp.ok) {
+                window.history.go(-1)
+            }
+        })
     }
     return (
         <div>
@@ -37,7 +37,7 @@ navigate('/saledetails')
             <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar addSale="bold" />
                 <div className='border border-gray-100 justify-center col-span-2'>
-                    <form className="space-y-6 px-40 py-2" onSubmit={(e)=>handleOnSubmit(e)}>
+                    <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
                         <div>
                             <div className="flex items-center justify-between">
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Received Ammount</label>

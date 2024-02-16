@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateProduct() {
     const navigate = useNavigate()
+    const {id} = useParams()
     const [newPrice, setNewPrice] = useState({
         purchasePrice: 0,
         itemName:''
@@ -17,7 +18,7 @@ function UpdateProduct() {
         })
        
     }
-    const {id} = useParams()
+   
     // console.log(id)
     const handleOnSubmit = (e)=>{
         e.preventDefault()
