@@ -36,20 +36,20 @@ function ProductLists() {
                     <table className="text-sm">
                         <thead className="text-xs text-gray-700 uppercase">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-white bg-gray-400 ">
+                                <th scope="col" className="px-6 py-3 text-center w-3 text-white bg-gray-400 ">
                                     Sn. No.
                                 </th>
-                                <th scope="col" className="px-6  py-3 text-white bg-gray-400">
+                                <th scope="col" className="px-6  py-3 text-center text-white bg-gray-400">
                                     Item Name
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-white bg-gray-400">
+                                <th scope="col" className="px-6 py-3 text-center text-white bg-gray-400">
                                     Purchase Price
                                 </th>
-                                <th scope="col" className="px-6 py-3  text-white bg-gray-400">
+                                <th scope="col" className="px-6 py-3 text-center  text-white bg-gray-400">
                                     Category
                                 </th>
 
-                                <th scope="col" className="px-6 py-3  text-white bg-gray-400 ">
+                                <th scope="col" className="px-6 py-3 text-center  text-white bg-gray-400 ">
                                     Actions
                                 </th>
                             </tr>
@@ -57,40 +57,40 @@ function ProductLists() {
                         {productDetailss.reverse().map((productDetails, index) => (
                           shortData?!productDetails.itemName.toLowerCase().includes(shortData.toLowerCase())?'':  <tbody key={index + 1} className='border border-x-2 my-10'>
                           <tr className="border border-gray-200 align-middle">
-                              <td scope="row" className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                              <td scope="row" className="border w-3 text-center border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                   {index + 1}
                               </td>
-                              <td scope="row" className="border w-80 text-wrap border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                              <td scope="row" className="border w-80 text-center text-wrap border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                   {productDetails.itemName.length > 30 ? productDetails.itemName.slice(0, 27) + "..." : productDetails.itemName}
                               </td>
-                              <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                              <td className="border border-x-2 px-6 py-2 text-center font-medium text-green-600 bg-white ">
                                   {productDetails.purchasePrice}
                               </td>
-                              <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                              <td className="border border-x-2 px-6 py-2 text-center font-medium text-green-600 bg-white ">
                                   {productDetails.category}
                               </td>
 
                               <td className="border border-x-2 font-medium text-green-600 bg-white  flex justify-center items-center ">
-                                  <NavLink className='border border-x-2 py-2 px-2 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updateproduct/${productDetails.itemName}`}>Update Price</NavLink>
+                                  <NavLink className='border border-x-2  text-centerpy-2 px-2 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updateproduct/${productDetails.itemName}`}>Update Price</NavLink>
                               </td>
                           </tr>
 
                       </tbody>:  <tbody key={index + 1} className='border border-x-2 my-10'>
                                 <tr className="border border-gray-200 align-middle">
-                                    <td scope="row" className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                                    <td scope="row" className="border text-center  border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                         {index + 1}
                                     </td>
-                                    <td scope="row" className="border w-80 text-wrap border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                                    <td scope="row" className="border w-80 text-center text-wrap border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                         {productDetails.itemName.length > 30 ? productDetails.itemName.slice(0, 27) + "..." : productDetails.itemName}
                                     </td>
-                                    <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                                    <td className="border border-x-2 px-6 py-2 text-center font-medium text-green-600 bg-white ">
                                         {productDetails.purchasePrice}
                                     </td>
-                                    <td className="border border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                                    <td className="border border-x-2 px-6 py-2 text-center font-medium text-green-600 bg-white ">
                                         {productDetails.category}
                                     </td>
 
-                                    <td className="border border-x-2 font-medium text-green-600 bg-white  flex justify-center items-center ">
+                                    <td className="border border-x-2 font-medium text-center text-green-600 bg-white  flex justify-center items-center ">
                                         <NavLink className='border border-x-2 py-2 px-2 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updateproduct/${productDetails.itemName}`}>Update Price</NavLink>
                                     </td>
                                 </tr>
