@@ -3,8 +3,9 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { useNavigate, useParams } from 'react-router-dom'
 
-function UpdateSale() {
+function UpdateSale(props) {
     const navigate = useNavigate()
+    const [updateStatus,setUpdateStatus]=useState('')
     const [saleDetail, setSaleDetail] = useState({
         receivedAmmount: 0
     })
@@ -18,7 +19,7 @@ function UpdateSale() {
     const { id } = useParams()
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:8080/sales/editsale/${id}`, {
+        fetch(`http://localhost:8080/sales/editsale/${props.id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
@@ -27,20 +28,26 @@ function UpdateSale() {
             body: JSON.stringify(saleDetail)
         }).then((resp) => {
             if (resp.ok) {
-                window.history.go(-1)
+                setUpdateStatus("Received Ammount Updated")
+                document.getElementById('updateStatus').classList.remove("text-red-600")
+                document.getElementById('updateStatus').classList.add("text-green-600")
+            }else{
+                setUpdateStatus("Failed to Update Received Ammount")
+                
+                document.getElementById('updateStatus').classList.remove("text-green-600")
+                document.getElementById('updateStatus').classList.add("text-red-600")
             }
         })
     }
     return (
         <div>
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Update received Ammount and Remaining</h1></div>
-            <div className='gridstyle grid grid-cols-4'>
-                <LeftSidbar addSale="bold" />
+            <div className=''>
                 <div className='border border-gray-100 justify-center col-span-2'>
                     <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
                         <div>
                             <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Received Ammount</label>
+                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Received Ammount By:- <span className='text-blue-600'>{props.itemName}</span></label>
                             </div>
                             <div className="mt-2">
                                 <input value={saleDetail.receivedAmmount} onChange={(e) => onEventChange(e)} id="amount" name="receivedAmmount" type="number" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -52,9 +59,7 @@ function UpdateSale() {
                     </form>
 
                 </div>
-                <div className='border border-gray-100 justify-center'>
-                    <RightSidebar />
-                </div>
+              <div className='text-xl font-bold w-full text-center' id='updateStatus'>{updateStatus}</div>
             </div>
         </div>
     )

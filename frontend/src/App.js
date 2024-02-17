@@ -16,7 +16,6 @@ import UpdateSale from './Components/UpdateSale';
 import Test from './Components/Test';
 import Profits from './Components/Profits';
 import ProductLists from './Components/ProductLists';
-import UpdateProduct from './Components/UpdateProduct';
 import Invoice from './Components/Invoice';
 import Remaining from './Components/Remaining';
 
@@ -45,7 +44,6 @@ function App() {
           <Route exact path="/stocks" element={<ProductLists/>} />
           <Route exact path="/invoice/:id" element={<Invoice/>} />
           <Route exact path="/test" element={<Test/>} />
-          <Route exact path="/updateproduct/:id" element={<UpdateProduct/>}/>
           <Route exact path="/remaining" element={<Remaining/>}/>
         </Routes>
         <Footer/>

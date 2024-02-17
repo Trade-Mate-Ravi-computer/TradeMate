@@ -1,10 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink, json } from 'react-router-dom';
-
+import crossImage from './cross.png'
+import UpdateSale from './UpdateSale';
 function SaleDetails() {
     const [saleDetails, setSaleDetails] = useState([])
     const [shortData, setShortData] = useState('')
+    const [update, setUpdate] = useState(false)
+    const [itemName, setItemName] = useState('')
+    const [itemId,setItemId]=useState(0)
     function changeNumberToMonth(currentMonth) {
         let month = ""
         switch (currentMonth) {
@@ -81,16 +85,29 @@ function SaleDetails() {
     const shortEvent = (e) => {
         setShortData(e.target.value)
     }
+    const handleOnClickUpdate = (id,itemName) => {
+        setUpdate(true)
+        setItemName(itemName)
+        setItemId(id)
+       
+    }
+    const handleOnclickBody = () => {
+        setUpdate(false)
+        loadSaleDetails()
+    }
     return (
         <div className="">
-
-            
-                <div className="w-full  flex justify-end  pr-14">
-                    <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
-                    <input type='text' className='border border-gray-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
-                </div>
-          
-            <div style={{ height: 555 }}  className=' px-10 overflow-y-auto '>
+            <div className="w-full  flex justify-end  pr-20">
+                <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
+                <input type='text' className='border border-gray-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
+            </div>
+            {update ? <div className='w-full flex justify-center '>
+                        <div className='fixed h-80 p-10 bg-gray-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
+                            <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
+                            <UpdateSale itemName={`${itemName}`} id={`${itemId}`} />
+                        </div>
+                    </div> : ''}
+            <div style={{ height: 555 }} className=' px-10 overflow-y-auto '>
 
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border border-black">
 
@@ -157,7 +174,7 @@ function SaleDetails() {
                                         </td>
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updatesale/${saleDetails[i].id}`}>Received</NavLink>
+                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={()=>handleOnClickUpdate(saleDetails[i].id,saleDetails[i].customerName)}>Received</NavLink>
                                             <NavLink onClick={(e) => deleteOnClick(saleDetails[i].id, e)} className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</NavLink>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/invoice/${saleDetails[i].id}`}>Invoice</NavLink>
                                         </td>
@@ -189,7 +206,7 @@ function SaleDetails() {
                                         </td>
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/updatesale/${saleDetails[i].id}`}>Received</NavLink>
+                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={()=>handleOnClickUpdate(saleDetails[i].id,saleDetails[i].customerName)}>Received</NavLink>
                                             <NavLink onClick={(e) => deleteOnClick(saleDetails[i].id, e)} className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</NavLink>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/invoice/${saleDetails[i].id}`}>Invoice</NavLink>
                                         </td>
