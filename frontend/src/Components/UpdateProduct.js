@@ -36,8 +36,10 @@ function UpdateProduct(props) {
                 // props.setUpdate(false)
                 setStatus("Price Updated")
                 let updatesection =document.getElementById('update')
+                props.setUpdate(false)
                 updatesection.classList.remove('text-red-500')
                 updatesection.classList.add('text-green-500')
+                props.myFunction();
             }else{
                 setStatus("Something went wrong")
                 let updatesection =document.getElementById('update')

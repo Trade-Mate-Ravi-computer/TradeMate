@@ -31,6 +31,8 @@ function UpdateSale(props) {
                 setUpdateStatus("Received Ammount Updated")
                 document.getElementById('updateStatus').classList.remove("text-red-600")
                 document.getElementById('updateStatus').classList.add("text-green-600")
+                props.setUpdate(false)
+                props.myFunction();
             }else{
                 setUpdateStatus("Failed to Update Received Ammount")
                 

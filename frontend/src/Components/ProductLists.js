@@ -48,7 +48,7 @@ function ProductLists() {
                 {update ? <div className='w-full flex justify-center '>
                     <div className='fixed h-80 p-10 bg-gray-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
                         <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
-                        <UpdateProduct itemName={`${itemName}`} />
+                        <UpdateProduct itemName={`${itemName}`} setUpdate={setUpdate}  myFunction={loadProducts}/>
                     </div>
                 </div> : ''}
                 
