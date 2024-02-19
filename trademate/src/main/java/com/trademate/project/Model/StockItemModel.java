@@ -1,10 +1,13 @@
 package com.trademate.project.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,7 +21,10 @@ public class StockItemModel {
     private String itemName;
     private int purchasePrice;
     private String category;
-    private long usersId;
+    private String companyName;
     @ManyToOne
-    private UserModel user;
+    private CompanyModel company;
+    @OneToMany(mappedBy = "item")
+    @JsonIgnore
+    private List<PurchaseModel> purchaseList;
 }

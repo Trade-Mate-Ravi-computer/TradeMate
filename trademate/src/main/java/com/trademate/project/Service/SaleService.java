@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SaleService {
@@ -46,8 +44,8 @@ public class SaleService {
         saleRepository.deleteById(id);
         return  "Deleted";
     }
-    public Object sumOfProfits(int month,int year){
-        return saleRepository.sumOfRemainingByMonth(month,year);
+    public Object sumOfProfits(int month,int year,String companyName){
+        return saleRepository.sumOfRemainingByMonth(month,year,companyName);
     }
     public List<SaleModel> getByCustomerName(String customerName){
         return saleRepository.findByCustomerName(customerName);

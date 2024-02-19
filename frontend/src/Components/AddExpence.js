@@ -1,9 +1,10 @@
 import React from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
+import { NavLink } from 'react-router-dom'
 function AddExpence() {
     return (
-        <div>
+        <div> <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login')?"⇐ Company Dashboard":"Home"}</NavLink></div>
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Add Expence</h1></div>
             <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar openexpence="bold" />

@@ -3,16 +3,13 @@ package com.trademate.project.Controller;
 import com.trademate.project.Model.DateModel;
 import com.trademate.project.Model.SaleModel;
 import com.trademate.project.Repository.SaleRepository;
+import com.trademate.project.Service.CompanyService;
 import com.trademate.project.Service.SaleService;
-import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +20,8 @@ public class SaleController {
     private SaleService saleService;
     @Autowired
     private SaleRepository saleRepository;
+    @Autowired
+    private CompanyService companyService;
 
 
     public SaleController(SaleService saleService) {
@@ -32,12 +31,14 @@ public class SaleController {
     @PostMapping("/addSale")
     public ResponseEntity<SaleModel> addSale(@RequestBody SaleModel saleModel){
         saleModel.getItem().setItemName(saleModel.getItemName());
-        saleModel.getUser().setId(saleModel.getSaleUserId());
+
+        saleModel.getCompany().setCompanyId(companyService.getByName(saleModel.getCompanyName()).getCompanyId());
          return  new ResponseEntity<SaleModel>(saleService.addSale(saleModel), HttpStatus.CREATED);
     }
-    @GetMapping("/allsaledetails")
-    public List<SaleModel> getAllSale(){
-        return saleService.allSale();
+    @PostMapping("/allsaledetails")
+    public List<SaleModel> getAllSale(@RequestBody DateModel date){
+        System.out.println(date.getCompanyName());
+        return saleRepository.findAllByCompanyName(date.getCompanyName());
     }
     @GetMapping("/{id}")
     public SaleModel getSaleById(@PathVariable long id){
@@ -56,7 +57,7 @@ public class SaleController {
     public Object getProfit(@RequestBody DateModel intDate) {
        Date date = new Date(intDate.getYear(),intDate.getMonth(),intDate.getDay());
 //        System.out.println(intDate.getDay()+","+intDate.getYear()+","+intDate.getMonth());
-        return saleService.sumOfProfits(date.getMonth(),date.getYear());
+        return saleService.sumOfProfits(date.getMonth(),date.getYear(),intDate.getCompanyName());
     }
     @PostMapping("/bycname")
     public List<SaleModel> getByCustomerName(@RequestBody String customerName){
@@ -70,13 +71,14 @@ public class SaleController {
     public List<SaleModel> salesWithRemaining(){
         return saleService.salesWithRemainingBalance();
     }
-    @GetMapping("/totalsum")
-    public Object sumOfTotal(){
-        return saleRepository.sumOfTotalRemaining();
+    @PostMapping("/totalsum")
+    public Object sumOfTotal(@RequestBody DateModel intDate){
+        return saleRepository.sumOfTotalRemaining(intDate.getCompanyName());
     }
-    @PostMapping("/byyear/{year}")
-    public Object sumOfprofitByYear(@PathVariable int year){
-        return saleRepository.sumOfRemainingByYear(year);
+    @PostMapping("/byyear")
+    public Object sumOfprofitByYear(@RequestBody DateModel intDate){
+        Date date = new Date(intDate.getYear(),intDate.getMonth(),intDate.getDay());
+        return saleRepository.sumOfRemainingByYear(date.getYear(),intDate.getCompanyName());
     }
     @PostMapping("/byid/{id}")
     public List<SaleModel> findById(@PathVariable long id){

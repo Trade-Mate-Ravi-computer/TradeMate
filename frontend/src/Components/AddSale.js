@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import axios from 'axios'
+import { NavLink } from 'react-router-dom';
 
 
 function AddSale() {
@@ -34,7 +35,9 @@ function AddSale() {
         loadProducts()
     }, [])
     const loadProducts = async () => {
-        const productDetails = await axios.get("http://localhost:8080/stock/all", {
+        const productDetails = await axios.post("http://localhost:8080/stock/all",
+        {companyName:JSON.parse(localStorage.getItem('companyName')).companyName},
+         {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
             }
@@ -82,9 +85,9 @@ function AddSale() {
         customerName: "",
         rate: 0,
         receivedAmmount: 0,
-        saleUserId: 0,
-        user: {
-            id: 0
+        companyName:'',
+        company: {
+            compannyName:''
         }
 
     })
@@ -93,7 +96,7 @@ function AddSale() {
         setSaleDetail(prevSale => ({
             ...prevSale,
             [name]: value,
-            saleUserId: id,
+            companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
             itemName:sale
         }));
 
@@ -119,8 +122,8 @@ function AddSale() {
                     customerName: "",
                     rate: 0,
                     receivedAmmount: 0,
-                    user: {
-                        id: 0
+                    company: {
+                        compannyName:''
                     }
                 })
                 upStatus();
@@ -133,6 +136,7 @@ function AddSale() {
 
     return (
         <div>
+            <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login')?"⇐ Company Dashboard":"Home"}</NavLink></div>
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Sale Entry</h1></div>
             <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar addSale="bold" />

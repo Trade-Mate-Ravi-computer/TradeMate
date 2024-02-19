@@ -18,6 +18,8 @@ import Profits from './Components/Profits';
 import ProductLists from './Components/ProductLists';
 import Invoice from './Components/Invoice';
 import Remaining from './Components/Remaining';
+import UsersDashboard from './Components/UsersDashboard';
+import CreateCOmpany from './Components/CreateCOmpany';
 
 
 
@@ -28,23 +30,24 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route exact path="/" element={stores?<Dashboard/>:<Home/>}></Route>
-          <Route exact path="/dashboard" element={<Dashboard />}></Route>
-          <Route exact path="/addsale" element={<AddSale/>} />
-          <Route exact path="/addemployee" element={<Signup/>} />
-          <Route exact path="/addcustomer" element={<AddCustomer/>} />
-          <Route exact path="/addpurchase" element={<AddPurchase/>} />
-          <Route exact path="/addexpense" element={<AddExpence/>} />
-          <Route exact path="/addproduct" element={<AddProduct/>} />
+          <Route exact path="/" element={stores?<UsersDashboard/>:<Home/>}></Route>
+          <Route exact path="/dashboard/:id" element={<Dashboard />}></Route>
+          <Route exact path="/addsale/:companyName" element={<AddSale/>} />
+          <Route exact path="/addemployee/:companyName" element={<Signup/>} />
+          <Route exact path="/addcustomer/:companyName" element={<AddCustomer/>} />
+          <Route exact path="/addpurchase/:companyName" element={<AddPurchase/>} />
+          <Route exact path="/addexpense/:companyName" element={<AddExpence/>} />
+          <Route exact path="/addproduct/:companyName" element={<AddProduct/>} />
           <Route exact path="/signup" element={<Signup/>} />
-          <Route exact path="/saledetails" element={<SaleDetails/>} />
+          <Route exact path="/saledetails/:companyName" element={<SaleDetails/>} />
           <Route exact path="/updatesale/:id" element={<UpdateSale/>} />
-          <Route exact path="/profits" element={<Profits/>} />
-          <Route exact path="/stocks" element={<ProductLists/>} />
-          <Route exact path="/stocks" element={<ProductLists/>} />
+          <Route exact path="/profits/:companyName" element={<Profits/>} />
+          <Route exact path="/stocks/:companyName" element={<ProductLists/>} />
           <Route exact path="/invoice/:id" element={<Invoice/>} />
           <Route exact path="/test" element={<Test/>} />
-          <Route exact path="/remaining" element={<Remaining/>}/>
+          <Route exact path="/usersDashboard" element={<UsersDashboard/>}/>
+          <Route exact path="/remaining/:companyName" element={<Remaining/>}/>
+          <Route exact path="/createCompany" element={<CreateCOmpany/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

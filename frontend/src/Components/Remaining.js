@@ -22,7 +22,9 @@ function Remaining() {
         return sum;
     }
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.get("http://localhost:8080/sales/allsaledetails", {
+        const saleDetail = await axios.post("http://localhost:8080/sales/allsaledetails",
+        {companyName:JSON.parse(localStorage.getItem('companyName')).companyName},
+        {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
             }
@@ -46,7 +48,7 @@ function Remaining() {
         loadSaleDetails()
     }
     return (
-        <div>
+        <div> <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login')?"⇐ Company Dashboard":"Home"}</NavLink></div>
             <div className='w-full font-bold text-3xl text-green-600 underline text-center'>Remaing Details</div>
             <div className="short w-full  h-10 flex justify-end pr-10">
                 <div>

@@ -1,5 +1,6 @@
 package com.trademate.project.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,27 +12,24 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Sales Detail")
-public class SaleModel {
+@NoArgsConstructor
+@Table(name = "Purchase")
+public class PurchaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne
-    private StockItemModel item;
-    private String customerName;
-    private int quantity;
-    private LocalDate date;
-    private int rate;
-    private int receivedAmmount;
-    private int totalAmmount;
-    private int remaining;
-    private int profit;
+    @Column(unique = false)
     private String itemName;
+    private int price;
+    private LocalDate date;
+    private int quantity;
+    private int totalAmmount;
+    private int paidAmmount;
+    private int remaining;
     private String companyName;
     @ManyToOne
+    private StockItemModel item;
+    @ManyToOne
     private CompanyModel company;
-
-
 }

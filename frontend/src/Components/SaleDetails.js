@@ -57,7 +57,9 @@ function SaleDetails() {
         loadSaleDetails();
     }, [])
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.get("http://localhost:8080/sales/allsaledetails", {
+        const saleDetail = await axios.post("http://localhost:8080/sales/allsaledetails",
+        {companyName:JSON.parse(localStorage.getItem('companyName')).companyName},
+         {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
             }
@@ -96,7 +98,7 @@ function SaleDetails() {
         loadSaleDetails()
     }
     return (
-        <div className="">
+        <div className=""> <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login')?"⇐ Company Dashboard":"Home"}</NavLink></div>
             <div className="w-full  flex justify-end  pr-20">
                 <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
                 <input type='text' className='border border-gray-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>

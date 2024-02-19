@@ -16,8 +16,7 @@ function Signup() {
         fetch('http://localhost:8080/auth/sign-up',{
             method:"POST",
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization':`Bearer ${localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).token:""}` 
+                'Content-Type': 'application/json' 
               },
               body:JSON.stringify(singupDetails),
         }).then((resp)=>{
@@ -26,6 +25,7 @@ function Signup() {
            }
            
         })
+        console.log(singupDetails)
     }
     const handleOnChange=(e)=>{
 setSingupDetails({

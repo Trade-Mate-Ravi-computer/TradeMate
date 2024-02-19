@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
+import { NavLink } from 'react-router-dom'
 function AddProduct() {
     useEffect(() => {
         loadUser()
@@ -14,10 +15,10 @@ function AddProduct() {
         itemName: '',
         purchasePrice: 0,
         category: '',
-        user: {
-            id: 0
-        },
-        usersId: id
+        companyName: '',
+        company: {
+            companyId: 0
+        }
     })
     const upStatus = () => {
         setUploadStatus("Item Added ")
@@ -36,7 +37,7 @@ function AddProduct() {
         setItemDetail(prevState => ({
             ...prevState,
             [name]: value,
-            usersId: id
+            companyName: JSON.parse(localStorage.getItem('companyName')).companyName
         }))
     }
 
@@ -59,10 +60,10 @@ function AddProduct() {
                     itemName: '',
                     purchasePrice: 0,
                     category: '',
-                    user: {
-                        id: 0
-                    },
-                    usersId: id
+                    companyName: '',
+                    company: {
+                        companyId: 0
+                    }
                 })
                 upStatus()
             })
@@ -93,14 +94,14 @@ function AddProduct() {
         })
     }
     return (
-        <div>
+        <div> <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
             <div ><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Add new Product</h1></div>
-             <div className='gridstyle grid grid-cols-4'>
+            <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar addpurchase="bold" />
                 <div className='border border-gray-100 justify-center col-span-2'>
                     <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
-                    <div className='w-full text-center p-2 border border-red-400 rounded-md shadow-sm '> <span className='font-bold text-red-500'>Importent !</span> Product Name Format Exp:-  if Product is Mouse And Brand is Dell this Name should be <span className='text-blue-600 underline font-bold'> Mouse-Dell</span></div>
-          
+                        <div className='w-full text-center p-2 border border-red-400 rounded-md shadow-sm '> <span className='font-bold text-red-500'>Importent !</span> Product Name Format Exp:-  if Product is Mouse And Brand is Dell this Name should be <span className='text-blue-600 underline font-bold'> Mouse-Dell</span></div>
+
                         <div>
                             <label for="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Product name</label>
                             <input id="itemName" value={itemDetail.itemName} onChange={(e) => handleOnChange(e)} name="itemName" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />

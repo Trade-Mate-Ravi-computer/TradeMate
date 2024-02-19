@@ -19,7 +19,7 @@ function ProductLists() {
         loadProducts();
     }, [])
     const loadProducts = async () => {
-        const productDetails = await axios.get("http://localhost:8080/stock/all", {
+        const productDetails = await axios.post("http://localhost:8080/stock/all",{companyName:JSON.parse(localStorage.getItem('companyName')).companyName}, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
             }

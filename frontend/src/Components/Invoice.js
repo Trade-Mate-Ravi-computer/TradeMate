@@ -4,15 +4,14 @@ import axios from 'axios'
 import html2pdf from 'html2pdf.js';
 import RightSidebar from './RightSidebar';
 import LeftSidbar from './LeftSidbar';
-
-
 function Invoice() {
     const [invoiceDetails, setInvoiceDetails] = useState([])
     const [address, setAddress] = useState('')
     const [custName, setCustName] = useState('')
     const [subTotal, setSubTotal] = useState(0)
     const [date, setDate] = useState(null)
-    const { id } = useParams()
+    const {id} = useParams()
+    // console.log(id)
     useEffect(() => {
         loadInvoiceDetails()
     }, [])
@@ -25,6 +24,7 @@ function Invoice() {
                 }
             }
         )
+        
         setInvoiceDetails(invoiceDetail.data);
         setDate(invoiceDetail.data[0].date)
         setCustName(invoiceDetail.data[0].customerName)
@@ -34,6 +34,7 @@ function Invoice() {
         })
         //    console.log(sum)
         setSubTotal(sum)
+        
     }
     const handleOnChange = (e) => {
         setAddress(e.target.value)
@@ -67,7 +68,7 @@ function Invoice() {
                 <RightSidebar/>
                 
             </div>
-            <div className="col-span-3 px-3">
+            <div className="col-span-3 px-3 " id='invoce'>
                 <div className="text-center w-full">Invoice of <span className='text-green-600 font-semibold'>{` ${custName}`} </span>on Date <span className='text-green-600 font-semibold'>{` ${date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}`}</span></div>
                 <div id='invoice' className="container mx-auto px-4 py-8 border border-black rounded-lg">
 

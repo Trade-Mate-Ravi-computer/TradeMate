@@ -30,10 +30,8 @@ public class UserModel implements UserDetails {
     private String password;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private List<StockItemModel> items;
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<SaleModel> sales;
+    private List<CompanyModel> company;
+
 
 
 

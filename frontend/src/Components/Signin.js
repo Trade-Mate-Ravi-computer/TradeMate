@@ -45,7 +45,7 @@ setLoginDetails(
         
       })
       if(resp.ok){
-        navigate('/Dashboard')
+        navigate('/usersDashboard')
         window.location.reload();
        }
     })

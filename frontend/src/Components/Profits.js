@@ -15,7 +15,8 @@ function Profits() {
     const [dateState, setDateState] = useState({
         year: currentYear,
         month: currentMonth + 1,
-        day: currentDate
+        day: currentDate,
+        companyName: JSON.parse(localStorage.getItem('companyName')).companyName
     });
 
     const monthInLetter = changeNumberToMonth(currentMonth);
@@ -83,7 +84,7 @@ function Profits() {
         ).then((resp) => {
             //    if(resp){
             setProfitData(resp.data)
-            
+
             //    }
             //    else{
             //     setProfitData({
@@ -96,43 +97,45 @@ function Profits() {
 
     }
     const [yearlyData, setYearlyData] = useState({
-        
+
     });
 
-const loadYearData = async () => {
-    try {
-        const response = await axios.post(
-            `http://localhost:8080/sales/byyear/${currentYear}`,
-            {},
+    const loadYearData = async () => {
+        try {
+            const response = await axios.post(
+                `http://localhost:8080/sales/byyear`,
+                dateState,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+                    }
+                }
+            );
+            setYearlyData(response.data);
+
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error (e.g., show error message to the user)
+        }
+    };
+    const [allReport, setAllReport] = useState({
+
+    })
+    const loadAllReport = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/sales/totalsum', 
+            dateState,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
                 }
-            }
-        );
-        setYearlyData(response.data);
-  
-    } catch (error) {
-        console.error('Error:', error);
-        // Handle error (e.g., show error message to the user)
-    }
-};
-const [allReport,setAllReport] = useState({
+            })
+            setAllReport(response.data);
 
-})
-const loadAllReport =async ()=>{
-  try{
-    const response = await axios.get('http://localhost:8080/sales/totalsum',{
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+        } catch (error) {
+            console.log("Something went wrong")
         }
-    })
-        setAllReport(response.data);
-    
-  } catch (error){
-console.log("Something went wrong")
-  }
-}
+    }
 
 
     return (
