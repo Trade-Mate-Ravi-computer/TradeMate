@@ -45,14 +45,14 @@ function UpdateSale(props) {
         <div>
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Update received Ammount and Remaining</h1></div>
             <div className=''>
-                <div className='border border-gray-100 justify-center col-span-2'>
+                <div className='border border-blue-100 justify-center col-span-2'>
                     <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
                         <div>
                             <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Received Ammount By:- <span className='text-blue-600'>{props.itemName}</span></label>
+                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-blue-900">Received Ammount By:- <span className='text-blue-600'>{props.itemName}</span></label>
                             </div>
                             <div className="mt-2">
-                                <input value={saleDetail.receivedAmmount} onChange={(e) => onEventChange(e)} id="amount" name="receivedAmmount" type="number" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input value={saleDetail.receivedAmmount} onChange={(e) => onEventChange(e)} id="amount" name="receivedAmmount" type="number" required className="block w-full rounded-md p-2 border-0 py-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                         <div>

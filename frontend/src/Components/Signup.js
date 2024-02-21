@@ -49,43 +49,43 @@ setSingupDetails({
                     <div>
                         <form className="space-y-6" onSubmit={(e)=>handleOnSubmit(e)}>
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                                <label htmlFor="email" className="block text-sm font-medium leading-6 text-blue-900">Email address</label>
                                 <div className="mt-2">
-                                    <input id="email" value={singupDetails.email} onChange={(e)=>handleOnChange(e)} name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input id="email" value={singupDetails.email} onChange={(e)=>handleOnChange(e)} name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Enter Your Name</label>
+                                <label htmlFor="name" className="block text-sm font-medium leading-6 text-blue-900">Enter Your Name</label>
                                 <div className="mt-2">
-                                    <input id="name" name="name" type="text" value={singupDetails.name} onChange={(e)=>handleOnChange(e)} autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input id="name" name="name" type="text" value={singupDetails.name} onChange={(e)=>handleOnChange(e)} autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
 
                             <div>
                                 <div className="flex items-center justify-between">
-                                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-blue-900">Password</label>
 
                                 </div>
                                 <div className="mt-2">
-                                    <input id="password" name="password"  value={singupDetails.password} onChange={(e)=>handleOnChange(e)} type="password" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input id="password" name="password"  value={singupDetails.password} onChange={(e)=>handleOnChange(e)} type="password" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             <div>
                                 <div className="flex items-center justify-between">
-                                    <label htmlFor="confirm password" className="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                                    <label htmlFor="confirm password" className="block text-sm font-medium leading-6 text-blue-900">Confirm Password</label>
 
                                 </div>
                                 <div className="mt-2">
-                                    <input id="confirm-password" name="confirm-password" type="password" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input id="confirm-password" name="confirm-password" type="password" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div>
                             {/* <div>
                                 <div className="flex items-center justify-between">
-                                    <label htmlFor="role" className="block text-sm font-medium leading-6 text-gray-900">Role</label>
+                                    <label htmlFor="role" className="block text-sm font-medium leading-6 text-blue-900">Role</label>
 
                                 </div>
                                 <div className="mt-2">
-                                    <input id="role" name="role" type="text" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    <input id="role" name="role" type="text" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                 </div>
                             </div> */}
 

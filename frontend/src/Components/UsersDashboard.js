@@ -1,133 +1,132 @@
-import React, { useEffect, useState } from 'react'
-import Home from './Home'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import CreateCOmpany from './CreateCOmpany'
-import crossImage from './cross.png'
-import UpdateCompany from './UpdateCompany'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Home from './Home';
+import UpdateCompany from './UpdateCompany';
+import crossImage from './cross.png';
+import CreateCOmpany from './CreateCOmpany';
 
 function UsersDashboard() {
-    const [update, setUpdate] = useState(false)
-    const [id, setId] = useState(0)
-    const [onlyUpdate, setOnlyUpdate] = useState(false)
-    let store = JSON.parse(localStorage.getItem('login'))
-    const navigate = useNavigate()
-    const [companyDetail, setCompanyDetail] = useState([])
+    const [update, setUpdate] = useState(false);
+    const [id, setId] = useState(0);
+    const [onlyUpdate, setOnlyUpdate] = useState(false);
+    const [companyDetail, setCompanyDetail] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
         loadCompany();
-        localStorage.setItem('companyName', "")
-    }, [])
+    }, []);
+
     const loadCompany = async () => {
-        const companyDetails = await axios.post(`http://localhost:8080/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
-            {},
-            {
-                headers: {
-                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+        try {
+            const response = await axios.post(
+                `http://localhost:8080/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(localStorage.getItem('login')).token}`,
+                    },
                 }
+            );
+            setCompanyDetail(response.data);
+        } catch (error) {
+            console.error('Error fetching company details:', error);
+        }
+    };
 
-            })
-        setCompanyDetail(companyDetails.data)
-    }
     const handleClickOnCompany = (id) => {
-        navigate(`/dashboard/${id}`)
-        localStorage.setItem('companyName', JSON.stringify({
-            companyName: id
-        }))
-    }
+        navigate(`/dashboard/${id}`);
+        localStorage.setItem('companyName', JSON.stringify({ companyName: id }));
+    };
+
     const handleOnclickBody = () => {
-        setUpdate(false)
-        loadCompany()
-    }
-    const handleOnclickupdate = () => {
-        setOnlyUpdate(false)
-        loadCompany()
-    }
-    const handleCreateCompany = () => {
-        setUpdate(true)
-    }
-    const handleOnclickOnupdate = (id) => {
-        setId(id)
-        setOnlyUpdate(true)
-    }
+        setUpdate(false);
+        setOnlyUpdate(false);
+        loadCompany();
+    };
+
+    const handleCreateCOmpany = () => {
+        setUpdate(true);
+    };
+
+    const handleOnclickOnupdate = (e, id) => {
+        e.stopPropagation();
+        setId(id);
+        setOnlyUpdate(true);
+    };
+
     return (
-        <div style={{ height: 597 }} className=' bg-gray-300 '>
-
-            {
-                (store && store.login) ?
-                    <div className='grid grid-cols-4'>
-                        <div className='col-span-1 text-center w-full h-8 bg-gray-100 pt-1 ml-2 mt-12 hover:bg-gray-200 hover:font-semibold'><button onClick={handleCreateCompany}><span className=''>Create Company</span></button></div>
-
-                        <div style={{ height: 600 }} className='col-span-3 mx-2 bg-gray-300 '>
-                            <div className='h-10 w-full p-3 text-center text-2xl text-blue-600 font-semibold'>Your Companies</div>
-                            {update ? (
-                                <div>
-                                    <div className='fixed border border-black bg-white ml-52'>
-                                        <div className='w-full h-10 text-right'>
-                                            <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}>
-                                                <img src={crossImage} alt="" />
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <CreateCOmpany setUpdate={setUpdate}  myfunction={loadCompany} />
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            ) : ''}
-                            {onlyUpdate ? <div className='fixed border border-black bg-white ml-52'>
-                                <div className='w-full h-10 text-right'>
-                                    <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickupdate}>
-                                        <img src={crossImage} alt="" />
-                                    </button>
-                                </div>
-                                <div>
-                                    <UpdateCompany setOnlyUpdate={setOnlyUpdate} id={id} myfunction={loadCompany} />
-
-                                </div>
-                            </div> : ''
-
-                            }
-                            <table className='w-full border border-gray-200 mt-2 rounded-md'>
-                                <thead className='border border-gray-400 h-10 bg-gray-500 text-white font-semibold text-lg'>
-                                    <tr>
-                                        <td className='text-center'>Sn.</td>
-                                        <td className='text-center'>Company Name</td>
-                                        <td className='text-center'>GST</td>
-                                        <td className='text-center'>Address</td>
-                                        <td className='text-center'>GST Type</td>
-                                        <td className='text-center'>Mobile No</td>
-                                        <td className='text-center w-24'>Update</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {companyDetail.map((company, index) => (
-                                        <tr key={company.companyId} className='border border-white h-12 m-6 hover:bg-gray-100 rounded-lg hover:shadow-md cursor-pointer'>
-                                            <td onClick={() => handleClickOnCompany(company.companyName)} className='text-center text-sm'>{index + 1}</td>
-
-                                            <td onClick={() => handleClickOnCompany(company.companyName)} className='text-center text-sm'>{company.companyName}</td>
-                                            <td onClick={() => handleClickOnCompany(company.companyName)} className='text-center text-sm'>{company.gstIn}</td>
-                                            <td onClick={() => handleClickOnCompany(company.companyName)} className='text-center text-sm'>{company.companyAddress}</td>
-
-                                            <td onClick={() => handleClickOnCompany(company.companyName)} className='text-center text-sm'>{company.gstType}</td>
-
-                                            <td onClick={() => handleClickOnCompany(company.companyName)} className='text-center text-sm'>{company.mobile}</td>
-                                            <td className='text-center text-sm'>
-                                                <span className='border border-red-500 rounded-lg p-2 hover:bg-green-600 hover:font-semibold hover:text-white w-16 cursor-pointer' onClick={() => handleOnclickOnupdate(company.companyId)}>Update</span>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+        <div className="bg-blue-300 min-h-screen relative overflow-hidden">
+            {localStorage.getItem('login') && JSON.parse(localStorage.getItem('login')).login ? (
+                <div className="grid grid-cols-4">
+                    <div className="col-span-1 flex justify-center items-center">
+                        <div className="w-full h-16 bg-blue-200 flex justify-center items-center hover:bg-blue-300 transition-colors duration-300 rounded-lg shadow-md">
+                            <button onClick={handleCreateCOmpany} className="text-blue-700 hover:text-blue-900 font-semibold focus:outline-none">
+                                Create Company
+                            </button>
+                        </div>
+                    </div>
+                    <div className="col-span-3 mx-2 bg-blue-300">
+                        <div className="h-16 w-full flex justify-center items-center text-4xl text-blue-600 font-bold bg-gray-200 border-b-4 border-blue-400 rounded-t-lg  mt-2">
+                            Your Companies
                         </div>
 
+                        {/* Background overlay when either CreateCOmpany or UpdateCompany is open */}
+                        {(update || onlyUpdate) && (
+                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50"></div>
+                        )}
 
+                        {/* Render update form */}
+                        {update && (
+                            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border border-black shadow-md rounded-md p-4 z-50">
+                                <div className="flex justify-end">
+                                    <button onClick={handleOnclickBody} className="w-6 h-6 mr-2 focus:outline-none hover:scale-110 transform transition-transform">
+                                        <img src={crossImage} alt="Close" />
+                                    </button>
+                                </div>
+                                <CreateCOmpany setUpdate={setUpdate} myfunction={loadCompany} />
+                            </div>
+                        )}
+                        {/* Render update company form */}
+                        {onlyUpdate && (
+                            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border border-black shadow-md rounded-md p-4 z-50">
+                                <div className="flex justify-end">
+                                    <button onClick={handleOnclickBody} className="w-6 h-6 mr-2 focus:outline-none hover:scale-110 transform transition-transform">
+                                        <img src={crossImage} alt="Close" />
+                                    </button>
+                                </div>
+                                <UpdateCompany setOnlyUpdate={setOnlyUpdate} id={id} myfunction={loadCompany} />
+                            </div>
+                        )}
+                        {/* Render company list */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
+                            {companyDetail.map((company, index) => (
+                                <div
+                                    key={company.companyId}
+                                    className="bg-white rounded-lg shadow-md p-6 cursor-pointer hover:shadow-lg hover:scale-105 transition-transform"
+                                    onClick={() => handleClickOnCompany(company.companyName)}
+                                >
+                                    <p className="text-lg font-extrabold text-blue-600 uppercase tracking-wide mb-4">{company.companyName}</p>
+                                    {company.gst && <p className="text-sm mb-2">GST: {company.gst}</p>}
+                                    {company.gstType && <p className="text-sm mb-2">GST Type: {company.gstType}</p>}
+                                    <p className="text-sm mb-2">Address: {company.companyAddress}</p>
+                                    <p className="text-sm mb-2">Mobile No: {company.mobile}</p>
+                                    <button
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onClick={(e) => handleOnclickOnupdate(e, company.companyId)}
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    : <Home />
-            }
+                </div>
+            ) : (
+                <Home />
+            )}
         </div>
-    )
+    );
 }
 
-export default UsersDashboard
+export default UsersDashboard;

@@ -14,15 +14,15 @@ function Dashboard() {
         <>
            {
             store && store.login? <div>
-            <div className='my-4'><h1 className='flex justify-center text-3xl text-gray-800 font-semibold'>Welcome to <span className='text-blue-400 ml-1'>{`${JSON.parse(localStorage.getItem('companyName')).companyName}`}</span> </h1></div>
+            <div className='my-4'><h1 className='flex justify-center text-3xl text-blue-800 font-semibold'>Welcome to <span className='text-blue-400 ml-1'>{`${JSON.parse(localStorage.getItem('companyName')).companyName}`}</span> </h1></div>
             <div className='gridstyle grid grid-cols-4'>
 
                 <LeftSidbar opendash="bold" />
-                <div className='border border-gray -100 justify-center col-span-2'>
+                <div className='border border-blue -100 justify-center col-span-2'>
                     <Navigationbuttons  />
 
                 </div>
-                <div className='border border-gray-100 justify-center'>
+                <div className='border border-blue-100 justify-center'>
                     <RightSidebar  />
                 </div>
             </div>

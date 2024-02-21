@@ -143,7 +143,7 @@ function Profits() {
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Profits </h1></div>
             <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar />
-                <div className='border border-gray-900 rounded-lg justify-center col-span-2'>
+                <div className='border border-blue-900 rounded-lg justify-center col-span-2'>
                     <div className='w-full bg-green-700 p-1 text-white rounded-md text-center'>{` ${monthInLetter}, ${currentYear} `} Report</div>
                     <div className='flex '>
                         <div className='flex  flex-col  w-60 h-40 m-2   border border-green-600 rounded-xl shadow-lg'>
@@ -190,7 +190,7 @@ function Profits() {
                         </div>
                     </div>
                 </div>
-                <div className='border border-gray-100 justify-center'>
+                <div className='border border-blue-100 justify-center'>
                     <RightSidebar />
                 </div>
             </div>

@@ -36,47 +36,50 @@ function ProductLists() {
         loadProducts()
     }
     return (
-<div className='grid grid-cols-4 pt-10'>      
+<div className='grid grid-cols-4 pt-10'>    
+
 <div className='pt-10'><LeftSidbar/></div>
       <div className='flex justify-center flex-col col-span-2'>
+      <div className='w-full text-center text-3xl text-green-800 font-bold'>Stick Item List</div>
             <div className="short w-full  h-10 text-right">
                     <span className='mr-4 font-semibold text-md'>Search By Name</span>
-                    <input type='text' className='border border-gray-600 rounded-md m-1 mr-6 p-1' placeholder='Enter Product Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
+                    <input type='text' className='border border-blue-600 rounded-md m-1 mr-6 p-1' placeholder='Enter Product Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
                 </div>
            
 
                 {update ? <div className='w-full flex justify-center '>
-                    <div className='fixed h-80 p-10 bg-gray-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
+                    <div className='fixed h-80 p-10 bg-blue-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
                         <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
                         <UpdateProduct itemName={`${itemName}`} setUpdate={setUpdate}  myFunction={loadProducts}/>
                     </div>
                 </div> : ''}
                 
-                <div style={{ height: 516 }} id="toblur" className=' overflow-y-auto '>
+                <div style={{ height: 480 }} id="toblur" className=' overflow-y-auto '>
+                    
                     <table className="text-sm ">
-                        <thead className="text-xs text-gray-700 uppercase z-10 sticky top-0">
+                        <thead className="text-xs text-blue-700 uppercase z-10 sticky top-0">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-center w-3 text-white bg-gray-400 ">
+                                <th scope="col" className="px-6 py-3 text-center w-3 text-white bg-blue-400 ">
                                     Sn. No.
                                 </th>
-                                <th scope="col" className="px-6  py-3 text-center  text-white bg-gray-400">
+                                <th scope="col" className="px-6  py-3 text-center  text-white bg-blue-400">
                                     Item Name
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-center text-white bg-gray-400">
+                                <th scope="col" className="px-6 py-3 text-center text-white bg-blue-400">
                                     Purchase Price
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-center  text-white bg-gray-400">
+                                <th scope="col" className="px-6 py-3 text-center  text-white bg-blue-400">
                                     Category
                                 </th>
 
-                                <th scope="col" className="px-6 py-3 text-center  text-white bg-gray-400 ">
+                                <th scope="col" className="px-6 py-3 text-center  text-white bg-blue-400 ">
                                     Actions
                                 </th>
                             </tr>
                         </thead>
                         {productDetailss.reverse().map((productDetails, index) => (
                             shortData ? !productDetails.itemName.toLowerCase().includes(shortData.toLowerCase()) ? '' : <tbody key={index + 1} className='border border-x-2 my-10'>
-                                <tr className="border border-gray-200 align-middle">
+                                <tr className="border border-blue-200 align-middle">
                                     <td scope="row" className="border w-3 text-center border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                         {index + 1}
                                     </td>
@@ -96,7 +99,7 @@ function ProductLists() {
                                 </tr>
 
                             </tbody> : <tbody key={index + 1} className='border border-x-2 my-10'>
-                                <tr className="border border-gray-200 align-middle">
+                                <tr className="border border-blue-200 align-middle">
                                     <td scope="row" className="border text-center  border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                         {index + 1}
                                     </td>

@@ -84,7 +84,7 @@ function Invoice() {
                             <h1 className="text-xl font-bold ">Customer:</h1>
                             <div>{custName}</div>
                             <p className="text-xl font-bold mb-2">Address:</p>
-                            <textarea value={address} onChange={(e) => handleOnChange(e)} className="w-full h-12 flex-wrap flex bg-white border border-gray-200 p-2 rounded-md resize-none focus:outline-none"
+                            <textarea value={address} onChange={(e) => handleOnChange(e)} className="w-full h-12 flex-wrap flex bg-white border border-blue-200 p-2 rounded-md resize-none focus:outline-none"
                                 placeholder="Enter address..."></textarea>
 
                         </div>
@@ -105,24 +105,24 @@ function Invoice() {
 
                     {/* <!-- Table Section --> */}
                     <div className="overflow-x-auto">
-                        <table className="min-w-full border-collapse pl-0 border border-gray-300">
-                            <thead className="bg-gray-200">
+                        <table className="min-w-full border-collapse pl-0 border border-blue-300">
+                            <thead className="bg-blue-200">
                                 <tr>
-                                    <th className="py-2 px-4 border border-gray-300 text-center w-16">Item</th>
-                                    <th className="py-2 px-4 border border-gray-300 text-center">Description</th>
-                                    <th className="py-2 px-4 border border-gray-300 text-center w-16">Quantity</th>
-                                    <th className="py-2 px-4 border border-gray-300 text-center">Price</th>
-                                    <th className="py-2 px-4 border border-gray-300 text-center">Total</th>
+                                    <th className="py-2 px-4 border border-blue-300 text-center w-16">Item</th>
+                                    <th className="py-2 px-4 border border-blue-300 text-center">Description</th>
+                                    <th className="py-2 px-4 border border-blue-300 text-center w-16">Quantity</th>
+                                    <th className="py-2 px-4 border border-blue-300 text-center">Price</th>
+                                    <th className="py-2 px-4 border border-blue-300 text-center">Total</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
                                 {invoiceDetails.map((item, index) => (
                                     <tr key={item.id}>
-                                        <td className="py-2 px-4 border border-gray-300 text-center">{index + 1}</td>
-                                        <td className="py-2 px-4 border border-gray-300 text-center">{item.item.itemName}</td>
-                                        <td className="py-2 px-4 border border-gray-300 text-center">{item.quantity}</td>
-                                        <td className="py-2 px-4 border border-gray-300 text-center">{item.rate}</td>
-                                        <td className="py-2 px-4 border border-gray-300 text-center">{item.quantity * item.rate}</td>
+                                        <td className="py-2 px-4 border border-blue-300 text-center">{index + 1}</td>
+                                        <td className="py-2 px-4 border border-blue-300 text-center">{item.item.itemName}</td>
+                                        <td className="py-2 px-4 border border-blue-300 text-center">{item.quantity}</td>
+                                        <td className="py-2 px-4 border border-blue-300 text-center">{item.rate}</td>
+                                        <td className="py-2 px-4 border border-blue-300 text-center">{item.quantity * item.rate}</td>
                                     </tr>
                                 ))
                                 }
@@ -135,19 +135,19 @@ function Invoice() {
                     {/* <!-- Invoice Footer --> */}
                     <div className="mt-6">
                         {/* <p className="text-black">Subtotal: Rs. {subTotal}</p> */}
-                        <p className="text-gray-900 font-bold text-xl">Total:Rs. {subTotal}</p>
+                        <p className="text-blue-900 font-bold text-xl">Total:Rs. {subTotal}</p>
                     </div>
                     <div className='flex justify-between mt-4'>
                         <div className='ml-2'>
                             <div className='mt-3 ml-2'>Stump :-</div>
-                            <div className="box h-16 w-40 border border-gray-300 mt-2 rounded-lg"></div>
+                            <div className="box h-16 w-40 border border-blue-300 mt-2 rounded-lg"></div>
                         </div>
                         <div className='mr-2'>
                             <div className='mt-3 ml-2'>Signature :-</div>
-                            <div className="box h-16 w-40 border border-gray-300 mt-2 rounded-lg"></div>
+                            <div className="box h-16 w-40 border border-blue-300 mt-2 rounded-lg"></div>
                         </div>
                     </div>
-                    <div className="msg w-full font-semibold tetx-gray-400 text-center">Thank For Shopping With Ravi Computer</div>
+                    <div className="msg w-full font-semibold tetx-blue-400 text-center">Thank For Shopping With Ravi Computer</div>
                 </div>
                 <div className="text-center w-full mt-2">  <button className='border border-x-2 bg-green-300 rounded-lg p-2 font-semibold hover:bg-green-600 hover:shadow-lg hover:text-white transition-all ' onClick={(e) => handleGeneratePDF(e)}>Download Invoice in PDF</button></div>
             </div>
