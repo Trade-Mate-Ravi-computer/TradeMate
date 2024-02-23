@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, json } from 'react-router-dom';
 import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
+import loder from './loader.gif'
 function SaleDetails() {
     const [saleDetails, setSaleDetails] = useState([])
     const [shortData, setShortData] = useState('')
     const [update, setUpdate] = useState(false)
     const [itemName, setItemName] = useState('')
-    const [itemId,setItemId]=useState(0)
+    const [itemId, setItemId] = useState(0)
+    const [loading, setLoading] = useState(true)
     function changeNumberToMonth(currentMonth) {
         let month = ""
         switch (currentMonth) {
@@ -58,12 +60,12 @@ function SaleDetails() {
     }, [])
     const loadSaleDetails = async () => {
         const saleDetail = await axios.post("http://localhost:8080/sales/allsaledetails",
-        {companyName:JSON.parse(localStorage.getItem('companyName')).companyName},
-         {
-            headers: {
-                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
-            }
-        });
+            { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
+            {
+                headers: {
+                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+                }
+            });
         setSaleDetails(saleDetail.data)
 
         // console.log(saleDetails[i].data.reverse())
@@ -87,34 +89,36 @@ function SaleDetails() {
     const shortEvent = (e) => {
         setShortData(e.target.value)
     }
-    const handleOnClickUpdate = (id,itemName) => {
+    const handleOnClickUpdate = (id, itemName) => {
         setUpdate(true)
         setItemName(itemName)
         setItemId(id)
-       
+
     }
     const handleOnclickBody = () => {
         setUpdate(false)
         loadSaleDetails()
     }
+   
     return (
-        <div className=""> 
-        <div className='w-full text-center font-bold text-3xl text-green-800 mt-4'>Sale Details</div>
+        <div className="">
+            
+            <div className='w-full text-center font-bold text-3xl text-green-800 mt-4'>Sale Details</div>
             <div className="w-full  flex justify-between  pr-20">
-            <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-blue-200 w-10">{localStorage.getItem('login')?"⇐ Company Dashboard":"Home"}</NavLink></div>
-              <div>
-              <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
-                <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
-              </div>
+                <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+                <div>
+                    <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
+                    <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
+                </div>
             </div>
             {update ? <div className='w-full flex justify-center '>
-                        <div className='fixed h-80 p-10 bg-blue-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
-                            <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
-                            <UpdateSale itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate}  myFunction={loadSaleDetails}/>
-                        </div>
-                    </div> : ''}
-            <div style={{ height: 555 }} className=' px-10 overflow-y-auto '>
-
+                <div className='fixed h-80 p-10 bg-blue-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
+                    <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
+                    <UpdateSale itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate} myFunction={loadSaleDetails} />
+                </div>
+            </div> : ''}
+            <div style={{ height: 497 }} className=' px-10 overflow-y-auto '>
+           
                 <table className="w-full text-sm text-left rtl:text-right text-blue-500 dark:text-blue-400 border border-black">
 
                     <thead className="text-xs text-blue-700 uppercase dark:text-blue-400 z-10 sticky top-0">
@@ -147,11 +151,15 @@ function SaleDetails() {
                             </th>
                         </tr>
                     </thead>
+                  
                     <tbody className=''>
                         {(() => {
                             const items = []
                             let j = 0
                             for (let i = saleDetails.length - 1; i >= 0; i--) {
+                                if(i===0 && loading!==false){
+                                    setLoading(false)
+                                }
                                 items.push(shortData ? !saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
                                     <tr className="border-b border-blue-200 dark:border-blue-900">
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
@@ -180,7 +188,7 @@ function SaleDetails() {
                                         </td>
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={()=>handleOnClickUpdate(saleDetails[i].id,saleDetails[i].customerName)}>Received</NavLink>
+                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(saleDetails[i].id, saleDetails[i].customerName)}>Received</NavLink>
                                             <NavLink onClick={(e) => deleteOnClick(saleDetails[i].id, e)} className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</NavLink>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/invoice/${saleDetails[i].id}`}>Invoice</NavLink>
                                         </td>
@@ -212,7 +220,7 @@ function SaleDetails() {
                                         </td>
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={()=>handleOnClickUpdate(saleDetails[i].id,saleDetails[i].customerName)}>Received</NavLink>
+                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(saleDetails[i].id, saleDetails[i].customerName)}>Received</NavLink>
                                             <NavLink onClick={(e) => deleteOnClick(saleDetails[i].id, e)} className='border border-x-2 py-2 px-4 rounded-xl m-1 bg-red-300 hover:bg-green-600 hover:text-white transition-all'>Delete</NavLink>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`/invoice/${saleDetails[i].id}`}>Invoice</NavLink>
                                         </td>
@@ -220,12 +228,19 @@ function SaleDetails() {
                                 );
 
                                 j++
-
+                              
                             }
+
                             return items;
-                        })()}
+                        })()
+
+                        }
                     </tbody>
+                    
                 </table>
+                <div className='w-full flex justify-center'> {
+                loading ? <div className='w-full flex justify-center'><img className='' src={loder} alt="" /></div> : ''
+            }</div>
             </div>
 
         </div>

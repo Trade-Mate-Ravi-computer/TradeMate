@@ -10,11 +10,29 @@ function Invoice() {
     const [custName, setCustName] = useState('')
     const [subTotal, setSubTotal] = useState(0)
     const [date, setDate] = useState(null)
-    const {id} = useParams()
+    const [companyDetails, setCompanyDetails] = useState({
+
+    })
+    const { id } = useParams()
     // console.log(id)
     useEffect(() => {
+        loadCompanyDetails()
         loadInvoiceDetails()
     }, [])
+    const loadCompanyDetails = async () => {
+        try {
+            const companyDetail = await axios.post(`http://localhost:8080/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+                }
+            })
+            setCompanyDetails(companyDetail.data)
+            // console.log(companyDetail.data)
+        } catch (e) {
+            console.log("Some Error Occurs")
+        }
+
+    }
     const loadInvoiceDetails = async () => {
         const invoiceDetail = await axios.post(`http://localhost:8080/sales/byid/${id}`,
             {},
@@ -24,7 +42,7 @@ function Invoice() {
                 }
             }
         )
-        
+
         setInvoiceDetails(invoiceDetail.data);
         setDate(invoiceDetail.data[0].date)
         setCustName(invoiceDetail.data[0].customerName)
@@ -34,7 +52,7 @@ function Invoice() {
         })
         //    console.log(sum)
         setSubTotal(sum)
-        
+
     }
     const handleOnChange = (e) => {
         setAddress(e.target.value)
@@ -44,7 +62,7 @@ function Invoice() {
 
         // Specify custom options for PDF generation
         const options = {
-            margin:2,
+            margin: 2,
             filename: `${custName + date}.pdf`,
             image: { type: 'jpeg', quality: 1 },
             html2canvas: { scale: 5 },
@@ -58,15 +76,15 @@ function Invoice() {
             .save();
     };
 
-
+    // console.log(companyDetails)
 
 
     return (
         <div className='grid grid-cols-4'>
             <div className="saleList pl-2 mt-10">
-            <LeftSidbar/>
-                <RightSidebar/>
-                
+                <LeftSidbar />
+                <RightSidebar />
+
             </div>
             <div className="col-span-3 px-3 " id='invoce'>
                 <div className="text-center w-full">Invoice of <span className='text-green-600 font-semibold'>{` ${custName}`} </span>on Date <span className='text-green-600 font-semibold'>{` ${date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}`}</span></div>
@@ -76,9 +94,10 @@ function Invoice() {
                     <div className="flex justify-between mb-8">
                         <div>
                             <h1 className="text-xl font-bold">Seller:</h1>
-                            <p className="text-black">Ravi Computer</p>
-                            <p className="text-black">Varanasi Road, Chandwak, Jaunpur,uttar pradesh</p>
-                            <p className="text-black">Mob: 7007826508</p>
+                            <p className="text-black">{companyDetails.companyName}</p>
+                            <p className="text-black">{companyDetails.companyAddress}</p>
+                            <p className="text-black">GSTIn: {companyDetails.gstIn}</p>
+                            <p className="text-black">Mob: {companyDetails.mobile}</p>
                         </div>
                         <div>
                             <h1 className="text-xl font-bold ">Customer:</h1>
@@ -94,12 +113,13 @@ function Invoice() {
                     <div className="flex justify-between items-center mb-8">
                         <div>
                             <h1 className="text-xl font-bold">Invoice</h1>
-                            <p className="text-black">Varanasi Road, Chandwak, Jaunpur,UP</p>
-                            <p className="text-black">Mob: 7007826508</p>
+                            <p className="text-black">{companyDetails.companyAddress}</p>
+                            <p className="text-black">Mob: {companyDetails.mobile}</p>
+                            <p className="text-black">GSTIn: {companyDetails.gstIn}</p>
                         </div>
                         <div>
                             <p className="text-black">Invoice: RC-{id} </p>
-                            <p className="text-black">{date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}</p>
+                            <p className="text-black">Date :- {date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}</p>
                         </div>
                     </div>
 
@@ -130,12 +150,24 @@ function Invoice() {
 
 
                         </table>
+                        
                     </div>
-
+                   {
+                     companyDetails.gstType==="Regular"?<div><div className='flex justify-end'>
+                     <div style={{width:248}} className='border border-blue-600 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
+                    
+                 </div>
+                 <div className='flex justify-end'>
+                     <div style={{width:248}} className='border border-blue-600 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
+                    
+                 </div></div>:''
+                   }
                     {/* <!-- Invoice Footer --> */}
                     <div className="mt-6">
                         {/* <p className="text-black">Subtotal: Rs. {subTotal}</p> */}
-                        <p className="text-blue-900 font-bold text-xl">Total:Rs. {subTotal}</p>
+                        <p className="text-blue-900 font-bold text-lg"> Sub-total:Rs. {subTotal}</p>
+                        <p className="text-blue-900 font-bold text-xl">Total:Rs. {subTotal + subTotal * (companyDetails.gstType === "Regular" ? 18 / 100 : 0)}</p>
+
                     </div>
                     <div className='flex justify-between mt-4'>
                         <div className='ml-2'>
@@ -147,9 +179,9 @@ function Invoice() {
                             <div className="box h-16 w-40 border border-blue-300 mt-2 rounded-lg"></div>
                         </div>
                     </div>
-                    <div className="msg w-full font-semibold tetx-blue-400 text-center">Thank For Shopping With Ravi Computer</div>
+                    <div className="msg w-full font-semibold tetx-blue-400 text-center">Thank For Shopping With {companyDetails.companyName}</div>
                 </div>
-                <div className="text-center w-full mt-2">  <button className='border border-x-2 bg-green-300 rounded-lg p-2 font-semibold hover:bg-green-600 hover:shadow-lg hover:text-white transition-all ' onClick={(e) => handleGeneratePDF(e)}>Download Invoice in PDF</button></div>
+                <div className="text-center w-full my-2">  <button className='border border-x-2 bg-green-300 rounded-lg p-2 font-semibold hover:bg-green-600 hover:shadow-lg hover:text-white transition-all ' onClick={(e) => handleGeneratePDF(e)}>Download Invoice in PDF</button></div>
             </div>
 
         </div>

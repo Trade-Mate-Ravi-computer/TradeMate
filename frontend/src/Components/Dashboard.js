@@ -1,35 +1,52 @@
-import React, { useEffect } from 'react'
-import Navigationbuttons from './Navigationbuttons'
-import LeftSidbar from './LeftSidbar'
-import RightSidebar from './RightSidebar'
-import Home from './Home'
-import LoginSuggetion from './LoginSuggetion'
-import { useParams } from 'react-router-dom'
-
+import React, { useEffect } from 'react';
+import Navigationbuttons from './Navigationbuttons';
+import LeftSidbar from './LeftSidbar';
+import RightSidebar from './RightSidebar';
+import Home from './Home';
+import LoginSuggetion from './LoginSuggetion';
+import axios from 'axios'
 
 function Dashboard() {
-    let store = JSON.parse(localStorage.getItem('login'))
-  
+    let store = JSON.parse(localStorage.getItem('login'));
+    useEffect(() => {
+        loadProducts()
+    }, [])
+    const loadProducts = async () => {
+        const productDetails = await axios.post("http://localhost:8080/stock/all",
+            { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+                }
+            });
+        localStorage.setItem('saleDetails', JSON.stringify(productDetails.data))
+    }
+
     return (
-        <>
-           {
-            store && store.login? <div>
-            <div className='my-4'><h1 className='flex justify-center text-3xl text-blue-800 font-semibold'>Welcome to <span className='text-blue-400 ml-1'>{`${JSON.parse(localStorage.getItem('companyName')).companyName}`}</span> </h1></div>
-            <div className='gridstyle grid grid-cols-4'>
-
-                <LeftSidbar opendash="bold" />
-                <div className='border border-blue -100 justify-center col-span-2'>
-                    <Navigationbuttons  />
-
+        <div style={{ height: 596 }} className="bg-white">
+            {store && store.login ? (
+                <div>
+                    <div className="mb-4 flex justify-center items-center bg-gradient-to-r from-sky-400 to-violet-500 text-white font-semibold rounded-lg p-4 shadow-md">
+                        <h1 className="text-3xl">Welcome to</h1>
+                        <div className="text-white bg-blue-900 px-3 py-1 ml-4 rounded-md">
+                            <span className="text-lg">{`${JSON.parse(localStorage.getItem('companyName')).companyName}`}</span>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-4">
+                        <LeftSidbar opendash="bold" />
+                        <div className="col-span-2 border border-blue-100 sticky">
+                            <Navigationbuttons />
+                        </div>
+                        <div className="border border-blue-100">
+                            <RightSidebar />
+                        </div>
+                    </div>
                 </div>
-                <div className='border border-blue-100 justify-center'>
-                    <RightSidebar  />
-                </div>
-            </div>
-        </div>:<LoginSuggetion/>
-           }
-        </>
-    )
+            ) : (
+                <LoginSuggetion />
+            )}
+        </div>
+    );
 }
 
-export default Dashboard
+export default Dashboard;

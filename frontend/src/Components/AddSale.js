@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
-import axios from 'axios'
 import { NavLink } from 'react-router-dom';
 
 
 function AddSale() {
     const [sale, setSale] = useState();
     const [isOpen, steIsOpen] = useState(false)
-    const itemNames =JSON.parse(localStorage.getItem('saleDetails'))
+    const itemNames = JSON.parse(localStorage.getItem('saleDetails'))
     const handleEventChange = (e) => {
         // const { name, value } = e.target;
         setSale(e.target.value)
@@ -17,11 +16,12 @@ function AddSale() {
     const handleOnClick = () => {
         isOpen ? steIsOpen(false) : steIsOpen(true)
     }
-    const handleOnClicks=()=>{
-        if(isOpen){
+    const handleOnClicks = () => {
+        if (isOpen) {
             steIsOpen(false)
         }
     }
+
     const handlOnClickItemName = (name) => {
         setSale(name)
         steIsOpen(false)
@@ -32,34 +32,28 @@ function AddSale() {
     })
     useEffect(() => {
         loadUser()
-        loadProducts()
     }, [])
-    const loadProducts = async () => {
-        const productDetails = await axios.post("http://localhost:8080/stock/all",
-        {companyName:JSON.parse(localStorage.getItem('companyName')).companyName},
-         {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
-            }
-        });
-        localStorage.setItem('saleDetails', JSON.stringify(productDetails.data))
-    }
+
     const loadUser = () => {
-        fetch('http://localhost:8080/user/byemail', {
-            "method": "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
-            },
-            body: JSON.stringify(email)
+        try {
+            fetch('http://localhost:8080/user/byemail', {
+                "method": "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+                },
+                body: JSON.stringify(email)
 
-        }).then((resp) => {
+            }).then((resp) => {
 
-            resp.json().then((result) => {
-                // console.log("result :-", result.id)
-                setId(result.id)
+                resp.json().then((result) => {
+                    // console.log("result :-", result.id)
+                    setId(result.id)
+                })
             })
-        })
+        } catch (e) {
+            console.log("Some Error Occurs")
+        }
     }
     // console.log("Id set to :-", id)
     const [uploadStatus, setUploadStatus] = useState("")
@@ -85,9 +79,9 @@ function AddSale() {
         customerName: "",
         rate: 0,
         receivedAmmount: 0,
-        companyName:'',
+        companyName: '',
         company: {
-            compannyName:''
+            compannyName: ''
         }
 
     })
@@ -97,13 +91,14 @@ function AddSale() {
             ...prevSale,
             [name]: value,
             companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
-            itemName:sale
+            itemName: sale
         }));
 
     }
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:8080/sales/addSale', {
+        try{
+            fetch('http://localhost:8080/sales/addSale', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -123,7 +118,7 @@ function AddSale() {
                     rate: 0,
                     receivedAmmount: 0,
                     company: {
-                        compannyName:''
+                        compannyName: ''
                     }
                 })
                 upStatus();
@@ -132,11 +127,14 @@ function AddSale() {
                 failStatus();
             }
         })
+        }catch(e){
+            failStatus();
+        }
     }
 
     return (
         <div>
-            <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login')?"⇐ Company Dashboard":"Home"}</NavLink></div>
+            <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Sale Entry</h1></div>
             <div className='gridstyle grid grid-cols-4'>
                 <LeftSidbar addSale="bold" />
@@ -156,18 +154,18 @@ function AddSale() {
                             </div>
                         </div>
                         <div className="flex items-center justify-between">
-                                <label htmlFor="Quantity" className="block text-sm font-medium leading-6 text-gray-900">Select Item</label>
-                            </div>
+                            <label htmlFor="Quantity" className="block text-sm font-medium leading-6 text-gray-900">Select Item</label>
+                        </div>
                         <div className='w-full'>
-                           
-                                <input name="user" onClick={handleOnClick} value={sale} onChange={handleEventChange} className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" />
-                                <div className="dropdown absolute bg-gray-100" style={{ width: 438 }}>
 
-                                <ul>
+                            <input name="user" onClick={handleOnClick} value={sale} onChange={handleEventChange} className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" />
+                            <div className="dropdown absolute bg-gray-100" style={{ width: 438 }}>
+
+                                <ul style={isOpen ? { maxHeight: 300 } : null} className='overflow-y-auto'>
                                     {isOpen && itemNames.map((item, index) => (
-                                        item.itemName.toLowerCase().includes(sale ? sale.toLowerCase() : '') ? <li key={index} className='list-none border border-x-2  flex justify-center hover:bg-blue-200' onClick={() => handlOnClickItemName(item.itemName)}>
+                                        item.itemName.toLowerCase().includes(sale ? sale.toLowerCase() : '') ? <button key={index} className='list-none border border-x-2 w-full flex justify-center hover:bg-blue-200' onClick={() => handlOnClickItemName(item.itemName)}>
                                             {item.itemName}
-                                        </li> : ''
+                                        </button> : ''
                                     ))}
                                 </ul>
                             </div>
@@ -180,7 +178,10 @@ function AddSale() {
                                 <input value={saleDetail.quantity} onChange={(e) => onEventChange(e)} id="quantity" name="quantity" type="number" min='1' required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
+                        <div className="fixed top-0 right-0 w-full flex items-center justify-center z-50">
                         <div className='fixed flex items-center ml-40 font-bold text-5xl text-green-600'>{uploadStatus}</div>
+                        </div>
+
                         <datalist name="itemList" id="customerList" >
                             <option name="customer1" id="item1">customer1</option>
                             <option name="customer2" id="item2">customer2</option>

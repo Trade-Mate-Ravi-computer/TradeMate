@@ -83,7 +83,7 @@ function UpdateCompany(props) {
                             onChange={handleChange}
                             className="mt-1 p-2 w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black"
                             placeholder="Enter 10-digit mobile number"  // Add a placeholder for user guidance
-                            required  // Add the required attribute to make the input field mandatory
+                            // Add the required attribute to make the input field mandatory
                         />
                     </div>
 

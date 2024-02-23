@@ -42,7 +42,7 @@ function Navbar(props) {
             <div className="relative ml-3">
               <div>
                 <button type="button" onClick={handleOnClick} className="relative bg-blue-300 py-2 px-4 flex border hover:border-blue-300 hover:text-white rounded-xl hover:bg-blue-400 transition-all" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                  {store ? store.user : "Sign-Up"} <img className='w-7 ml-2 h-7' src={logout} alt="" />
+                  {store ? store.user : "Sign-Up"} { localStorage.getItem('login')?JSON.parse(localStorage.getItem('login')).login?<img className='w-7 ml-2 h-7' src={logout} alt="" />:'':''}
                 </button>
               </div>
             </div>

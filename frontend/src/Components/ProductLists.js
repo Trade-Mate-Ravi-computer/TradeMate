@@ -62,7 +62,7 @@ function ProductLists() {
                                 <th scope="col" className="px-6 py-3 text-center w-3 text-white bg-blue-400 ">
                                     Sn. No.
                                 </th>
-                                <th scope="col" className="px-6  py-3 text-center  text-white bg-blue-400">
+                                <th scope="col" className="px-6  py-3 text-center  w-60 text-white bg-blue-400">
                                     Item Name
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-center text-white bg-blue-400">
@@ -83,7 +83,7 @@ function ProductLists() {
                                     <td scope="row" className="border w-3 text-center border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                         {index + 1}
                                     </td>
-                                    <td scope="row" className="border w-80 text-center text-wrap border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
+                                    <td scope="row" className="border w-80 text-center text-wrap  border-x-2 px-6 py-2 font-medium text-green-600 bg-white ">
                                         {productDetails.itemName.length > 30 ? productDetails.itemName.slice(0, 27) + "..." : productDetails.itemName}
                                     </td>
                                     <td className="border border-x-2 px-6 py-2 text-center font-medium text-green-600 bg-white ">

@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {QRCodeSVG} from 'qrcode.react';
 
 function Test() {
-   const array = [1,2,3,4,5,6,7,8,9]
+  // UPI details
+  const upiId = 'mauryaravi599-4@okicici'; // Replace with the receiver's UPI ID
+  const amount = '2990'; // Optional: Replace with the payment amount
+  const note = 'Payment for check upi code'; // Optional: Payment note
 
-    return (
-        <div className=' border border-green-300 px-40 h-screen'>
-          this is testing 
-          <div>
-            <ul>
-                
-            </ul>
-          </div>
-        </div>
+  // UPI URL format: upi://pay?pa=UPI_ID&am=AMOUNT&cu=INR&pn=NAME&tn=NOTE
+  const upiUrl = `upi://pay?pa=${upiId}&am=${amount}&cu=INR&pn=Name&tn=${note}`;
 
-        
-    );
+  return (
+    <div>
+      <h2>UPI QR Code</h2>
+      <QRCodeSVG value={upiUrl} />
+    </div>
+  );
 }
 
 export default Test;

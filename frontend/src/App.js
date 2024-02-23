@@ -20,6 +20,7 @@ import Invoice from './Components/Invoice';
 import Remaining from './Components/Remaining';
 import UsersDashboard from './Components/UsersDashboard';
 import CreateCOmpany from './Components/CreateCOmpany';
+import PurchaseList from './Components/PurchaseList';
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/addpurchase/:companyName" element={<AddPurchase/>} />
           <Route exact path="/addexpense/:companyName" element={<AddExpence/>} />
           <Route exact path="/addproduct/:companyName" element={<AddProduct/>} />
+          <Route exact path="/purchase/:companyName" element={<PurchaseList/>} />
           <Route exact path="/signup" element={<Signup/>} />
           <Route exact path="/saledetails/:companyName" element={<SaleDetails/>} />
           <Route exact path="/updatesale/:id" element={<UpdateSale/>} />
@@ -48,6 +50,7 @@ function App() {
           <Route exact path="/usersDashboard" element={<UsersDashboard/>}/>
           <Route exact path="/remaining/:companyName" element={<Remaining/>}/>
           <Route exact path="/createCompany" element={<CreateCOmpany/>}/>
+          <Route exact path ="/purchase/:companyName" element={<AddPurchase/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>
