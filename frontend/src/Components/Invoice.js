@@ -84,11 +84,12 @@ function Invoice() {
             <div className="saleList pl-2 mt-10">
                 <LeftSidbar />
                 <RightSidebar />
+                <div className='text-red-600 font-semibold'> <span className='font-bold text-lg'>Importent :-</span><br/>In new Update GST number added to your Invoice If your GST is Composition it only show your gst number on invoice and if its regular it will add 18% gst to your invoice</div>
 
             </div>
             <div className="col-span-3 px-3 " id='invoce'>
                 <div className="text-center w-full">Invoice of <span className='text-green-600 font-semibold'>{` ${custName}`} </span>on Date <span className='text-green-600 font-semibold'>{` ${date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}`}</span></div>
-                <div id='invoice' className="container mx-auto px-4 py-8 border border-black rounded-lg">
+                <div id='invoice' className="container mx-auto px-4 py-8  rounded-lg">
 
                     {/* <!-- Seller and Customer Details --> */}
                     <div className="flex justify-between mb-8">
@@ -154,11 +155,11 @@ function Invoice() {
                     </div>
                    {
                      companyDetails.gstType==="Regular"?<div><div className='flex justify-end'>
-                     <div style={{width:248}} className='border border-blue-600 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
+                     <div style={{width:248}} className='border border-blue-300 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
                     
                  </div>
                  <div className='flex justify-end'>
-                     <div style={{width:248}} className='border border-blue-600 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
+                     <div style={{width:248}} className='border border-blue-300 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
                     
                  </div></div>:''
                    }
