@@ -60,12 +60,18 @@ function Remaining() {
                 </div>
 
             </div>
-            {update ? <div className='w-full flex justify-center '>
-                <div className='fixed h-80 p-10 bg-blue-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
-                    <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
-                    <UpdateSale itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate} myFunction={loadSaleDetails} />
+            {update && (
+                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
+                        )}
+            {/* UpdateSale component */}
+            {update &&
+                <div className="fixed flex justify-center top-40 left-1/2 bg-white border border-black shadow-md rounded-md z-50">
+                    <div className='fixed h-80 p-10 bg-blue-50 rounded-lg  shadow-2xl' id='updateProduct'>
+                        <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
+                        <UpdateSale itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate} myFunction={loadSaleDetails} />
+                    </div>
                 </div>
-            </div> : ''}
+            }
             <div style={{ height: 521 }} className="col-span-3 overflow-y-auto">
 
                 <table className="w-full text-sm text-left rtl:text-right text-blue-500 dark:text-blue-400 ">

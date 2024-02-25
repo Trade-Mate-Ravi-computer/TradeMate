@@ -53,7 +53,7 @@ setLoginDetails(
   })
 
  return (
-    <div>
+    <div className='mt-2 pb-3'>
        <form className="space-y-6" onSubmit={(e)=>handleOnClick(e)}>
       <div>
         <label htmlFor="email" className="block text-sm font-medium leading-6 text-blue-900">Email address</label>

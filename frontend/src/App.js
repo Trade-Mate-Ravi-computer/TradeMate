@@ -21,6 +21,7 @@ import Remaining from './Components/Remaining';
 import UsersDashboard from './Components/UsersDashboard';
 import CreateCOmpany from './Components/CreateCOmpany';
 import PurchaseList from './Components/PurchaseList';
+import GST from './Components/GST';
 
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route exact path="/remaining/:companyName" element={<Remaining/>}/>
           <Route exact path="/createCompany" element={<CreateCOmpany/>}/>
           <Route exact path ="/purchase/:companyName" element={<AddPurchase/>}/>
+          <Route exact path ="/gst/:companyName" element={<GST/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

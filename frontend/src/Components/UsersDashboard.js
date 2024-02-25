@@ -73,7 +73,7 @@ function UsersDashboard() {
 
                         {/* Background overlay when either CreateCOmpany or UpdateCompany is open */}
                         {(update || onlyUpdate) && (
-                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50"></div>
+                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
                         )}
 
                         {/* Render update form */}

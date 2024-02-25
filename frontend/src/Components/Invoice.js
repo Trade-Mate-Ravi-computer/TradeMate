@@ -10,6 +10,7 @@ function Invoice() {
     const [custName, setCustName] = useState('')
     const [subTotal, setSubTotal] = useState(0)
     const [date, setDate] = useState(null)
+    const [gstFromat,setGstFormat]=useState('a4')
     const [companyDetails, setCompanyDetails] = useState({
 
     })
@@ -65,8 +66,8 @@ function Invoice() {
             margin: 2,
             filename: `${custName + date}.pdf`,
             image: { type: 'jpeg', quality: 1 },
-            html2canvas: { scale: 5 },
-            jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' }
+            html2canvas: { scale: 10 },
+            jsPDF: { unit: 'mm', format: `${gstFromat}`, orientation: 'portrait' }
         };
 
         // Generate PDF with custom options
@@ -88,6 +89,9 @@ function Invoice() {
 
             </div>
             <div className="col-span-3 px-3 " id='invoce'>
+                
+            {/* //create toggle button to swith between A4 and A5 */}
+            toogle button
                 <div className="text-center w-full">Invoice of <span className='text-green-600 font-semibold'>{` ${custName}`} </span>on Date <span className='text-green-600 font-semibold'>{` ${date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}`}</span></div>
                 <div id='invoice' className="container mx-auto px-4 py-8  rounded-lg">
 
@@ -118,7 +122,7 @@ function Invoice() {
                             <p className="text-black">Mob: {companyDetails.mobile}</p>
                             <p className="text-black">GSTIn: {companyDetails.gstIn}</p>
                         </div>
-                        <div>
+                        <div className='mr-10'>
                             <p className="text-black">Invoice: RC-{id} </p>
                             <p className="text-black">Date :- {date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}</p>
                         </div>
@@ -180,7 +184,7 @@ function Invoice() {
                             <div className="box h-16 w-40 border border-blue-300 mt-2 rounded-lg"></div>
                         </div>
                     </div>
-                    <div className="msg w-full font-semibold tetx-blue-400 text-center">Thank For Shopping With {companyDetails.companyName}</div>
+                    <div className="mt-6 w-full font-semibold tetx-blue-400 text-center">Thank For Shopping With {companyDetails.companyName}</div>
                 </div>
                 <div className="text-center w-full my-2">  <button className='border border-x-2 bg-green-300 rounded-lg p-2 font-semibold hover:bg-green-600 hover:shadow-lg hover:text-white transition-all ' onClick={(e) => handleGeneratePDF(e)}>Download Invoice in PDF</button></div>
             </div>
