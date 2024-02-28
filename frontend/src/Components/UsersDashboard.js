@@ -20,7 +20,7 @@ function UsersDashboard() {
         loadCompany();
     }, []);
     const loadUser= async ()=>{
-        const loadedUser= await axios.get(`http://localhost:8080/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,{
+        const loadedUser= await axios.get(`https://tradematebackend-production.up.railway.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,{
             
         headers: {
             Authorization: `Bearer ${JSON.parse(localStorage.getItem('login')).token}`,
@@ -34,7 +34,7 @@ function UsersDashboard() {
     const loadCompany = async () => {
         try {
             const response = await axios.post(
-                `http://localhost:8080/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
+                `https://tradematebackend-production.up.railway.app/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
                 {},
                 {
                     headers: {

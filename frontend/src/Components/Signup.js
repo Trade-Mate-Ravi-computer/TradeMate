@@ -11,7 +11,7 @@ function Signup() {
         password: ''
     })
     const emailContent = {
-        message:`http://localhost:8080/auth/setverify/${singupDetails.email}`,
+        message:`https://tradematebackend-production.up.railway.app/auth/setverify/${singupDetails.email}`,
         email: singupDetails.email,
         name: singupDetails.name
     }
@@ -31,7 +31,7 @@ function Signup() {
     const handleOnSubmit = (e) => {
         e.preventDefault()
         console.log("Submit button clicked")
-        fetch('http://localhost:8080/auth/sign-up', {
+        fetch('https://tradematebackend-production.up.railway.app/auth/sign-up', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

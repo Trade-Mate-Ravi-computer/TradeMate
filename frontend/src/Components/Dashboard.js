@@ -12,7 +12,7 @@ function Dashboard() {
         loadProducts()
     }, [])
     const loadProducts = async () => {
-        const productDetails = await axios.post("http://localhost:8080/stock/all",
+        const productDetails = await axios.post("https://tradematebackend-production.up.railway.app/stock/all",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {

@@ -82,7 +82,7 @@ function AddPurchase() {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
        try{
-        await axios.post('http://localhost:8080/purchase/add',
+        await axios.post('https://tradematebackend-production.up.railway.app/purchase/add',
         purchaseDetails,
         {
             headers: {

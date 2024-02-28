@@ -23,7 +23,7 @@ function UpdatePurchase(props) {
     const handleOnSubmit =async (e) => {
         e.preventDefault()
        try{
-        await fetch('http://localhost:8080/purchase/update',
+        await fetch('https://tradematebackend-production.up.railway.app/purchase/update',
         
         {
             method:"POST",

@@ -27,7 +27,7 @@ setLoginDetails(
   })
   const handleOnClick=((e)=>{
     e.preventDefault();
-    fetch('http://localhost:8080/auth/login',{
+    fetch('https://tradematebackend-production.up.railway.app/auth/login',{
       method:"POST",
       headers: {
         'Content-Type': 'application/json',
