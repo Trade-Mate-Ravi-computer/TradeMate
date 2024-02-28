@@ -45,7 +45,12 @@ this.doAuthenticate(jwtRequest.getEmail(),jwtRequest.getPassword());
  }
 @PostMapping("/sign-up")
 public UserModel addUser(@RequestBody UserModel user){
+        user.setVerified(false);
         return userService.addUser(user);
+}
+@GetMapping("/setverify/{email}")
+public void setVerification(@PathVariable String email){
+        userService.setVerification(email);
 }
   private void doAuthenticate(String email,String password){
       UsernamePasswordAuthenticationToken authentication =new UsernamePasswordAuthenticationToken(email,password);

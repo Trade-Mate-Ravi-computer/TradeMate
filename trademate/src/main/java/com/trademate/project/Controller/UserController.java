@@ -25,8 +25,14 @@ public class UserController {
     public List<UserModel> getAllUsers(){
         return userService.getUsers();
     }
-@PostMapping("/byemail")
-    public UserModel getByEmail(@RequestBody UserModel user){
-        return userService.getByEmail(user.getEmail());
+@GetMapping("/byemail/{email}")
+    public UserModel getByEmail(@PathVariable String email){
+    System.out.println("Tried to fetch");
+        return userService.getByEmail(email);
 }
+    @PostMapping("/byemail")
+    public UserModel getByEmailBody(@RequestBody UserModel userModel){
+        System.out.println("Tried to fetch");
+        return userService.getByEmail(userModel.getEmail());
+    }
 }

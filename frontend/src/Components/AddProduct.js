@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 function AddProduct() {
     useEffect(() => {
         loadUser()
+        loadProducts()
     }, [])
     const [uploadStatus, setUploadStatus] = useState("")
     const [id, setId] = useState(0)
@@ -40,7 +42,16 @@ function AddProduct() {
             companyName: JSON.parse(localStorage.getItem('companyName')).companyName
         }))
     }
-
+    const loadProducts = async () => {
+        const productDetails = await axios.post("http://localhost:8080/stock/all",
+            { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+                }
+            });
+        localStorage.setItem('saleDetails', JSON.stringify(productDetails.data))
+    }
     const handleOnSubmit = (e) => {
         e.preventDefault();
         fetch('http://localhost:8080/stock/add', {
@@ -55,6 +66,7 @@ function AddProduct() {
                 if (!resp.ok) {
                     throw new Error('Failed to add stock item');
                 }
+                loadProducts()
                 console.log(resp.ok);
                 setItemDetail({
                     itemName: '',
@@ -88,7 +100,7 @@ function AddProduct() {
                 throw new Error('Failed to add stock item');
             }
             resp.json().then((result) => {
-                console.log("result :-", result.id)
+                // console.log("result :-", result.id)
                 setId(result.id)
             })
         })

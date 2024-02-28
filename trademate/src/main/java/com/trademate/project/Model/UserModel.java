@@ -24,6 +24,7 @@ public class UserModel implements UserDetails {
     private long id;
     @Column(nullable = false)
     private String name;
+    private boolean isVerified;
     @Column(nullable = false,unique = true)
     private String email;
     @Column(nullable = false)

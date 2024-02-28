@@ -38,7 +38,7 @@ function Dashboard() {
                             <Navigationbuttons />
                             <div className='flex justify-center w-full flex-col'> 
          <div className='ml-28'>  <div className='text-lg font-bold text-green-600' >Know about new Update wath this video</div>
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/RH7vP32MosM?si=BevX36tvAumxX2YC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> </div>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/RH7vP32MosM?si=BevX36tvAumxX2YC" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe> </div>
          </div>
                         </div>
                         <div className="border border-blue-100">
