@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-1j4p.vercel.app/"})
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-pearl.vercel.app/"})
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired

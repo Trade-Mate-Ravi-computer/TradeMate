@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/company")
-@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-1j4p.vercel.app/"})
+@CrossOrigin(value = {"http://localhost:3000","https://trade-mate-pearl.vercel.app/"})
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
