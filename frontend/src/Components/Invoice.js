@@ -29,7 +29,7 @@ function Invoice() {
     }, [])
     const loadCompanyDetails = async () => {
         try {
-            const companyDetail = await axios.post(`tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`, {}, {
+            const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }
@@ -43,7 +43,7 @@ function Invoice() {
 
     }
     const loadInvoiceDetails = async () => {
-        const invoiceDetail = await axios.post(`tradematebackend-production.up.railway.app/sales/byid/${id}`,
+        const invoiceDetail = await axios.post(`https://tradematebackend-production.up.railway.app/sales/byid/${id}`,
             {},
             {
                 headers: {
@@ -66,7 +66,7 @@ function Invoice() {
         setTotalGst(gst)
         
         const loadCustomer = async () => {
-            const customerDetails = await axios.post(`tradematebackend-production.up.railway.app/customer/bynamecompany`,
+            const customerDetails = await axios.post(`https://tradematebackend-production.up.railway.app/customer/bynamecompany`,
                 {
                     customerName: invoiceDetail.data[0].customerName,
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName

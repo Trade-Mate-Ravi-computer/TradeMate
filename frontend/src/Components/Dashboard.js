@@ -15,7 +15,7 @@ function Dashboard() {
     }, []);
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "tradematebackend-production.up.railway.app/stock/all",
+            "https://tradematebackend-production.up.railway.app/stock/all",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -27,7 +27,7 @@ function Dashboard() {
     };
     const loadCustomers = async () => {
         const customers = await axios.get(
-            "tradematebackend-production.up.railway.app/customer/all",
+            "https://tradematebackend-production.up.railway.app/customer/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -38,7 +38,7 @@ function Dashboard() {
     };
     const loadSeller = async () => {
         const sellers = await axios.get(
-            "tradematebackend-production.up.railway.app/seller/all",
+            "https://tradematebackend-production.up.railway.app/seller/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`

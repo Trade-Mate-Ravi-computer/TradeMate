@@ -13,7 +13,7 @@ function Signup() {
         confirmPassword: ''
     })
     const emailContent = {
-        message: `tradematebackend-production.up.railway.app/auth/setverify/${singupDetails.email}`,
+        message: `https://tradematebackend-production.up.railway.app/auth/setverify/${singupDetails.email}`,
         email: singupDetails.email,
         name: singupDetails.name
     }
@@ -39,7 +39,7 @@ function Signup() {
     const handleOnSubmit = (e) => {
         e.preventDefault()
         if (singupDetails.password === singupDetails.confirmPassword) {
-            fetch('tradematebackend-production.up.railway.app/auth/sign-up', {
+            fetch('https://tradematebackend-production.up.railway.app/auth/sign-up', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

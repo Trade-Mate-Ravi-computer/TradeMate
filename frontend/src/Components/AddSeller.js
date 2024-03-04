@@ -34,7 +34,7 @@ function AddSeller() {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('tradematebackend-production.up.railway.app/seller/add', {
+            const response = await fetch('https://tradematebackend-production.up.railway.app/seller/add', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

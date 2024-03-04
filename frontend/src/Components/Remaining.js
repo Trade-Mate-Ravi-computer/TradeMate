@@ -25,7 +25,7 @@ function Remaining() {
         return sum;
     }
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("tradematebackend-production.up.railway.app/sales/allsaledetails",
+        const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {

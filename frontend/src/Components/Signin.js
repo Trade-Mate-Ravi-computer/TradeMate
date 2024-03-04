@@ -24,7 +24,7 @@ function Signin() {
 
   const loadUser = async () => {
     try {
-      const loadedUser = await axios.get(`tradematebackend-production.up.railway.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
+      const loadedUser = await axios.get(`https://tradematebackend-production.up.railway.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
 
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('login')).token}`,
@@ -45,7 +45,7 @@ function Signin() {
   };
   const handleOnClick = (e) => {
     e.preventDefault();
-    fetch('tradematebackend-production.up.railway.app/auth/login', {
+    fetch('https://tradematebackend-production.up.railway.app/auth/login', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
