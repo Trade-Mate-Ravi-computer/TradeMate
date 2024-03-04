@@ -2,24 +2,26 @@ import React, { useEffect, useState } from 'react';
 import LeftSidbar from './LeftSidbar';
 import RightSidebar from './RightSidebar';
 import axios from 'axios';
+import ProfitCard from './ProfitCard';
+import { NavLink } from 'react-router-dom';
 
 function Profits() {
     const [profitData, setProfitData] = useState({});
     const [yearlyData, setYearlyData] = useState({});
     const [allReport, setAllReport] = useState({});
     const todayDate = new Date();
-    const currentMonth = todayDate.getMonth();
+    const currentMonth = todayDate.getMonth() + 1;
     const currentYear = todayDate.getFullYear();
     const currentDate = todayDate.getDate();
     const [dateState, setDateState] = useState({
         year: currentYear,
-        month: currentMonth + 1,
+        month: currentMonth,
         day: currentDate,
         companyName: JSON.parse(localStorage.getItem('companyName')).companyName
     });
 
     const monthInLetter = changeNumberToMonth(currentMonth);
-
+    console.log(currentMonth)
     function changeNumberToMonth(currentMonth) {
         let month = "";
         switch (currentMonth) {
@@ -77,7 +79,7 @@ function Profits() {
     const loadData = async () => {
         try {
             const profits = await axios.post(
-                `https://tradematebackend-production.up.railway.app/sales/profit`,
+                `https://trade-mate-pearl.vercel.app/sales/profit`,
                 dateState,
                 {
                     headers: {
@@ -94,7 +96,7 @@ function Profits() {
     const loadYearData = async () => {
         try {
             const response = await axios.post(
-                `https://tradematebackend-production.up.railway.app/sales/byyear`,
+                `https://trade-mate-pearl.vercel.app/sales/byyear`,
                 dateState,
                 {
                     headers: {
@@ -111,7 +113,7 @@ function Profits() {
     const loadAllReport = async () => {
         try {
             const response = await axios.post(
-                'https://tradematebackend-production.up.railway.app/sales/totalsum',
+                'https://trade-mate-pearl.vercel.app/sales/totalsum',
                 dateState,
                 {
                     headers: {
@@ -127,61 +129,38 @@ function Profits() {
 
     return (
         <div>
-            <div><h1 className='flex justify-center text-3xl font-bold text-green-600'>Profits</h1></div>
-            <div className='grid grid-cols-4'>
-                <LeftSidbar />
-                <div className='border border-blue-900 rounded-lg col-span-2'>
-                    <div className='w-full bg-green-700 p-1 text-white rounded-md text-center'>{` ${monthInLetter}, ${currentYear} `} Report</div>
-                    <div className='flex '>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Profit in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">₹ {profitData.sumOfProfit}</div>
-                        </div>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Revenue in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">₹ {profitData.sumOfTotalAmmount}</div>
-                        </div>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Remaining in {` ${monthInLetter}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-red-600">₹ {profitData.sumOfRemaining}</div>
-                        </div>
-                    </div>
-                    <div className='w-full bg-green-700 p-1 text-white rounded-md text-center'>{`${currentYear} `} Report</div>
-                    <div className='flex '>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Profit in {` ${currentYear}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">₹ {yearlyData.sumOfProfit}</div>
-                        </div>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Revenue in {` ${currentYear}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">₹ {yearlyData.sumOfTotalAmmount}</div>
-                        </div>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Remaining in {` ${currentYear}`}</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-red-600">₹ {yearlyData.sumOfRemaining}</div>
-                        </div>
-                    </div>
-                    <div className='w-full bg-green-700 p-1 text-white rounded-md text-center'>All Time Report</div>
-                    <div className='flex '>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Total Profit</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">₹ {allReport.sumOfProfit}</div>
-                        </div>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Total Revenue</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-green-600">₹ {allReport.sumOfTotalAmmount}</div>
-                        </div>
-                        <div className='flex flex-col w-60 h-40 m-2 border border-green-600 rounded-xl shadow-lg'>
-                            <div className="text-green-600 font-bold border border-x-2 h-10 flex justify-center items-center shadow-lg w-full rounded-xl">Total Remaining</div>
-                            <div className="flex justify-center m-6 font-bold text-3xl text-red-600">₹ {allReport.sumOfRemaining}</div>
-                        </div>
-                    </div>
-                </div>
-                <div className='border border-blue-100'>
+            <div className='m-3 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md sm:hidden flex px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 w-44  sm:w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+        <div>
+            <h1 className='flex justify-center text-3xl font-bold text-indigo-700'>Profits</h1>
+        </div>
+        <div className='grid grid-cols-1 sm:grid-cols-4 gap-4'>
+        <div className="border border-gray-100 hidden sm:flex flex-col">
+                    <LeftSidbar openaddcustomer="bold" />
                     <RightSidebar />
+                </div>
+            <div className='border border-indigo-900 rounded-lg p-4 col-span-3'>
+                <div className='bg-indigo-700 text-white rounded-md text-center py-2'>{`${monthInLetter}, ${currentYear} Report`}</div>
+                <div className='flex flex-wrap justify-center'>
+                    <ProfitCard title={`Profit in ${monthInLetter}`} amount={profitData.sumOfProfit} />
+                    <ProfitCard title={`Revenue in ${monthInLetter}`} amount={profitData.sumOfTotalAmmount} />
+                    <ProfitCard title={`Remaining in ${monthInLetter}`} amount={profitData.sumOfRemaining} />
+                </div>
+                <div className='bg-indigo-700 text-white rounded-md text-center py-2 mt-4'>{`${currentYear} Report`}</div>
+                <div className='flex flex-wrap justify-center'>
+                    <ProfitCard title={`Profit in ${currentYear}`} amount={yearlyData.sumOfProfit} />
+                    <ProfitCard title={`Revenue in ${currentYear}`} amount={yearlyData.sumOfTotalAmmount} />
+                    <ProfitCard title={`Remaining in ${currentYear}`} amount={yearlyData.sumOfRemaining} />
+                </div>
+                <div className='bg-indigo-700 text-white rounded-md text-center py-2 mt-4'>All Time Report</div>
+                <div className='flex flex-wrap justify-center'>
+                    <ProfitCard title="Total Profit" amount={allReport.sumOfProfit} />
+                    <ProfitCard title="Total Revenue" amount={allReport.sumOfTotalAmmount} />
+                    <ProfitCard title="Total Remaining" amount={allReport.sumOfRemaining} />
                 </div>
             </div>
         </div>
+    </div>
+    
     )
 }
 

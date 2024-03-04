@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios'
 
 function UpdateCompany(props) {
-    console.log(props.id)
     const [formData, setFormData] = useState({
         companyId: props.id,
         companyName: '',
@@ -10,7 +9,9 @@ function UpdateCompany(props) {
         gstIn: '',
         gstType: '',
         pinCode: '',
-        mobile: ''
+        mobile: '',
+        state:'',
+        country:''
 
     });
 
@@ -24,7 +25,7 @@ function UpdateCompany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.put('https://tradematebackend-production.up.railway.app/company/update',
+        await axios.put('https://trade-mate-pearl.vercel.app/company/update',
             formData,
             {
                 headers: {
@@ -38,10 +39,16 @@ function UpdateCompany(props) {
             })
 
     };
+    const hanldeRadioChange = (e) => {
+        setFormData({
+            ...formData,
+            gstType: e.target.value
+        })
+    }
     return (
-        <div className=" mx-auto  p-4 rounded-md z-10">
+        <div className="p-4 rounded-md z-10">
             <div className='w-full text-green-600 text-center text-xl font-bold'> Update your Company</div>
-            <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
 
                 {/* <div>
                         <label htmlFor="companyName" className="block text-sm font-medium text-blue-700">Company Name</label>
@@ -60,10 +67,18 @@ function UpdateCompany(props) {
                     <input id="gstIn" name="gstIn" type="text" value={formData.gstIn} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
                     </input>
                 </div>
-                <div>
-                    <label htmlFor="gstType" className="block text-sm font-medium text-blue-700">GST Type</label>
-                    <input id="gstType" name="gstType" type="text" value={formData.gstType} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
-                    </input>
+                <div className='flex justify-around'>
+                    <div className='mt-6'>GST Type :-</div>
+                    <div className='sm:mt-4'>
+                        <label className="block">
+                            <input type="radio" onChange={(e) => hanldeRadioChange(e)} name="option" value="Regular" className="mr-1" />
+                            Regular
+                        </label>
+                        <label className="block">
+                            <input type="radio" onChange={(e) => hanldeRadioChange(e)} name="option" value="Composition" className="mr-1" />
+                            Composition
+                        </label>
+                    </div>
                 </div>
                 <div className='flex justify-around'>
                     <div>
@@ -74,7 +89,7 @@ function UpdateCompany(props) {
                     <div className='ml-2'>
                         <label htmlFor="mobile" className="block text-sm font-medium text-blue-700">Mobile</label>
                         <input
-                            id="mobile" 
+                            id="mobile"
                             name="mobile"
                             type="tel"
                             pattern="[0-9]{10}"  // Set the pattern attribute to allow only 10 digits
@@ -83,10 +98,22 @@ function UpdateCompany(props) {
                             onChange={handleChange}
                             className="mt-1 p-2 w-full rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black"
                             placeholder="Enter 10-digit mobile number"  // Add a placeholder for user guidance
-                            // Add the required attribute to make the input field mandatory
+                        // Add the required attribute to make the input field mandatory
                         />
                     </div>
 
+                </div>
+                <div className='w-full flex justify-around'>
+                    <div className='m-1'>
+                        <label htmlFor="gstType" className="block text-sm font-medium text-blue-700">State</label>
+                        <input id="gstType" name="state" type="text" value={formData.state} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
+                        </input>
+                    </div>
+                    <div className='m-1'>
+                        <label htmlFor="gstType" className="block text-sm font-medium text-blue-700">Country</label>
+                        <input id="gstType" name="country" type="text" value={formData.country} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
+                        </input>
+                    </div>
                 </div>
                 <div>
                     <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

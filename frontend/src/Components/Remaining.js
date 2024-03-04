@@ -25,7 +25,7 @@ function Remaining() {
         return sum;
     }
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
+        const saleDetail = await axios.post("https://trade-mate-pearl.vercel.app/sales/allsaledetails",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -33,7 +33,7 @@ function Remaining() {
                 }
             });
         setSaleDetails(saleDetail.data.reverse())
-
+        setLoading(false)
         // console.log(saleDetail.data.reverse())
     }
 
@@ -51,10 +51,11 @@ function Remaining() {
         loadSaleDetails()
     }
     return (
-        <div>
+        <div className=' sm:px-10 h-[60rem]'>
             <div className='w-full font-bold text-3xl text-green-600 underline text-center'>Remaing Details</div>
-            <div className="short w-full  h-10 flex justify-between pr-10">
-                <div className='m-2 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div> <div>
+            <div className="w-full  flex sm:justify-between flex-col sm:flex-row pr-20 items-center">
+                <div className='m-2 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+                 <div className='m-2 pl-28 '>
                     <span className='mr-4 font-semibold text-md'>Search By Name</span>
                     <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
                 </div>
@@ -72,7 +73,7 @@ function Remaining() {
                     </div>
                 </div>
             }
-            <div style={{ height: 521 }} className="col-span-3 overflow-y-auto">
+            <div className="sm:px-10 overflow-y-auto sm:h-[27.7rem] m-2">
 
                 <table className="w-full text-sm text-left rtl:text-right text-blue-500 dark:text-blue-400 ">
 

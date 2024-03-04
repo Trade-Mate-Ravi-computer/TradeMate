@@ -9,6 +9,8 @@ function CreateCOmpany(props) {
         pinCode: '',
         mobile: '',
         email: '',
+        state: "",
+        country: '',
         user: {
             id: 0
         }
@@ -24,7 +26,7 @@ function CreateCOmpany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('https://tradematebackend-production.up.railway.app/company/add',
+        await axios.post('https://trade-mate-pearl.vercel.app/company/add',
             formData,
             {
                 headers: {
@@ -38,9 +40,15 @@ function CreateCOmpany(props) {
             })
 
     };
+    const hanldeRadioChange=(e)=>{
+        setFormData({
+            ...formData,
+            gstType:e.target.value
+        })
+    }
 
     return (
-        <div className=" mx-auto  p-4 rounded-md ">
+        <div className=" mx-auto h-[150rem]  p-4 rounded-md ">
             <div className='w-full text-green-600 text-center text-xl font-bold'> Create Company</div>
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
 
@@ -56,22 +64,32 @@ function CreateCOmpany(props) {
                 </div>
 
 
-                <div>
-                    <label htmlFor="gstIn" className="block text-sm font-medium text-blue-700">GSTIN</label>
-                    <input id="gstIn" name="gstIn" type="text" value={formData.gstIn} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
-                    </input>
+                <div className='w-full flex justify-evenly'>
+                    <div className='mr-4 sm:mr-32'>
+                        <label htmlFor="gstIn" className="block text-sm font-medium text-blue-700">GSTIN</label>
+                        <input id="gstIn" name="gstIn" type="text" value={formData.gstIn} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
+                        </input>
+                    </div>
+                    <div className="block text-sm font-medium text-blue-700">
+                        <div className='sm:mt-4 mt-6'>
+                            <label className="block">
+                                <input type="radio" onChange={(e)=>hanldeRadioChange(e)} name="option" value="Regular" className="mr-1" />
+                                Regular
+                            </label>
+                            <label className="block">
+                                <input type="radio"  onChange={(e)=>hanldeRadioChange(e)} name="option" value="Composition" className="mr-1" />
+                                Composition
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="gstType" className="block text-sm font-medium text-blue-700">GST Type</label>
-                    <input id="gstType" name="gstType" type="text" value={formData.gstType} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
-                    </input>
-                </div>
-                <div className='flex justify-around'>
+                <div className='w-full flex justify-around'>
                     <div>
                         <label htmlFor="pinCode" className="block text-sm font-medium text-blue-700">Pin Code</label>
                         <input id="pinCode" name="pinCode" type="number" value={formData.pinCode} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
                         </input>
                     </div>
+
                     <div className='ml-2'>
                         <label htmlFor="mobile" className="block text-sm font-medium text-blue-700">Mobile</label>
                         <input
@@ -87,7 +105,18 @@ function CreateCOmpany(props) {
                             required  // Add the required attribute to make the input field mandatory
                         />
                     </div>
-
+                </div>
+                <div className='w-full flex justify-around'>
+                    <div className='m-1'>
+                        <label htmlFor="gstType" className="block text-sm font-medium text-blue-700">State</label>
+                        <input id="gstType" name="state" type="text" value={formData.state} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
+                        </input>
+                    </div>
+                    <div className='m-1'>
+                        <label htmlFor="gstType" className="block text-sm font-medium text-blue-700">Country</label>
+                        <input id="gstType" name="country" type="text" value={formData.country} onChange={handleChange} className="mt-1 p-2 w-full  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block border border-black">
+                        </input>
+                    </div>
                 </div>
                 <div>
                     <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

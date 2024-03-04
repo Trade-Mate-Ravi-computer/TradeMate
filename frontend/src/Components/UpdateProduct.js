@@ -23,7 +23,7 @@ function UpdateProduct(props) {
     // console.log(id)
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://tradematebackend-production.up.railway.app/stock/updateStock`, {
+        fetch(`https://trade-mate-pearl.vercel.app/stock/updateStock`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

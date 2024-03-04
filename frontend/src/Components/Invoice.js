@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import axios from 'axios'
 import html2pdf from 'html2pdf.js';
 import RightSidebar from './RightSidebar';
 import LeftSidbar from './LeftSidbar';
 function Invoice() {
     const [invoiceDetails, setInvoiceDetails] = useState([])
+    const [custDetail, setCustDetail] = useState({
+
+    })
+    const [invoicePrefixArr,setInvoicePrefixArr]=useState([])
     const [address, setAddress] = useState('')
     const [custName, setCustName] = useState('')
     const [subTotal, setSubTotal] = useState(0)
+    const [totalGst, setTotalGst] = useState(0)
     const [date, setDate] = useState(null)
-    const [gstFromat,setGstFormat]=useState('a4')
+    const [gstFromat, setGstFormat] = useState('a4')
     const [companyDetails, setCompanyDetails] = useState({
 
     })
@@ -19,15 +24,18 @@ function Invoice() {
     useEffect(() => {
         loadCompanyDetails()
         loadInvoiceDetails()
+       
+
     }, [])
     const loadCompanyDetails = async () => {
         try {
-            const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`, {}, {
+            const companyDetail = await axios.post(`https://trade-mate-pearl.vercel.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }
             })
             setCompanyDetails(companyDetail.data)
+            setInvoicePrefixArr(companyDetail.data.companyName.split(" "))
             // console.log(companyDetail.data)
         } catch (e) {
             console.log("Some Error Occurs")
@@ -35,7 +43,7 @@ function Invoice() {
 
     }
     const loadInvoiceDetails = async () => {
-        const invoiceDetail = await axios.post(`https://tradematebackend-production.up.railway.app/sales/byid/${id}`,
+        const invoiceDetail = await axios.post(`https://trade-mate-pearl.vercel.app/sales/byid/${id}`,
             {},
             {
                 headers: {
@@ -48,23 +56,40 @@ function Invoice() {
         setDate(invoiceDetail.data[0].date)
         setCustName(invoiceDetail.data[0].customerName)
         let sum = 0
+        let gst = 0
         invoiceDetail.data.map((item, index) => {
             sum += item.totalAmmount
+            gst += item.gstInRupee
         })
         //    console.log(sum)
         setSubTotal(sum)
+        setTotalGst(gst)
+        
+        const loadCustomer = async () => {
+            const customerDetails = await axios.post(`https://trade-mate-pearl.vercel.app/customer/bynamecompany`,
+                {
+                    customerName: invoiceDetail.data[0].customerName,
+                    companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+                    }
+                }
+            )
+            setCustDetail(customerDetails.data)
+        }
+        loadCustomer()
+    }
+ 
 
-    }
-    const handleOnChange = (e) => {
-        setAddress(e.target.value)
-    }
     const handleGeneratePDF = () => {
         const element = document.getElementById('invoice');
 
         // Specify custom options for PDF generation
         const options = {
             margin: 2,
-            filename: `${custName + date}.pdf`,
+            filename: `${custName +" " +date}.pdf`,
             image: { type: 'jpeg', quality: 1 },
             html2canvas: { scale: 10 },
             jsPDF: { unit: 'mm', format: `${gstFromat}`, orientation: 'portrait' }
@@ -76,23 +101,33 @@ function Invoice() {
             .set(options)
             .save();
     };
-
-    // console.log(companyDetails)
-
-
+    function firstCharacterString(arr) {
+        // Initialize an empty string to store the result
+        let result = '';
+      
+        // Iterate through the array
+        arr.forEach((element) => {
+          // Check if the element is a string and not empty
+          if (typeof element === 'string' && element.length > 0) {
+            // Append the first character of the element to the result string
+            result += element.charAt(0);
+          }
+        });
+      
+        // Return the result string
+        return result;
+      }
     return (
-        <div className='grid grid-cols-4'>
-            <div className="saleList pl-2 mt-10">
+        <div className='grid grid-cols-1 sm:grid-cols-4'>
+            <div className="border border-gray-100 hidden sm:flex flex-col mt-5">
                 <LeftSidbar />
                 <RightSidebar />
-                <div className='text-red-600 font-semibold'> <span className='font-bold text-lg'>Importent :-</span><br/>In new Update GST number added to your Invoice If your GST is Composition it only show your gst number on invoice and if its regular it will add 18% gst to your invoice</div>
+                <div className='text-red-600 font-semibold'> <span className='font-bold text-lg'>Importent :-</span><br />In new Update GST number added to your Invoice If your GST is Composition it only show your gst number on invoice and if its regular it will add 18% gst to your invoice</div>
 
             </div>
             <div className="col-span-3 px-3 " id='invoce'>
-                
-            {/* //create toggle button to swith between A4 and A5 */}
-            toogle button
-                <div className="text-center w-full">Invoice of <span className='text-green-600 font-semibold'>{` ${custName}`} </span>on Date <span className='text-green-600 font-semibold'>{` ${date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}`}</span></div>
+                <div className='m-3 sm:hidden flex'><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 sm:w-10 w-44">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+                <div className="text-center w-full ">Invoice of <span className='text-green-600 font-semibold'>{` ${custName}`} </span>on Date <span className='text-green-600 font-semibold'>{` ${date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}`}</span></div>
                 <div id='invoice' className="container mx-auto px-4 py-8  rounded-lg">
 
                     {/* <!-- Seller and Customer Details --> */}
@@ -104,13 +139,13 @@ function Invoice() {
                             <p className="text-black">GSTIn: {companyDetails.gstIn}</p>
                             <p className="text-black">Mob: {companyDetails.mobile}</p>
                         </div>
-                        <div>
+                        <div className='mr-1 sm:mr-5'>
                             <h1 className="text-xl font-bold ">Customer:</h1>
-                            <div>{custName}</div>
-                            <p className="text-xl font-bold mb-2">Address:</p>
-                            <textarea value={address} onChange={(e) => handleOnChange(e)} className="w-full h-12 flex-wrap flex bg-white border border-blue-200 p-2 rounded-md resize-none focus:outline-none"
-                                placeholder="Enter address..."></textarea>
-
+                            <div>{custDetail.customerName}</div>
+                           {custDetail.gstIn?<div>GSTIn:-{custDetail.gstIn}</div>:''}
+                            <h1 className="text-xl font-bold mb-2">Address:</h1>
+                            <div>{custDetail.address}</div>
+                            <div className='text-center'>{custDetail.state}</div>
                         </div>
                     </div>
 
@@ -122,8 +157,8 @@ function Invoice() {
                             <p className="text-black">Mob: {companyDetails.mobile}</p>
                             <p className="text-black">GSTIn: {companyDetails.gstIn}</p>
                         </div>
-                        <div className='mr-10'>
-                            <p className="text-black">Invoice: RC-{id} </p>
+                        <div className='mr-2 sm:mr-10'>
+                            <p className="text-black">Invoice: {firstCharacterString(invoicePrefixArr)}-{id} </p>
                             <p className="text-black">Date :- {date ? date.split('-')[2] + "/" + date.split('-')[1] + "/" + date.split('-')[0] : null}</p>
                         </div>
                     </div>
@@ -155,23 +190,23 @@ function Invoice() {
 
 
                         </table>
-                        
+
                     </div>
-                   {
-                     companyDetails.gstType==="Regular"?<div><div className='flex justify-end'>
-                     <div style={{width:248}} className='border border-blue-300 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
-                    
-                 </div>
-                 <div className='flex justify-end'>
-                     <div style={{width:248}} className='border border-blue-300 text-lg p-1 text-center'>SGST:- {subTotal*9/100}</div>
-                    
-                 </div></div>:''
-                   }
+                    {
+                        companyDetails.gstType === "Regular" ? <div><div className='flex justify-end'>
+                            <div style={{ width: 248 }} className='border border-blue-300 text-lg p-1 text-center'>SGST:- {totalGst / 2}</div>
+
+                        </div>
+                            <div className='flex justify-end'>
+                                <div style={{ width: 248 }} className='border border-blue-300 text-lg p-1 text-center'>SGST:- {totalGst / 2}</div>
+
+                            </div></div> : ''
+                    }
                     {/* <!-- Invoice Footer --> */}
                     <div className="mt-6">
                         {/* <p className="text-black">Subtotal: Rs. {subTotal}</p> */}
-                        <p className="text-blue-900 font-bold text-lg"> Sub-total:Rs. {subTotal}</p>
-                        <p className="text-blue-900 font-bold text-xl">Total:Rs. {subTotal + subTotal * (companyDetails.gstType === "Regular" ? 18 / 100 : 0)}</p>
+                        <p className="text-blue-900 font-bold text-lg"> Sub-total:Rs. {companyDetails.gstType === "Regular" ? subTotal - totalGst : subTotal}</p>
+                        <p className="text-blue-900 font-bold text-xl">Total:Rs. {subTotal}</p>
 
                     </div>
                     <div className='flex justify-between mt-4'>

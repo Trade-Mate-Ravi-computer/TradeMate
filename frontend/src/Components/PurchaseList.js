@@ -62,7 +62,7 @@ function PurchaseList() {
         loadPurchaseDetails();
     }, [])
     const loadPurchaseDetails = async () => {
-        const purchaseDetail = await axios.post("https://tradematebackend-production.up.railway.app/purchase/getbycompany",
+        const purchaseDetail = await axios.post("https://trade-mate-pearl.vercel.app/purchase/getbycompany",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -70,7 +70,7 @@ function PurchaseList() {
                 }
             });
         setPurchaseDetails(purchaseDetail.data)
-        console.log(purchaseDetail.data)
+        setLoading(false)
 
         // console.log(purchaseDetails[i].data.reverse())
     }
@@ -79,7 +79,7 @@ function PurchaseList() {
         const confirm = window.confirm("Are you Sure to Delete")
         console.log(confirm)
         if (confirm) {
-            await axios.delete(`https://tradematebackend-production.up.railway.app/sales/delete/${id}`, {
+            await axios.delete(`https://trade-mate-pearl.vercel.app/sales/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }
@@ -110,32 +110,31 @@ function PurchaseList() {
         setUpdate(false)
         loadPurchaseDetails()
     }
-    console.log("THis is purchase details", purchaseDetails)
+
 
     return (
-        <div className="">
+        <div className="sm:h-[34.6rem] h-[40rem] ">
 
             <div className='w-full text-center font-bold text-3xl text-green-800 mt-4'>Purchase Details</div>
-            <div className="w-full  flex justify-between  pr-20">
-                <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
-                <div>
+            <div className="w-full  flex sm:justify-between flex-col sm:flex-row pr-20 items-center">
+                <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md sm:px-3 p-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+                <div className='m-3 pl-28 '>
                     <span className='mr-4 mt-2 font-semibold text-md '>Search By Name</span>
-                    <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
+                    <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => setShortData(e.target.value)}></input>
                 </div>
             </div>
             {update && (
-                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
-                        )}
+                <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
+            )}
             {/* UpdateSale component */}
             {update ?
-                <div className="fixed flex justify-center top-40 left-1/2 bg-white border border-black shadow-md rounded-md z-50">
-                <div className='fixed h-80 p-10 bg-blue-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
-                    <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
-                    <UpdatePurchase itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate} myFunction={loadPurchaseDetails} />
-                </div>
-            </div> : ''}
-            <div style={{ height: 497 }} className=' px-10 overflow-y-auto '>
-
+                <div className="absolute flex justify-center sm:top-40 left-1/2 bg-white border border-black shadow-md rounded-md z-50 mx-5">
+                    <div className='fixed h-80 p-10 bg-blue-50 rounded-lg mt-24  shadow-2xl' id='updateProduct'>
+                        <div className='w-full h-10 text-center sm:text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
+                        <UpdatePurchase itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate} myFunction={loadPurchaseDetails} />
+                    </div>
+                </div> : ''}
+            <div className='sm:px-10 overflow-y-auto h-[400px]'> {/* Adjust the height as needed */}
                 <table className="w-full text-sm text-left rtl:text-right text-blue-500 dark:text-blue-400 border border-black">
 
                     <thead className="text-xs text-blue-700 uppercase dark:text-blue-400 z-10 sticky top-0">
@@ -186,7 +185,7 @@ function PurchaseList() {
                                     }
                                 }
                                 items.push(shortData ? !purchaseDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
-                                    <tr className="border-b border-blue-200 dark:border-blue-900">
+                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-900">
                                         <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {j + 1}
                                         </th>
@@ -217,7 +216,7 @@ function PurchaseList() {
 
                                         </td>
                                     </tr> :
-                                    <tr className="border-b border-blue-200 dark:border-blue-900">
+                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-900">
                                         <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {j + 1}
                                         </th>
@@ -264,9 +263,9 @@ function PurchaseList() {
                 <div className='w-full flex justify-center'> {
                     loading ? <div className='w-full flex justify-center'><img className='' src={loder} alt="" /></div> : ''
                 }</div>
-                <div className='text-center font-bold text-2xl text-red-500'><div>Total remaining :-{shortData?sumArray(totalShortedRemaining):sumArray(totalRemaining)}</div></div>
+                
             </div>
-
+            <div className='text-center font-bold text-2xl text-red-500'><div>Total remaining :-{shortData ? sumArray(totalShortedRemaining) : sumArray(totalRemaining)}</div></div>
         </div>
     )
 }

@@ -5,16 +5,16 @@ import Carasoul from './Carasoul'
 
 function Home() {
     return (
-        <div className="container flex justify-center my-10 flex-col">
+        <div className="container flex justify-center my-14 flex-col sm:h-full h-[38rem]">
             <div className='text-3xl flex justify-center '>
-                Welcome to <span className='text-semibold'>Trade</span><span className='text-red-400 font-bold'>Mate</span>
+                Welcome to <span className='text-semibold'>&ensp;Trade</span><span className='text-red-400 font-bold'>Mate</span>
             </div>
-            <div className='grid grid-cols-2 m-10'>
-                <div className="col1 flex justify-between p-12 flex-wrap">
+            <div className='grid sm:grid-cols-2 grid-cols-1  ml-10'>
+                <div className="col1 justify-between flex-wrap mt-8 hidden sm:flex">
                     <Carasoul/>
                 </div>
                 <div className="col2 pr-20 pt-15">
-                    <div className="signintag flex flex-col text-3xl justify-center pl-32 py-10 ">Sign in to your Account</div>
+                    <div className="signintag flex flex-col text-3xl justify-center pl-1 sm:pl-32 py-10 ">Sign in to your Account</div>
                    <Signin/>
                 </div>
             </div>

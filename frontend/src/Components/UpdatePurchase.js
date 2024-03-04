@@ -23,7 +23,7 @@ function UpdatePurchase(props) {
     const handleOnSubmit =async (e) => {
         e.preventDefault()
        try{
-        await fetch('https://tradematebackend-production.up.railway.app/purchase/update',
+        await fetch('https://trade-mate-pearl.vercel.app/purchase/update',
         
         {
             method:"POST",
@@ -52,11 +52,11 @@ function UpdatePurchase(props) {
     }
     return (
         <div>
-            <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Update paid Ammount to seller</h1></div>
+            <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Update paid Ammount </h1></div>
             <div className=''>
                 <div className='border border-blue-100 justify-center col-span-2'>
-                    <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
-                        <div>
+                    <form className="space-y-6 px-40 py-2 " onSubmit={(e) => handleOnSubmit(e)}>
+                        <div className='flex justify-center w-[15rem]'>
                             <div className="flex items-center justify-between">
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-blue-900">Paid to:- <span className='text-blue-600'>{props.itemName}</span></label>
                             </div>

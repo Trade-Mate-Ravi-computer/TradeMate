@@ -43,7 +43,7 @@ function AddProduct() {
         }))
     }
     const loadProducts = async () => {
-        const productDetails = await axios.post("https://tradematebackend-production.up.railway.app/stock/all",
+        const productDetails = await axios.post("https://trade-mate-pearl.vercel.app/stock/all",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -54,7 +54,7 @@ function AddProduct() {
     }
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        fetch('https://tradematebackend-production.up.railway.app/stock/add', {
+        fetch('https://trade-mate-pearl.vercel.app/stock/add', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -71,8 +71,9 @@ function AddProduct() {
                 setItemDetail({
                     itemName: '',
                     purchasePrice: 0,
-                    category: '',
+                    quantity:0,
                     companyName: '',
+                    gstInPercent:0,
                     company: {
                         companyId: 0
                     }
@@ -87,7 +88,7 @@ function AddProduct() {
     };
 
     const loadUser = () => {
-        fetch(`https://tradematebackend-production.up.railway.app/user/byemail`, {
+        fetch(`https://trade-mate-pearl.vercel.app/user/byemail`, {
             "method": "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -105,46 +106,62 @@ function AddProduct() {
             })
         })
     }
+    const handleUpdateStatus = () => {
+        setUploadStatus('')
+    }
     return (
-        <div> <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
-            <div ><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Add new Product</h1></div>
-            <div className='gridstyle grid grid-cols-4'>
-                <LeftSidbar addpurchase="bold" />
-                <div className='border border-gray-100 justify-center col-span-2'>
-                    <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
+        <div className='my-3 h-[45.4rem] sm:h-[39.7rem]'>
+          
+
+            <div className='m-3 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 sm:w-10 w-44 sm:hidden flex">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+            <div className=' grid grid-cols-1 sm:grid-cols-4 '>
+
+                <div className="border border-gray-100 hidden sm:flex flex-col">
+                    <LeftSidbar openaddProduct="bold" />
+                    <RightSidebar />
+                </div>
+                <div className='border border-gray-100 justify-center col-span-3'>
+                    <div className='p-10'><h1 className='flex justify-center text-3xl font-bold  text-green-900'>Add new Product</h1></div>
+                    <form className="space-y-6 px-4 lg:px-60 py-2" onSubmit={(e) => handleOnSubmit(e)}>
                         <div className='w-full text-center p-2 border border-red-400 rounded-md shadow-sm '> <span className='font-bold text-red-500'>Importent !</span> Product Name Format Exp:-  if Product is Mouse And Brand is Dell this Name should be <span className='text-blue-600 underline font-bold'> Mouse-Dell</span></div>
 
                         <div>
-                            <label for="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Product name</label>
+                            <label htmlFor="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Product name</label>
                             <input id="itemName" value={itemDetail.itemName} onChange={(e) => handleOnChange(e)} name="itemName" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
 
                         <div>
                             <div className="flex items-center justify-between">
-                                <label for="password" className="block text-sm font-medium leading-6 text-gray-900">Purchase Price</label>
+                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Purchase Price in Rs.</label>
                             </div>
                             <div className="mt-2">
                                 <input id="price" value={itemDetail.purchasePrice} onChange={(e) => handleOnChange(e)} name="purchasePrice" type="number" min='0' required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
-                        <div className='fixed flex items-center ml-40 font-bold text-5xl text-green-600'>{uploadStatus}</div>
                         <div>
                             <div className="flex items-center justify-between">
-                                <label for="password" className="block text-sm font-medium leading-6 text-gray-900">Category</label>
+                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
                             </div>
                             <div className="mt-2">
-                                <input id="producttype" value={itemDetail.category} onChange={(e) => handleOnChange(e)} name="category" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="producttype" value={itemDetail.quantity} onChange={(e) => handleOnChange(e)} name="quantity" type="number" min="0" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex items-center justify-between">
+                                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Gst %</label>
+                            </div>
+                            <div className="mt-2">
+                                <input id="producttype" value={itemDetail.gstInPercent} onChange={(e) => handleOnChange(e)} name="gstInPercent" type="number" min="0" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                         <div>
                             <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Product</button>
                         </div>
+                        <div className='w-full text-center text-xl font-bold text-green-800'>{uploadStatus}</div>
                     </form>
 
                 </div>
-                <div className='border border-gray-100 justify-center'>
-                    <RightSidebar />
-                </div>
+
             </div>
         </div>
     )

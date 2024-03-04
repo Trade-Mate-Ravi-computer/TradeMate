@@ -22,7 +22,7 @@ function GST() {
     }, [])
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.get(`https://tradematebackend-production.up.railway.app/sales/date/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
+            const minYearValue = await axios.get(`https://trade-mate-pearl.vercel.app/sales/date/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
@@ -72,7 +72,7 @@ function GST() {
 
     }
     const loadCompanyDetail = async () => {
-        const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
+        const companyDetail = await axios.post(`https://trade-mate-pearl.vercel.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
             {},
             {
                 headers: {
@@ -85,7 +85,7 @@ function GST() {
     }
     const loadSumOfQuart = async () => {
         try {
-            const sumofQuart = await axios.post('https://tradematebackend-production.up.railway.app/sales/quart',
+            const sumofQuart = await axios.post('https://trade-mate-pearl.vercel.app/sales/quart',
                 quaterMonthFInder(month, year),
                 {
                     headers: {
@@ -95,6 +95,7 @@ function GST() {
 
             )
             setQuartSum(sumofQuart.data)
+            document.getElementById('compositionGst').innerHTML =`Rs. ${sumofQuart.data*1/100}`
         }
         catch (e) {
             if (document.getElementById('compositionGst')) {
@@ -106,7 +107,7 @@ function GST() {
 
     const loadSumOfMonth = async () => {
         try {
-            const sumofMonth = await axios.post('https://tradematebackend-production.up.railway.app/sales/monthsum',
+            const sumofMonth = await axios.post('https://trade-mate-pearl.vercel.app/sales/monthsum',
                 {
                     month: regMonth,
                     year: parseInt(year),
@@ -120,11 +121,13 @@ function GST() {
 
             )
             setMonthSum(sumofMonth.data)
+            console.log(sumofMonth.data)
+            document.getElementById('regularGst').innerHTML = `Rs. ${sumofMonth.data*18/100}`;
         } catch (e) {
-            if(document.getElementById('regularGst')){
+            if (document.getElementById('regularGst')) {
                 document.getElementById('regularGst').innerHTML = "Choose Correct Month for Choosen Year";
             }
-           
+
         }
     }
 
@@ -151,93 +154,79 @@ function GST() {
     }
 
     return (
-        <div style={{ height: 557}} className="mt-4 text-center">
-            <div className='text-2xl font-bold text-gray-500 mt-10'>Your Payable GST Detials :</div>
-            {companyDetails.gstType === "Composition" ?
-                <div>
-                    <div className=' flex justify-center text-center mt-40'>
-                        <div className='flex flex-col mx-5'>
-                            <label className='font-bold rounded-lg w-60' htmlFor="Quarter month">Select Year </label>
-                            <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 m-2 rounded-lg w-60' id="year">
-                                {
-                                    yearsList.map((year) => (
-                                       <option key={year} value={year}>{year}</option> 
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        <div className='flex flex-col'>
-                            <label className='font-bold rounded-lg w-60' htmlFor="Quarter month">Select Quarter </label>
-                            <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 m-2 rounded-lg w-60' id="quarter">
-                                <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="4">Quarter 1 (Aprail-june)</option>
-                                <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="7">Quarter 2 (July-Sep)</option>
-                                <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="10">Quarter 3 (Oct-Dec)</option>
-                                <option value="1">Quarter 4 (Jan-March)</option>
-                            </select>
-                        </div>
+        <div className="mt-4 text-center">
+            <div className='text-2xl font-bold text-gray-500 mt-10'>Your Payable GST Details:</div>
+            {companyDetails.gstType === "Composition" &&
+                <div className='mt-8 sm:flex justify-center'>
+                    <div className='flex flex-col mx-4 sm:mx-8 mb-4 sm:mb-0'>
+                        <label className='font-bold rounded-lg w-full text-blue-600' htmlFor="Year">Select Year</label>
+                        <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 rounded-lg w-full' id="year">
+                            {yearsList.map((year) => (
+                                <option key={year} value={year}>{year}</option>
+                            ))}
+                        </select>
                     </div>
-                    <div>
-                        <button className="border border-blue-600 mt-6 p-2 rounded-lg text-center w-40 bg-blue-400 text-white hover:bg-blue-600" onClick={loadSelectedGst}>Click to select value</button>
-
+                    <div className='flex flex-col mx-4 sm:mx-8'>
+                        <label className='font-bold rounded-lg w-full text-blue-600' htmlFor="Quarter">Select Quarter</label>
+                        <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 rounded-lg w-full' id="quarter">
+                            <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="4">Quarter 1 (April-June)</option>
+                            <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="7">Quarter 2 (July-Sep)</option>
+                            <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="10">Quarter 3 (Oct-Dec)</option>
+                            <option value="1">Quarter 4 (Jan-March)</option>
+                        </select>
                     </div>
-                </div> : ''
+                    <button className="border border-blue-600 mt-6 p-2 rounded-lg text-center w-full sm:w-auto bg-blue-400 text-white hover:bg-blue-600" onClick={loadSelectedGst}>Click to select value</button>
+                </div>
             }
-            {companyDetails.gstType === "Regular" ?
-                <div className='mt-36'>
-                    <div className='flex justify-center'>
-                        <div className='flex flex-col'>
-                            <label className='font-bold rounded-lg w-60' htmlFor="Quarter month">Select Month </label>
-                            <select onChange={selectValue} name="regMonth" className='border border-blue-600 p-2 m-2 rounded-lg w-60' id="regMonth">
-                                <option value="1">January</option>
-                                <option disabled={currentMonth < 2 && currentYear === parseInt(year)} value="2">February</option>
-                                <option disabled={currentMonth < 3 && currentYear === parseInt(year)} value="3">March</option>
-                                <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="4">Aprail</option>
-                                <option disabled={currentMonth < 5 && currentYear === parseInt(year)} value="5">May</option>
-                                <option disabled={currentMonth < 6 && currentYear === parseInt(year)} value="6">June</option>
-                                <option disabled={currentMonth < 7 && currentYear === parseInt(year)} value="7">July</option>
-                                <option disabled={currentMonth < 8 && currentYear === parseInt(year)} value="8">August</option>
-                                <option disabled={currentMonth < 9 && currentYear === parseInt(year)} value="9">September</option>
-                                <option disabled={currentMonth < 10 && currentYear === parseInt(year)} value="10">October</option>
-                                <option disabled={currentMonth < 11 && currentYear === parseInt(year)} value="11">November</option>
-                                <option disabled={currentMonth < 12 && currentYear === parseInt(year)} value="12">December</option>
-
-                            </select>
-                        </div>
-                        <div className='flex flex-col'>
-                            <label className='font-bold rounded-lg w-60' htmlFor="Quarter month">Select Year </label>
-                            <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 m-2 rounded-lg w-60' id="year">
-                                {
-                                    yearsList.map((year) => (
-                                        <option key={year} value={year}>{year}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
+            {companyDetails.gstType === "Regular" &&
+                <div className='mt-8 sm:flex justify-center'>
+                    <div className='flex flex-col mx-4 sm:mx-8 mb-4 sm:mb-0'>
+                        <label className='font-bold rounded-lg w-full text-blue-600' htmlFor="Month">Select Month</label>
+                        <select onChange={selectValue} name="regMonth" className='border border-blue-600 p-2 rounded-lg w-full' id="regMonth">
+                            <option value="1" {...currentMonth === 1 ? 'selected' : ''}>January</option>
+                            <option value="2" disabled={currentMonth < 2 && currentYear === parseInt(year)} {...currentMonth === 2 ? 'selected' : ''}>February</option>
+                            <option value="3" disabled={currentMonth < 3 && currentYear === parseInt(year)} {...currentMonth === 3 ? 'selected' : ''}>March</option>
+                            <option value="4" disabled={currentMonth < 4 && currentYear === parseInt(year)} {...currentMonth === 4 ? 'selected' : ''}>April</option>
+                            <option value="5" disabled={currentMonth < 5 && currentYear === parseInt(year)} {...currentMonth === 5 ? 'selected' : ''}>May</option>
+                            <option value="6" disabled={currentMonth < 6 && currentYear === parseInt(year)} {...currentMonth === 6 ? 'selected' : ''}>June</option>
+                            <option value="7" disabled={currentMonth < 7 && currentYear === parseInt(year)} {...currentMonth === 7 ? 'selected' : ''}>July</option>
+                            <option value="8" disabled={currentMonth < 8 && currentYear === parseInt(year)} {...currentMonth === 8 ? 'selected' : ''}>August</option>
+                            <option value="9" disabled={currentMonth < 9 && currentYear === parseInt(year)} {...currentMonth === 9 ? 'selected' : ''}>September</option>
+                            <option value="10" disabled={currentMonth < 10 && currentYear === parseInt(year)} {...currentMonth === 10 ? 'selected' : ''}>October</option>
+                            <option value="11" disabled={currentMonth < 11 && currentYear === parseInt(year)} {...currentMonth === 11 ? 'selected' : ''}>November</option>
+                            <option value="12" disabled={currentMonth < 12 && currentYear === parseInt(year)} {...currentMonth === 12 ? 'selected' : ''}>December</option>
+                        </select>
                     </div>
-                    <button className="borde border-blue-600 mt-6 p-2 rounded-lg bg-blue-400 text-white hover:bg-blue-600" onClick={loadRegularGst}>Click to select value</button>
 
-                </div> : ''
+                    <div className='flex flex-col mx-4 sm:mx-8'>
+                        <label className='font-bold rounded-lg w-full text-blue-600' htmlFor="Year">Select Year</label>
+                        <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 rounded-lg w-full' id="year">
+                            {yearsList.map((year) => (
+                                <option key={year} value={year}>{year}</option>
+                            ))}
+                        </select>
+                    </div>
 
+                </div>
             }
-            <div className='w-full flex justify-center mt-8 text-center'>
-                {
-                    companyDetails.gstType === "Composition" &&
-                    <div className='flex border border-green-600 m-2 w-96  p-1 rounded-lg shadow-orange-800'>
-                        <div className='Text-xl font-bold mt-3 mb-2 pl-2 text-green-600'>Your Composition GST is :-</div>
-                        <div id="compositionGst" className="text-x font-bold mt-3 pl-4 text-green-700 rounded-lg">{quartSum * 1 / 100}</div>
+            <div className=' sm:w-full sm:ml-0 ml-10 w-3/4  flex justify-center mt-8'>
+                {companyDetails.gstType === "Composition" &&
+                    <div className='flex border border-green-600 m-2 p-2 rounded-lg shadow-orange-800'>
+                        <div className='text-lg font-bold mt-1 mb-2 pl-2 text-green-600'>Your Composition GST is:</div>
+                        <div id="compositionGst" className="text-lg font-bold mt-1 pl-4 text-green-700 rounded-lg"></div>
                     </div>
                 }
-                {
-                    companyDetails.gstType === "Regular" &&
-                    <div className='flex border border-green-600 m-2 w-96 p-2 rounded-lg shadow-orange-800'>
-                        <div className='Text-xl font-bold mt-3 mb-2 pl-2 text-green-600'>Your Regular Gst is :-</div>
-                        <div id="regularGst" className="text-xl font-bold mt-3 pl-4 text-green-700 rounded-lg">{mmonthSum * 18 / 100}</div>
+                {companyDetails.gstType === "Regular" &&
+                    <div className='flex border border-green-600 m-2 p-2 rounded-lg shadow-orange-800'>
+                        <div className='text-lg font-bold mt-1 mb-2 pl-2 text-green-600'>Your Regular GST is:</div>
+                        <div id="regularGst" className="text-lg font-bold mt-1 pl-4 text-green-700 rounded-lg"></div>
                     </div>
                 }
-
+            </div>
+            <div className='w-full my-10'>
+                <button className="border border-blue-600 mt-6 p-2 rounded-lg bg-blue-400 text-white hover:bg-blue-600" onClick={loadRegularGst}>Click to select value</button>
 
             </div>
-
         </div>
 
     )

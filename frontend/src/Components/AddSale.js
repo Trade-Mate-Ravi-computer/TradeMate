@@ -6,8 +6,11 @@ import { NavLink } from 'react-router-dom';
 
 function AddSale() {
     const [sale, setSale] = useState();
+    const [customerName,setCustomerName]= useState()
     const [isOpen, steIsOpen] = useState(false)
+    const [isOpenCust,setIsOpenCust]=useState(false)
     const itemNames = JSON.parse(localStorage.getItem('saleDetails'))
+    const customers = JSON.parse(localStorage.getItem('customers'))
     const handleEventChange = (e) => {
         // const { name, value } = e.target;
         setSale(e.target.value)
@@ -19,13 +22,30 @@ function AddSale() {
     const handleOnClicks = () => {
         if (isOpen) {
             steIsOpen(false)
+
+        }
+        if(isOpenCust){
+            setIsOpenCust(false)
         }
     }
+
 
     const handlOnClickItemName = (name) => {
         setSale(name)
         steIsOpen(false)
     }
+    const handleOnClicksCustomerInput = () => {
+       isOpenCust?setIsOpenCust(false):setIsOpenCust(true)
+    }
+    const handlOnClickCustomerName = (name) => {
+        setCustomerName(name)
+        setIsOpenCust(false)
+    }
+    const handleEcustomerNameChange = (e) => {
+        // const { name, value } = e.target;
+        setCustomerName(e.target.value)
+
+    };
     const [id, setId] = useState(0)
     const [email, setEmail] = useState({
         email: JSON.parse(localStorage.getItem('login')).user
@@ -36,7 +56,7 @@ function AddSale() {
 
     const loadUser = () => {
         try {
-            fetch('https://tradematebackend-production.up.railway.app/user/byemail', {
+            fetch('https://trade-mate-pearl.vercel.app/user/byemail', {
                 "method": "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +87,7 @@ function AddSale() {
         setUploadStatus("Something went wrong")
         setTimeout(() => {
             setUploadStatus("")
-        }, 3000);
+        }, 1000);
     }
     const [saleDetail, setSaleDetail] = useState({
         item: {
@@ -82,7 +102,11 @@ function AddSale() {
         companyName: '',
         company: {
             compannyName: ''
-        }
+        },
+        customer: {
+            id: 0
+        },
+        gstInRupee:0
 
     })
     const onEventChange = (e) => {
@@ -91,59 +115,83 @@ function AddSale() {
             ...prevSale,
             [name]: value,
             companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
-            itemName: sale
+            itemName: sale,
+            customerName:customerName
         }));
 
     }
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        try{
-            fetch('https://tradematebackend-production.up.railway.app/sales/addSale', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
-            },
-            body: JSON.stringify(saleDetail)
-        }).then((resp) => {
-            if (resp.ok) {
-                setSaleDetail({
-                    item: {
-                        itemName: ""
-                    },
-                    itemName: '',
-                    quantity: 0,
-                    date: 0,
-                    customerName: "",
-                    rate: 0,
-                    receivedAmmount: 0,
-                    company: {
-                        compannyName: ''
-                    }
-                })
-                upStatus();
-                // window.location.reload()
-            } else {
-                failStatus();
-            }
-        })
-        }catch(e){
+        try {
+            fetch('https://trade-mate-pearl.vercel.app/sales/addSale', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
+                },
+                body: JSON.stringify(saleDetail)
+            }).then((resp) => {
+                if (resp.ok) {
+                    setSaleDetail({
+                        item: {
+                            itemName: ""
+                        },
+                        itemName: '',
+                        quantity: 0,
+                        date: 0,
+                        customerName: "",
+                        rate: 0,
+                        receivedAmmount: 0,
+                        company: {
+                            compannyName: ''
+                        },
+                        customer: {
+                            id: 0
+                        }
+                    })
+                    upStatus();
+                    // document.getElementById('uploadstatus').classList.remove('text-red-600')
+                    // document.getElementById('uploadstatus').classList.add('text-green-600')
+                    // window.location.reload()
+                } else {
+                    failStatus();
+                    // document.getElementById('uploadstatus').classList.remove('text-green-600')
+                    // document.getElementById('uploadstatus').classList.add('text-red-600')
+
+                }
+            })
+        } catch (e) {
             failStatus();
         }
     }
-
+    const handleUpdateStatus = () => {
+        setUploadStatus('')
+    }
     return (
-        <div>
-            <div className='m-3 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-gray-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-black text-white border border-gray-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
-            <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Sale Entry</h1></div>
-            <div className='gridstyle grid grid-cols-4'>
-                <LeftSidbar addSale="bold" />
-                <div className='border border-gray-100 justify-center col-span-2' onClick={handleOnClicks}>
-                    <form className="space-y-6 px-40 py-2" onSubmit={(e) => handleOnSubmit(e)}>
+        <div className='h-[46rem] sm:h-screen'>
+            <div className='m-3'><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 sm:w-10 w-44 sm:hidden flex">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+            <div className=' grid grid-cols-1 sm:grid-cols-4 '>
+
+            <div className="border border-gray-100 hidden sm:flex flex-col">
+                    <LeftSidbar openaddSale="bold" />
+                    <RightSidebar />
+                </div>
+                <div className='border border-gray-100 justify-center col-span-3' onClick={handleOnClicks} >
+                    <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Sale Entry</h1></div>
+                    <form className="space-y-6 px-4 sm:px-60 py-2" onSubmit={(e) => handleOnSubmit(e)}>
                         <div>
                             <label htmlFor="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Customer's name</label>
-                            <input value={saleDetail.customerName} onChange={(e) => onEventChange(e)} id="itemName" name="customerName" type="text" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <input value={customerName} onChange={(e) => handleEcustomerNameChange(e)} id="itemName" name="customerName" type="text" onClick={handleOnClicksCustomerInput} required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            <div className="dropdown absolute bg-gray-100 w-[21.8rem] sm:w-[41.1rem]">
 
+                                <ul style={isOpenCust ? { maxHeight: 300 } : null} className='overflow-y-auto'>
+                                    {isOpenCust && customers.map((customer, index) => (
+                                      (customer.companyName===JSON.parse(localStorage.getItem('companyName')).companyName)?  customer.customerName.toLowerCase().includes(customerName ? customerName.toLowerCase() : '') ? <button key={index} className='list-none border border-x-2 w-full flex justify-center hover:bg-blue-200' onClick={() => handlOnClickCustomerName(customer.customerName)}>
+                                      {customer.customerName}
+                                  </button> : '':''
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                         <div>
                             <div className="flex items-center justify-between">
@@ -159,7 +207,7 @@ function AddSale() {
                         <div className='w-full'>
 
                             <input name="user" onClick={handleOnClick} value={sale} onChange={handleEventChange} className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" />
-                            <div className="dropdown absolute bg-gray-100" style={{ width: 438 }}>
+                            <div className="dropdown absolute bg-gray-100 w-[21.8rem] sm:w-[41.1rem]">
 
                                 <ul style={isOpen ? { maxHeight: 300 } : null} className='overflow-y-auto'>
                                     {isOpen && itemNames.map((item, index) => (
@@ -178,15 +226,6 @@ function AddSale() {
                                 <input value={saleDetail.quantity} onChange={(e) => onEventChange(e)} id="quantity" name="quantity" type="number" min='1' required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
-                        <div className="fixed top-0 right-0 w-full flex items-center justify-center z-50">
-                        <div className='fixed flex items-center ml-40 font-bold text-5xl text-green-600'>{uploadStatus}</div>
-                        </div>
-
-                        <datalist name="itemList" id="customerList" >
-                            <option name="customer1" id="item1">customer1</option>
-                            <option name="customer2" id="item2">customer2</option>
-                            <option name="customer3" id="item3">customer3</option>
-                        </datalist>
                         <div>
                             <div className="flex items-center justify-between">
                                 <label htmlFor="ammount" className="block text-sm font-medium leading-6 text-gray-900">Rate</label>
@@ -207,13 +246,13 @@ function AddSale() {
                         <div>
                             <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Sale</button>
                         </div>
+                        <div className='w-full text-center text-xl font-bold text-green-800'>{uploadStatus}</div>
                     </form>
 
                 </div>
-                <div className='border border-gray-100 justify-center'>
-                    <RightSidebar />
-                </div>
+
             </div>
+           
         </div>
     )
 }
