@@ -25,7 +25,7 @@ function Navbar(props) {
   };
   const loadCompany = () => {
     try {
-        fetch(`https://trade-mate-pearl.vercel.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
+        fetch(`tradematebackend-production.up.railway.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
             method: "GET",
             headers: { // Corrected typo: 'headers' instead of 'header'
               'Content-Type': 'application/json',

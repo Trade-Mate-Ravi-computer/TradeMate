@@ -24,7 +24,7 @@ function SellerList() {
         return sum;
     }
     const loadsellerDetails = async () => {
-        const saleDetail = await axios.get("https://trade-mate-pearl.vercel.app/seller/all",
+        const saleDetail = await axios.get("tradematebackend-production.up.railway.app/seller/all",
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`

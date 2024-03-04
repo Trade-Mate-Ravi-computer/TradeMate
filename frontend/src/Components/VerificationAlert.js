@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import { NavLink } from 'react-router-dom';
 function VerificationAlert() {
     const emailContent = {
-        message: `https://trade-mate-pearl.vercel.app/auth/setverify/${JSON.parse(localStorage.getItem('login')).user}`,
+        message: `tradematebackend-production.up.railway.app/auth/setverify/${JSON.parse(localStorage.getItem('login')).user}`,
         email: JSON.parse(localStorage.getItem('login')).user,
      
     }

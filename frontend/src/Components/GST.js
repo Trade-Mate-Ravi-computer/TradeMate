@@ -22,7 +22,7 @@ function GST() {
     }, [])
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.get(`https://trade-mate-pearl.vercel.app/sales/date/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
+            const minYearValue = await axios.get(`tradematebackend-production.up.railway.app/sales/date/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
@@ -72,7 +72,7 @@ function GST() {
 
     }
     const loadCompanyDetail = async () => {
-        const companyDetail = await axios.post(`https://trade-mate-pearl.vercel.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
+        const companyDetail = await axios.post(`tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
             {},
             {
                 headers: {
@@ -85,7 +85,7 @@ function GST() {
     }
     const loadSumOfQuart = async () => {
         try {
-            const sumofQuart = await axios.post('https://trade-mate-pearl.vercel.app/sales/quart',
+            const sumofQuart = await axios.post('tradematebackend-production.up.railway.app/sales/quart',
                 quaterMonthFInder(month, year),
                 {
                     headers: {
@@ -107,7 +107,7 @@ function GST() {
 
     const loadSumOfMonth = async () => {
         try {
-            const sumofMonth = await axios.post('https://trade-mate-pearl.vercel.app/sales/monthsum',
+            const sumofMonth = await axios.post('tradematebackend-production.up.railway.app/sales/monthsum',
                 {
                     month: regMonth,
                     year: parseInt(year),

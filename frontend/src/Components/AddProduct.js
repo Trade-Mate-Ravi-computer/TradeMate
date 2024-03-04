@@ -43,7 +43,7 @@ function AddProduct() {
         }))
     }
     const loadProducts = async () => {
-        const productDetails = await axios.post("https://trade-mate-pearl.vercel.app/stock/all",
+        const productDetails = await axios.post("tradematebackend-production.up.railway.app/stock/all",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -54,7 +54,7 @@ function AddProduct() {
     }
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        fetch('https://trade-mate-pearl.vercel.app/stock/add', {
+        fetch('tradematebackend-production.up.railway.app/stock/add', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ function AddProduct() {
     };
 
     const loadUser = () => {
-        fetch(`https://trade-mate-pearl.vercel.app/user/byemail`, {
+        fetch(`tradematebackend-production.up.railway.app/user/byemail`, {
             "method": "POST",
             headers: {
                 'Content-Type': 'application/json',

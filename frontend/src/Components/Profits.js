@@ -79,7 +79,7 @@ function Profits() {
     const loadData = async () => {
         try {
             const profits = await axios.post(
-                `https://trade-mate-pearl.vercel.app/sales/profit`,
+                `tradematebackend-production.up.railway.app/sales/profit`,
                 dateState,
                 {
                     headers: {
@@ -96,7 +96,7 @@ function Profits() {
     const loadYearData = async () => {
         try {
             const response = await axios.post(
-                `https://trade-mate-pearl.vercel.app/sales/byyear`,
+                `tradematebackend-production.up.railway.app/sales/byyear`,
                 dateState,
                 {
                     headers: {
@@ -113,7 +113,7 @@ function Profits() {
     const loadAllReport = async () => {
         try {
             const response = await axios.post(
-                'https://trade-mate-pearl.vercel.app/sales/totalsum',
+                'tradematebackend-production.up.railway.app/sales/totalsum',
                 dateState,
                 {
                     headers: {

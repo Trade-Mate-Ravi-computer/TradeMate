@@ -56,7 +56,7 @@ function AddSale() {
 
     const loadUser = () => {
         try {
-            fetch('https://trade-mate-pearl.vercel.app/user/byemail', {
+            fetch('tradematebackend-production.up.railway.app/user/byemail', {
                 "method": "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ function AddSale() {
     const handleOnSubmit = (e) => {
         e.preventDefault()
         try {
-            fetch('https://trade-mate-pearl.vercel.app/sales/addSale', {
+            fetch('tradematebackend-production.up.railway.app/sales/addSale', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

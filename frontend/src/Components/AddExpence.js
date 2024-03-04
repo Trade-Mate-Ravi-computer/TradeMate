@@ -22,7 +22,7 @@ function AddExpence() {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`https://trade-mate-pearl.vercel.app/expense/add`, {
+            const response = await fetch(`tradematebackend-production.up.railway.app/expense/add`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

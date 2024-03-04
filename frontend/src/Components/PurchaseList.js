@@ -62,7 +62,7 @@ function PurchaseList() {
         loadPurchaseDetails();
     }, [])
     const loadPurchaseDetails = async () => {
-        const purchaseDetail = await axios.post("https://trade-mate-pearl.vercel.app/purchase/getbycompany",
+        const purchaseDetail = await axios.post("tradematebackend-production.up.railway.app/purchase/getbycompany",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -79,7 +79,7 @@ function PurchaseList() {
         const confirm = window.confirm("Are you Sure to Delete")
         console.log(confirm)
         if (confirm) {
-            await axios.delete(`https://trade-mate-pearl.vercel.app/sales/delete/${id}`, {
+            await axios.delete(`tradematebackend-production.up.railway.app/sales/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }

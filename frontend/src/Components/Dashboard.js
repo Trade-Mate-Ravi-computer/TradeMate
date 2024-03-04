@@ -15,7 +15,7 @@ function Dashboard() {
     }, []);
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "https://trade-mate-pearl.vercel.app/stock/all",
+            "tradematebackend-production.up.railway.app/stock/all",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -27,7 +27,7 @@ function Dashboard() {
     };
     const loadCustomers = async () => {
         const customers = await axios.get(
-            "https://trade-mate-pearl.vercel.app/customer/all",
+            "tradematebackend-production.up.railway.app/customer/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -38,7 +38,7 @@ function Dashboard() {
     };
     const loadSeller = async () => {
         const sellers = await axios.get(
-            "https://trade-mate-pearl.vercel.app/seller/all",
+            "tradematebackend-production.up.railway.app/seller/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`

@@ -24,7 +24,7 @@ function UsersDashboard() {
     const loadCompany = async () => {
         try {
             const response = await axios.post(
-                `https://trade-mate-pearl.vercel.app/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
+                `tradematebackend-production.up.railway.app/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
                 {},
                 {
                     headers: {

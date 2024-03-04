@@ -106,7 +106,7 @@ function AddPurchase() {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://trade-mate-pearl.vercel.app/purchase/add',
+            await axios.post('tradematebackend-production.up.railway.app/purchase/add',
                 purchaseDetails,
                 {
                     headers: {

@@ -25,7 +25,7 @@ function UpdateCompany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.put('https://trade-mate-pearl.vercel.app/company/update',
+        await axios.put('tradematebackend-production.up.railway.app/company/update',
             formData,
             {
                 headers: {

@@ -23,7 +23,7 @@ function UpdatePurchase(props) {
     const handleOnSubmit =async (e) => {
         e.preventDefault()
        try{
-        await fetch('https://trade-mate-pearl.vercel.app/purchase/update',
+        await fetch('tradematebackend-production.up.railway.app/purchase/update',
         
         {
             method:"POST",

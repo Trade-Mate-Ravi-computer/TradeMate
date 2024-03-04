@@ -26,7 +26,7 @@ function CreateCOmpany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('https://trade-mate-pearl.vercel.app/company/add',
+        await axios.post('tradematebackend-production.up.railway.app/company/add',
             formData,
             {
                 headers: {
