@@ -10,6 +10,7 @@ import loader from './loader.gif'
 function UsersDashboard() {
     const [update, setUpdate] = useState(false);
     const [id, setId] = useState(0);
+    const [loading, setLoading]=useState(true)
     const [onlyUpdate, setOnlyUpdate] = useState(false);
     const [companyDetail, setCompanyDetail] = useState([]);
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ function UsersDashboard() {
                 }
             );
             setCompanyDetail(response.data);
+            setLoading(false)
         } catch (error) {
             console.error('Error fetching company details:', error);
         }
@@ -103,9 +105,10 @@ function UsersDashboard() {
                                     </button>
                                 </div>
                             </div>
-                           
+                            {loading?<div className='w-full flex justify-center'><img src={loader} alt="" /></div>:''}
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4  sm:h-full overflow-y-auto">
-                                {companyDetail.map((company, index) => (
+                               
+                               {companyDetail.map((company, index) => (
                                     <div
                                         key={company.companyId}
                                         className="bg-white rounded-lg shadow-md p-6 cursor-pointer hover:shadow-lg hover:scale-105 transition-transform"

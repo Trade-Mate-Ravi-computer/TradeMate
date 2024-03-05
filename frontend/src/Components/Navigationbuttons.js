@@ -16,9 +16,7 @@ function NavigationButtons(props) {
         <NavLink className={navlinkStyle} to={`/gst/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
           GST
         </NavLink>
-        <NavLink className={navlinkStyle} to={`/profitloss/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
-          Profit/Loss
-        </NavLink>
+     
       </div>
       <div>
         <NavLink className={navlinkStyle} to={`/saledetails/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
@@ -27,26 +25,22 @@ function NavigationButtons(props) {
         <NavLink className={navlinkStyle} to={`/purchase/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
           Purchase Details
         </NavLink>
-        <NavLink className={navlinkStyle} to={`/expenses/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
+        <NavLink className={navlinkStyle} to={`/expenselist`}>
           Expenses
         </NavLink>
-        <NavLink className={navlinkStyle} to={`/profitloss/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
-          Profit/Loss
-        </NavLink>
+      
       </div>
       <div>
         <NavLink className={navlinkStyle} to={`/stocks/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>
           Stock Items
         </NavLink>
-        <NavLink className={navlinkStyle}>
-          Profit/Loss
+        <NavLink to={`/customers/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className={navlinkStyle}>
+          Customer List
         </NavLink>
-        <NavLink className={navlinkStyle}>
-          Profit/Loss
+        <NavLink to={`/sellers/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className={navlinkStyle}>
+          Seller List
         </NavLink>
-        <NavLink className={navlinkStyle}>
-          Profit/Loss
-        </NavLink>
+      
       </div>
     </div>
   );

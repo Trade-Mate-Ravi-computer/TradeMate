@@ -5,9 +5,8 @@ import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
 
-function SellerList() {
-
-    const [sellerDetails, setSellerDetails] = useState([])
+function ExpenseList() {
+    const [expenseDetails, setExpenseDetails] = useState([])
     const [shortData, setShortData] = useState('')
     const [itemName, setItemName] = useState('')
     const [itemId, setItemId] = useState(0)
@@ -15,7 +14,7 @@ function SellerList() {
 
     const remainings = []
     useEffect(() => {
-        loadsellerDetails();
+        loadExpenseDetails();
     }, [])
     function sumArray(arr) {
         let sum = 0;
@@ -24,14 +23,14 @@ function SellerList() {
         });
         return sum;
     }
-    const loadsellerDetails = async () => {
-        const saleDetail = await axios.get("https://tradematebackend-production.up.railway.app/seller/all",
+    const loadExpenseDetails = async () => {
+        const saleDetail = await axios.get("https://tradematebackend-production.up.railway.app/expense/all",
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }
             });
-        setSellerDetails(saleDetail.data.reverse())
+        setExpenseDetails(saleDetail.data.reverse())
         setLoading(false)
         // console.log(saleDetail.data.reverse())
     }
@@ -47,12 +46,12 @@ function SellerList() {
     // }
     // const handleOnclickBody = () => {
     //     // setUpdate(false)
-    //     loadsellerDetails()
+    //     loadExpenseDetails()
     // }
 
     return (
         <div className=' sm:px-10 h-[56rem]'>
-            <div className='w-full font-bold text-3xl text-green-600 underline text-center'>Seller List</div>
+            <div className='w-full font-bold text-3xl text-green-600 underline text-center'>Customer List</div>
             <div className="w-full  flex sm:justify-between flex-col sm:flex-row pr-20 items-center">
                 <div className='m-2 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
                 <div className='m-2 pl-28 '>
@@ -61,18 +60,6 @@ function SellerList() {
                 </div>
 
             </div>
-            {/* {update && (
-                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
-                        )} */}
-            {/* UpdateSale component */}
-            {/* {update &&
-                <div className="fixed flex justify-center top-40 left-1/2 bg-white border border-black shadow-md rounded-md z-50">
-                    <div className='fixed h-80 p-10 bg-blue-50 rounded-lg  shadow-2xl' id='updateProduct'>
-                        <div className='w-full h-10 text-right'> <button className='h-6 w-6 m-2 transition-all hover:h-8 hover:w-8 hover:m-1' onClick={handleOnclickBody}><img src={crossImage} alt="" /></button></div>
-                        <UpdateSale itemName={`${itemName}`} id={`${itemId}`} setUpdate={setUpdate} myFunction={loadsellerDetails} />
-                    </div>
-                </div>
-            } */}
             <div className="sm:px-10 overflow-y-auto sm:h-[27.7rem] m-2">
                 <table className="w-full text-sm text-left rtl:text-right text-blue-500 dark:text-blue-400">
 
@@ -82,22 +69,17 @@ function SellerList() {
                                 Sr no.
                             </th>
                             <th scope="col" className="px-6 py-3 w-24 text-white bg-blue-400 text-center">
-                                Seller Name
+                               Who spent
                             </th>
                             <th scope="col" className="px-6 py-3 text-white bg-blue-400 text-center">
-                                Address
+                                Spent on
                             </th>
                             <th scope="col" className="px-6 py-3 text-white bg-blue-400 text-center">
-                                Mobile
+                                date
                             </th>
                             <th scope="col" className="px-6 py-3 text-white bg-blue-400 text-center">
-                                Gst In               </th>
-                            <th scope="col" className="px-6 py-3 text-white bg-blue-400 text-center">
-                                State
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-white bg-blue-400 text-center">
-                                Country
-                            </th>
+                                Amount               </th>
+                         
 
                         </tr>
                     </thead>
@@ -106,31 +88,26 @@ function SellerList() {
                             const items = []
                             let j = 1;
                             let k = 0
-                            for (let i = sellerDetails.length - 1; i >= 0; i--) {
-                                items.push(shortData ? !sellerDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
+                            for (let i = expenseDetails.length - 1; i >= 0; i--) {
+                                items.push(shortData ? !expenseDetails[i].name.toLowerCase().includes(shortData.toLowerCase()) ? '' :
                                     <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
                                             {j}
                                         </th>
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].sellerName}
+                                            {expenseDetails[i].name}
                                         </th>
                                         <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].address}
+                                            {expenseDetails[i].expenseOn}
                                         </td>
 
                                         <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
-                                            {sellerDetails[i].mobile}
+                                            {expenseDetails[i].date}
                                         </td>
                                         <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].gstIn}
+                                            {expenseDetails[i].amount}
                                         </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].state}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].country}
-                                        </td>
+                                       
 
                                     </tr>
 
@@ -141,24 +118,19 @@ function SellerList() {
                                             {j}
                                         </th>
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].sellerName}
+                                            {expenseDetails[i].name}
                                         </th>
                                         <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].address}
+                                            {expenseDetails[i].expenseOn}
                                         </td>
 
                                         <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
-                                            {sellerDetails[i].mobile}
+                                            {expenseDetails[i].date}
                                         </td>
                                         <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].gstIn}
+                                            {expenseDetails[i].amount}
                                         </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].state}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {sellerDetails[i].country}
-                                        </td>
+                                        
 
                                     </tr>
                                 );
@@ -177,4 +149,4 @@ function SellerList() {
     )
 }
 
-export default SellerList
+export default ExpenseList

@@ -28,6 +28,7 @@ import About from './Components/About';
 import AddSeller from './Components/AddSeller';
 import SellerList from './Components/SellerList';
 import CustomerList from './Components/CustomerList';
+import ExpenseList from './Components/ExpenseList';
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           <Route exact path='/addseller' element={<AddSeller/>} />
           <Route exact path='/customers/:companyName' element={<CustomerList/>} />
           <Route exact path='/sellers/:companyName' element={<SellerList/>} />
+          <Route exact path='/expenselist' element={<ExpenseList/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

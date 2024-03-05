@@ -169,6 +169,7 @@ function CustomerList() {
 
                     </tbody>
                 </table>
+                {loading?<div className='w-full flex justify-center'><img src={loder} alt="" /></div>:''}
             </div>
         </div>
 
