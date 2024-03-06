@@ -17,7 +17,8 @@ function Profits() {
         year: currentYear,
         month: currentMonth,
         day: currentDate,
-        companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+        companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+        email:JSON.parse(localStorage.getItem('login')).user
     });
 
     const monthInLetter = changeNumberToMonth(currentMonth);

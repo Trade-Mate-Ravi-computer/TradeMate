@@ -185,6 +185,39 @@ function PurchaseList() {
                                     }
                                 }
                                 items.push(shortData ? !purchaseDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
+                                    (purchaseDetails[i].email === JSON.parse(localStorage.getItem('login')).user) ?
+                                        <tr key={i} className="border-b border-blue-200 dark:border-blue-900">
+                                            <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {j + 1}
+                                            </th>
+                                            <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {purchaseDetails[i].sellerName.length > 25 ? purchaseDetails[i].sellerName.slice(0, 22) + "..." : purchaseDetails[i].sellerName}
+                                            </th>
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {purchaseDetails[i].itemName.length > 25 ? purchaseDetails[i].itemName.slice(0, 23) + "..." : purchaseDetails[i].itemName}
+                                            </td>
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {purchaseDetails[i].quantity}
+                                            </td>
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center `}>
+                                                {purchaseDetails[i].totalAmmount}
+                                            </td>
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {purchaseDetails[i].paidAmmount}
+                                            </td>
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {purchaseDetails[i].date.split('-')[2] + "/" + changeNumberToMonth(parseInt(purchaseDetails[i].date.split('-')[1])) + '/' + purchaseDetails[i].date.split('-')[0]}
+                                            </td>
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                {purchaseDetails[i].remaining}
+                                            </td>
+
+                                            <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
+                                                <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(purchaseDetails[i].id, purchaseDetails[i].sellerName)}>Pay </NavLink>
+
+                                            </td>
+                                        </tr> : '' :
+                                    (purchaseDetails[i].email === JSON.parse(localStorage.getItem('login')).user) ?
                                     <tr key={i} className="border-b border-blue-200 dark:border-blue-900">
                                         <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {j + 1}
@@ -215,38 +248,7 @@ function PurchaseList() {
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(purchaseDetails[i].id, purchaseDetails[i].sellerName)}>Pay </NavLink>
 
                                         </td>
-                                    </tr> :
-                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-900">
-                                        <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {j + 1}
-                                        </th>
-                                        <th scope="row" className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {purchaseDetails[i].sellerName.length > 25 ? purchaseDetails[i].sellerName.slice(0, 22) + "..." : purchaseDetails[i].sellerName}
-                                        </th>
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {purchaseDetails[i].itemName.length > 19 ? purchaseDetails[i].itemName.slice(0, 16) + "..." : purchaseDetails[i].itemName}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {purchaseDetails[i].quantity}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center `}>
-                                            {purchaseDetails[i].totalAmmount}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {purchaseDetails[i].paidAmmount}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {purchaseDetails[i].date.split('-')[2] + "/" + changeNumberToMonth(parseInt(purchaseDetails[i].date.split('-')[1])) + '/' + purchaseDetails[i].date.split('-')[0]}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {purchaseDetails[i].remaining}
-                                        </td>
-
-                                        <td className={` px-6 py-4 font-medium ${purchaseDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${purchaseDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(purchaseDetails[i].id, purchaseDetails[i].sellerName)}>Pay </NavLink>
-
-                                        </td>
-                                    </tr>
+                                    </tr> : ''
                                 );
 
                                 j++
@@ -263,7 +265,7 @@ function PurchaseList() {
                 <div className='w-full flex justify-center'> {
                     loading ? <div className='w-full flex justify-center'><img className='' src={loder} alt="" /></div> : ''
                 }</div>
-                
+
             </div>
             <div className='text-center font-bold text-2xl text-red-500'><div>Total remaining :-{shortData ? sumArray(totalShortedRemaining) : sumArray(totalRemaining)}</div></div>
         </div>

@@ -109,7 +109,7 @@ function SellerList() {
                             for (let i = sellerDetails.length - 1; i >= 0; i--) {
                                 
                                 items.push(shortData ? !sellerDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
-                                sellerDetails[i].companyName===JSON.parse(localStorage.getItem("companyName")).companyName?
+                                (sellerDetails[i].companyName===JSON.parse(localStorage.getItem("companyName")).companyName && sellerDetails[i].email===JSON.parse(localStorage.getItem('login')).user)?
                                 
                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
@@ -139,7 +139,7 @@ function SellerList() {
 
 
                                     :
-                                    sellerDetails[i].companyName===JSON.parse(localStorage.getItem("companyName")).companyName?
+                                    (sellerDetails[i].companyName===JSON.parse(localStorage.getItem("companyName")).companyName && sellerDetails[i].email===JSON.parse(localStorage.getItem('login')).user)?
                                     <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
                                             {++j}

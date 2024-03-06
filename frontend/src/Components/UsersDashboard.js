@@ -120,6 +120,7 @@ function UsersDashboard() {
                                         <p className="text-sm mb-2">Address: {company.companyAddress}</p>
                                         <p className="text-sm mb-2">Mobile No: {company.mobile}</p>
                                         <p className="text-sm mb-2">State: {company.state}</p>
+                                        <p className="text-sm mb-2">Email: {company.email}</p>
                                         <button
                                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                             onClick={(e) => handleOnclickOnupdate(e, company.companyId)}
