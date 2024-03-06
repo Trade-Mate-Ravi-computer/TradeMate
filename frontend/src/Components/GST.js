@@ -36,8 +36,6 @@ function GST() {
                     }
                 })
             setMinYear(parseInt(minYearValue.data.split('-')[0]))
-            console.log(minYearValue.data)
-            // console.log(minYearValue.data.split('-')[0],typeof(parseInt(minYearValue.data.split('-')[0])))
         } catch (e) {
             console.log("Some error Occurs")
         }
@@ -84,7 +82,6 @@ function GST() {
 
     }
     const loadCompanyDetail = async () => {
-        console.log("Loading company Details")
         const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/companyByNameEmail`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
@@ -98,7 +95,6 @@ function GST() {
 
         )
         setCompanyDetails(companyDetail.data)
-        console.log("COmpany Details",companyDetail.data.gstType)
     }
     const loadSumOfQuart = async () => {
         try {
@@ -112,13 +108,11 @@ function GST() {
 
             )
             setQuartSum(sumofQuart.data)
-            console.log("Quarter sum",sumofQuart.data)
             document.getElementById('compositionGst').innerHTML = `Rs. ${sumofQuart.data * 1 / 100}`
         }
         catch (e) {
             if (document.getElementById('compositionGst')) {
                 document.getElementById('compositionGst').innerHTML = "Choose Correct Quarter for Choosen Year"
-                console.log(quaterMonthFInder(month, year))
             }
         }
     }
@@ -140,7 +134,6 @@ function GST() {
 
             )
             setMonthSum(sumofMonth.data)
-            console.log("monhth",sumofMonth.data)
             document.getElementById('regularGst').innerHTML = `Rs. ${sumofMonth.data * 18 / 100}`;
         } catch (e) {
             if (document.getElementById('regularGst')) {
@@ -166,7 +159,6 @@ function GST() {
         loadSumOfMonth()
         console.log("Clicked")
     }
-    console.log(currentYear === year, typeof (currentYear), typeof (year))
     let yearsList = []
     for (let yr = currentYear; yr >= minYear; yr--) {
         yearsList.push(yr)

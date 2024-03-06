@@ -49,7 +49,7 @@ function Signup() {
                 console.log(resp)
                 if (resp.ok) {
                     setSignupStatus(true)
-                    sendMail(e)
+                    // sendMail(e)
                     document.getElementById('errorMsg').innerHTML = ""
                 }
                 if (resp.status === 401) {

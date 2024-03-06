@@ -22,7 +22,6 @@ function Profits() {
     });
 
     const monthInLetter = changeNumberToMonth(currentMonth);
-    console.log(currentMonth)
     function changeNumberToMonth(currentMonth) {
         let month = "";
         switch (currentMonth) {

@@ -5,14 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 
 function AddSale() {
-    const [sale, setSale] = useState();
-    const [customerName,setCustomerName]= useState()
+    const [sale, setSale] = useState(0);
+    const [customerName,setCustomerName]= useState('')
     const [isOpen, steIsOpen] = useState(false)
     const [isOpenCust,setIsOpenCust]=useState(false)
     const itemNames = JSON.parse(localStorage.getItem('saleDetails'))
     const customers = JSON.parse(localStorage.getItem('customers'))
     const handleEventChange = (e) => {
-        // const { name, value } = e.target;
         setSale(e.target.value)
 
     };
@@ -42,7 +41,6 @@ function AddSale() {
         setIsOpenCust(false)
     }
     const handleEcustomerNameChange = (e) => {
-        // const { name, value } = e.target;
         setCustomerName(e.target.value)
 
     };
@@ -67,7 +65,6 @@ function AddSale() {
             }).then((resp) => {
 
                 resp.json().then((result) => {
-                    // console.log("result :-", result.id)
                     setId(result.id)
                 })
             })
@@ -95,7 +92,7 @@ function AddSale() {
         },
         itemName: '',
         quantity: 0,
-        date: null,
+        date: '',
         customerName: "",
         rate: 0,
         receivedAmmount: 0,
@@ -139,7 +136,7 @@ function AddSale() {
                         },
                         itemName: '',
                         quantity: 0,
-                        date: 0,
+                        date: '',
                         customerName: "",
                         rate: 0,
                         receivedAmmount: 0,
