@@ -103,65 +103,67 @@ function CustomerList() {
                     <tbody className=''>
                         {(() => {
                             const items = []
-                            let j = 1;
+                            let j = 0;
                             let k = 0
                             for (let i = customerDetails.length - 1; i >= 0; i--) {
                                 items.push(shortData ? !customerDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
-                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {j}
-                                        </th>
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].customerName}
-                                        </th>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].address}
-                                        </td>
+                                   (customerDetails[i].companyName===JSON.parse(localStorage.getItem('companyName')).companyName)?
+                                   <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
+                                   <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                       {++j}
+                                   </th>
+                                   <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                       {customerDetails[i].customerName}
+                                   </th>
+                                   <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                       {customerDetails[i].address}
+                                   </td>
 
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
-                                            {customerDetails[i].mobile}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].gstIn}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].state}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].country}
-                                        </td>
+                                   <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
+                                       {customerDetails[i].mobile}
+                                   </td>
+                                   <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                       {customerDetails[i].gstIn}
+                                   </td>
+                                   <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                       {customerDetails[i].state}
+                                   </td>
+                                   <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                       {customerDetails[i].country}
+                                   </td>
 
-                                    </tr>
+                               </tr>:''
 
 
                                     :
+                                    (customerDetails[i].companyName===JSON.parse(localStorage.getItem('companyName')).companyName)?
                                     <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {j}
-                                        </th>
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].customerName}
-                                        </th>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].address}
-                                        </td>
-
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
-                                            {customerDetails[i].mobile}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].gstIn}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].state}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {customerDetails[i].country}
-                                        </td>
-
-                                    </tr>
+                                    <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {++j}
+                                    </th>
+                                    <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {customerDetails[i].customerName}
+                                    </th>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {customerDetails[i].address}
+                                    </td>
+ 
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
+                                        {customerDetails[i].mobile}
+                                    </td>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {customerDetails[i].gstIn}
+                                    </td>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {customerDetails[i].state}
+                                    </td>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {customerDetails[i].country}
+                                    </td>
+ 
+                                </tr>:''
                                 );
-                                j++
+                               
                             }
                             return items;
 

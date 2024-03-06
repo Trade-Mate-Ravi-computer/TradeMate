@@ -104,13 +104,16 @@ function SellerList() {
                     <tbody className=''>
                         {(() => {
                             const items = []
-                            let j = 1;
-                            let k = 0
+                            let j = 0;
+                            let k = 1
                             for (let i = sellerDetails.length - 1; i >= 0; i--) {
+                                
                                 items.push(shortData ? !sellerDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
-                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
+                                sellerDetails[i].companyName===JSON.parse(localStorage.getItem("companyName")).companyName?
+                                
+                                   <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {j}
+                                            {++j}
                                         </th>
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
                                             {sellerDetails[i].sellerName}
@@ -132,13 +135,14 @@ function SellerList() {
                                             {sellerDetails[i].country}
                                         </td>
 
-                                    </tr>
+                                    </tr>:''
 
 
                                     :
+                                    sellerDetails[i].companyName===JSON.parse(localStorage.getItem("companyName")).companyName?
                                     <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {j}
+                                            {++j}
                                         </th>
                                         <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
                                             {sellerDetails[i].sellerName}
@@ -160,9 +164,10 @@ function SellerList() {
                                             {sellerDetails[i].country}
                                         </td>
 
-                                    </tr>
+                                    </tr>:''
+                                     
                                 );
-                                j++
+                               
                             }
                             return items;
 
@@ -170,7 +175,7 @@ function SellerList() {
 
                     </tbody>
                 </table>
-                {loading?<div className='w-full flex justify-center'><img src={loder} alt="" /></div>:''}
+                 {loading?<div className='w-full flex justify-center'><img src={loder} alt="" /></div>:''}
             </div>
         </div>
 

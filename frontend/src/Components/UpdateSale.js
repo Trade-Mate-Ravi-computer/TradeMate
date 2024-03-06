@@ -42,7 +42,7 @@ function UpdateSale(props) {
         })
     }
     return (
-        <div className='w-[20rem]'>
+        <div className='w-[20rem] sm:w-[40rem]'>
             <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Update received Ammount</h1></div>
             <div className=''>
                 <div className='border border-blue-100 justify-center col-span-2'>

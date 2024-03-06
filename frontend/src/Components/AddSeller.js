@@ -44,6 +44,7 @@ function AddSeller() {
             });
 
             if (response.ok) {
+               
                 document.getElementById('info').classList.remove('text-red-800')
                 document.getElementById('info').classList.add('text-green-800')
                 setUplaodStatus("seller Added");
@@ -66,7 +67,7 @@ function AddSeller() {
                 }, 2000);
 
             } else {
-                
+                console.log(response.data)
                 document.getElementById('info').classList.remove('text-green-800')
                 document.getElementById('info').classList.add('text-red-800')
                 setUplaodStatus("Something went wrong");

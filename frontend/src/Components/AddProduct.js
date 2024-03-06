@@ -110,7 +110,7 @@ function AddProduct() {
         setUploadStatus('')
     }
     return (
-        <div className='my-3 h-[45.4rem] sm:h-[39.7rem]'>
+        <div className='my-3 h-[45.4rem] sm:h-[41.7rem]'>
           
 
             <div className='m-3 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 sm:w-10 w-44 sm:hidden flex">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
