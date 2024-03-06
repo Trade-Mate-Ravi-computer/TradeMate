@@ -36,6 +36,7 @@ function GST() {
                     }
                 })
             setMinYear(parseInt(minYearValue.data.split('-')[0]))
+            console.log(minYearValue.data)
             // console.log(minYearValue.data.split('-')[0],typeof(parseInt(minYearValue.data.split('-')[0])))
         } catch (e) {
             console.log("Some error Occurs")
@@ -83,10 +84,11 @@ function GST() {
 
     }
     const loadCompanyDetail = async () => {
-        const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname}`,
+        console.log("Loading company Details")
+        const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/companyByNameEmail`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
-                email: JSON.parse(localStorage.getItem('login')).user
+                email:JSON.parse(localStorage.getItem('login')).user
             },
             {
                 headers: {
@@ -96,6 +98,7 @@ function GST() {
 
         )
         setCompanyDetails(companyDetail.data)
+        console.log("COmpany Details",companyDetail.data.gstType)
     }
     const loadSumOfQuart = async () => {
         try {
@@ -109,6 +112,7 @@ function GST() {
 
             )
             setQuartSum(sumofQuart.data)
+            console.log("Quarter sum",sumofQuart.data)
             document.getElementById('compositionGst').innerHTML = `Rs. ${sumofQuart.data * 1 / 100}`
         }
         catch (e) {
@@ -136,7 +140,7 @@ function GST() {
 
             )
             setMonthSum(sumofMonth.data)
-            console.log(sumofMonth.data)
+            console.log("monhth",sumofMonth.data)
             document.getElementById('regularGst').innerHTML = `Rs. ${sumofMonth.data * 18 / 100}`;
         } catch (e) {
             if (document.getElementById('regularGst')) {
