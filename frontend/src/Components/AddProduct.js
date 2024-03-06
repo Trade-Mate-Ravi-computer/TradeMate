@@ -23,6 +23,7 @@ function AddProduct() {
             companyId: 0
         }
     })
+    console.log(itemDetail)
     const upStatus = () => {
         setUploadStatus("Item Added ")
         setTimeout(() => {
