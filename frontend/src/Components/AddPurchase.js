@@ -38,6 +38,7 @@ function AddPurchase() {
         paidAmmount: 0,
         itemName: '',
         companyName: '',
+        email:JSON.parse(localStorage.getItem('login')).user,
         company: {
             id: 0
         },
@@ -72,6 +73,7 @@ function AddPurchase() {
             price: 0,
             paidAmmount: 0,
             sellerName: '',
+            email:JSON.parse(localStorage.getItem('login')).user,
             company: {
                 id: 0
             },

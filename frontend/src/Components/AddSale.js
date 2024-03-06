@@ -100,6 +100,7 @@ function AddSale() {
         rate: 0,
         receivedAmmount: 0,
         companyName: '',
+        email:JSON.parse(localStorage.getItem('login')).user,
         company: {
             compannyName: ''
         },
@@ -145,6 +146,7 @@ function AddSale() {
                         company: {
                             compannyName: ''
                         },
+                        email:JSON.parse(localStorage.getItem('login')).user,
                         customer: {
                             id: 0
                         }

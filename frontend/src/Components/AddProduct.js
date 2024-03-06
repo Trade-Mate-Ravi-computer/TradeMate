@@ -18,6 +18,7 @@ function AddProduct() {
         purchasePrice: 0,
         category: '',
         companyName: '',
+        email:JSON.parse(localStorage.getItem('login')).user,
         company: {
             companyId: 0
         }
@@ -73,6 +74,7 @@ function AddProduct() {
                     purchasePrice: 0,
                     quantity:0,
                     companyName: '',
+                    email:JSON.parse(localStorage.getItem('login')).user,
                     gstInPercent:0,
                     company: {
                         companyId: 0
