@@ -38,16 +38,6 @@ function ExpenseList() {
     const shortEvent = (e) => {
         setShortData(e.target.value)
     }
-    // const handleOnClickUpdate = (id, itemName) => {
-    //     setUpdate(true)
-    //     setItemName(itemName)
-    //     setItemId(id)
-
-    // }
-    // const handleOnclickBody = () => {
-    //     // setUpdate(false)
-    //     loadExpenseDetails()
-    // }
 
     return (
         <div className=' sm:px-10 h-[56rem]'>
@@ -86,55 +76,52 @@ function ExpenseList() {
                     <tbody className=''>
                         {(() => {
                             const items = []
-                            let j = 1;
+                            let j = 0;
                             let k = 0
                             for (let i = expenseDetails.length - 1; i >= 0; i--) {
                                 items.push(shortData ? !expenseDetails[i].name.toLowerCase().includes(shortData.toLowerCase()) ? '' :
-                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {j}
-                                        </th>
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {expenseDetails[i].name}
-                                        </th>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {expenseDetails[i].expenseOn}
-                                        </td>
+                                    (expenseDetails[i].email===JSON.parse(localStorage.getItem('login')).user)?<tr key={i} className="border-b border-blue-200 dark:border-blue-700">
+                                    <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {++j}
+                                    </th>
+                                    <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {expenseDetails[i].name}
+                                    </th>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {expenseDetails[i].expenseOn}
+                                    </td>
 
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
-                                            {expenseDetails[i].date}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {expenseDetails[i].amount}
-                                        </td>
-                                       
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
+                                        {expenseDetails[i].date}
+                                    </td>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {expenseDetails[i].amount}
+                                    </td>
+                                   
 
-                                    </tr>
+                                </tr>:'':
+                                    (expenseDetails[i].email===JSON.parse(localStorage.getItem('login')).user)?<tr key={i} className="border-b border-blue-200 dark:border-blue-700">
+                                    <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {++j}
+                                    </th>
+                                    <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {expenseDetails[i].name}
+                                    </th>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {expenseDetails[i].expenseOn}
+                                    </td>
 
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
+                                        {expenseDetails[i].date}
+                                    </td>
+                                    <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
+                                        {expenseDetails[i].amount}
+                                    </td>
+                                   
 
-                                    :
-                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {j}
-                                        </th>
-                                        <th scope="row" className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {expenseDetails[i].name}
-                                        </th>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {expenseDetails[i].expenseOn}
-                                        </td>
-
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center `}>
-                                            {expenseDetails[i].date}
-                                        </td>
-                                        <td className={` px-6 py-4 font-medium text-green-700 text-center`}>
-                                            {expenseDetails[i].amount}
-                                        </td>
-                                        
-
-                                    </tr>
+                                </tr>:''
                                 );
-                                j++
+                               
                             }
                             return items;
 
