@@ -14,6 +14,7 @@ function AddSeller() {
         gstIn: '',
         gstType: '',
         mobile: '',
+        email:JSON.parse(localStorage.getItem('login')).user,
         company: {
             companyId: 0
         }
@@ -58,6 +59,7 @@ function AddSeller() {
                     gstIn: '',
                     gstType: '',
                     mobile: '',
+                    email:JSON.parse(localStorage.getItem('login')).user,
                     company: {
                         companyId: 0
                     }
