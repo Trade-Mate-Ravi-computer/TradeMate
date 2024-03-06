@@ -29,7 +29,13 @@ function Invoice() {
     }, [])
     const loadCompanyDetails = async () => {
         try {
-            const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`, {}, {
+            const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/companyByNameEmail`,
+             {
+                companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                email:JSON.parse(localStorage.getItem('login')).user
+            
+            },
+              {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }
