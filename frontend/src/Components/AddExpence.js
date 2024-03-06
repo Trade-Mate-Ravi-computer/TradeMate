@@ -8,6 +8,7 @@ function AddExpence() {
         expenseOn: '',
         date:'',
         amount: 0,
+        email:JSON.parse(localStorage.getItem('login')).user,
         companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
         company: {
             companyId: 0
