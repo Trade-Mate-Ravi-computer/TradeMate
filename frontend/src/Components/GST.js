@@ -25,7 +25,11 @@ function GST() {
     }, [])
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.get(`https://tradematebackend-production.up.railway.app/sales/date/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
+            const minYearValue = await axios.post(`https://tradematebackend-production.up.railway.app/sales/date`,
+                {
+                    companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                    email: JSON.parse(localStorage.getItem('login')).user
+                },
                 {
                     headers: {
                         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
@@ -45,7 +49,8 @@ function GST() {
                 month2: 5,
                 month3: 6,
                 year: parseInt(year),
-                companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                email: JSON.parse(localStorage.getItem('login')).user
             }
         } else if (9 >= month && month >= 7) {
             return {
@@ -53,7 +58,8 @@ function GST() {
                 month2: 8,
                 month3: 9,
                 year: parseInt(year),
-                companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                email: JSON.parse(localStorage.getItem('login')).user
             }
         } else if (12 >= month && month >= 10) {
             return {
@@ -61,7 +67,8 @@ function GST() {
                 month2: 11,
                 month3: 12,
                 year: parseInt(year),
-                companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                email: JSON.parse(localStorage.getItem('login')).user
             }
         } else if (3 >= month && month >= 1) {
             return {
@@ -69,14 +76,18 @@ function GST() {
                 month2: 2,
                 month3: 3,
                 year: parseInt(year),
-                companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                email: JSON.parse(localStorage.getItem('login')).user
             }
         }
 
     }
     const loadCompanyDetail = async () => {
-        const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname/${JSON.parse(localStorage.getItem('companyName')).companyName}`,
-            {},
+        const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/byname}`,
+            {
+                companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                email: JSON.parse(localStorage.getItem('login')).user
+            },
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
@@ -114,7 +125,8 @@ function GST() {
                 {
                     month: regMonth,
                     year: parseInt(year),
-                    companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                    companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                    email: JSON.parse(localStorage.getItem('login')).user
                 },
                 {
                     headers: {
