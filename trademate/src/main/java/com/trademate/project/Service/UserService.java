@@ -14,12 +14,20 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private EmailService emailService;
 
     public List<UserModel> getUsers(){
         return userRepository.findAll();
     }
     public UserModel addUser(UserModel userModel){
         userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        System.out.println(userModel.getPassword());
+        if(userRepository.findByEmail(userModel.getEmail())==null){
+            String subject="Verify Your Email !";
+            String message="You are successfully registered On TradeMate \nClick the link to verify your account "+"\nVerification Link"+"\n "+"https://tradematebackend-production.up.railway.app/auth/setverify/"+userModel.getEmail();
+            emailService.sendEmail(userModel.getEmail(),subject,message);
+        }
         return userRepository.save(userModel);
     }
     public UserModel getByEmail(String email){

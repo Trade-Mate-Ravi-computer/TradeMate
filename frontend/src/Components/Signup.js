@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import Carasoul from './Carasoul'
 import { NavLink, useNavigate } from 'react-router-dom'
 import emailjs from "@emailjs/browser";
+import loder from './loader.gif'
 
 function Signup() {
     const navigate = useNavigate()
     const [signupStatus, setSignupStatus] = useState(false)
+    const [loading,setLoading]=useState(false)
     const [singupDetails, setSingupDetails] = useState({
         name: '',
         email: '',
@@ -37,6 +39,7 @@ function Signup() {
 
 
     const handleOnSubmit = (e) => {
+        setLoading(true)
         e.preventDefault()
         if (singupDetails.password === singupDetails.confirmPassword) {
             fetch('https://tradematebackend-production.up.railway.app/auth/sign-up', {
@@ -51,16 +54,18 @@ function Signup() {
                     setSignupStatus(true)
                     // sendMail(e)
                     document.getElementById('errorMsg').innerHTML = ""
+                    setLoading(false)
                 }
                 if (resp.status === 401) {
                     document.getElementById('errorMsg').innerHTML = "Email Alredy Exist Try another email !"
-                    
+                    setLoading(false)
                 }
             })
             
         }
         else {
             document.getElementById('errorMsg').innerHTML = "Password and confirm password should match"
+            setLoading(false)
         }
 
     }
@@ -141,7 +146,7 @@ function Signup() {
                             </div> */}
 
                                 <div>
-                                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add User</button>
+                                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<img className='h-6' src={loder} alt="" />:"Sign Up"}</button>
                                 </div>
                                 <div id="errorMsg" className='text-red-600 w-full text-center'></div>
                                 <div className="text-sm flex justify-end">

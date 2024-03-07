@@ -29,6 +29,7 @@ import AddSeller from './Components/AddSeller';
 import SellerList from './Components/SellerList';
 import CustomerList from './Components/CustomerList';
 import ExpenseList from './Components/ExpenseList';
+import ForgotPassword from './Components/ForgotPassword';
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
           <Route exact path='/customers/:companyName' element={<CustomerList/>} />
           <Route exact path='/sellers/:companyName' element={<SellerList/>} />
           <Route exact path='/expenselist' element={<ExpenseList/>} />
+          <Route exact path='/forgotpassword' element={<ForgotPassword/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>
