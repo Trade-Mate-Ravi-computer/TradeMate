@@ -105,7 +105,7 @@ function ForgotPassword() {
                                 <form className="space-y-6" onSubmit={(e) => handleOnSubmit(e)}>
                                     <div>
 
-                                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-blue-900">Enter your registored email to get otp</label>
+                                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-blue-900">Enter your registered email to get otp</label>
                                         <div className="mt-2">
                                             <input id="email" disabled={sendOtp ? true : false} onChange={(e) => handleOnChange(e)} name="email" value={newPasswordDetails.email} type="email" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
