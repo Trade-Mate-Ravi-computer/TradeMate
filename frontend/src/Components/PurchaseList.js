@@ -177,11 +177,15 @@ function PurchaseList() {
                                     setLoading(false)
                                 }
                                 if (purchaseDetails[i].remaining > 0) {
-                                    totalRemaining.push(purchaseDetails[i].remaining)
+                                    if(purchaseDetails[i].email===JSON.parse(localStorage.getItem('login')).user){
+                                        totalRemaining.push(purchaseDetails[i].remaining)
+                                    }
                                 }
                                 if (purchaseDetails[i].remaining > 0) {
                                     if (shortData && purchaseDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase())) {
+                                        if(purchaseDetails[i].email===JSON.parse(localStorage.getItem('login')).user){
                                         totalShortedRemaining.push(purchaseDetails[i].remaining);
+                                    }
                                     }
                                 }
                                 items.push(shortData ? !purchaseDetails[i].sellerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
