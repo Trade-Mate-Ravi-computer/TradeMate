@@ -125,7 +125,7 @@ function Signin() {
         </div>
 
         <div>
-          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<img className='h-6' src={loder} alt="" />:"Sign in"}</button>
+          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<img className='h-6 rounded-full' src={loder} alt="" />:"Sign in"}</button>
         </div>
         <div className="text-sm flex justify-end">
           {/* <p className='mx-2'>Don't have an account? </p><a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign up</a> */}
