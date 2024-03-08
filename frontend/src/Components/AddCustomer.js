@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
+import loder from './loader.gif'
 function AddCustomer() {
     const [uploadStatus, setUplaodStatus] = useState("")
+    const [loading,setLoading]=useState(false)
     const [cusomerDetails, setCustomerDetails] = useState({
         customerName: '',
         address: '',
@@ -33,6 +35,7 @@ function AddCustomer() {
         })
     }
     const handleOnSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
         try {
             const response = await fetch('https://tradematebackend-production.up.railway.app/customer/add', {
@@ -84,6 +87,7 @@ function AddCustomer() {
                 setUplaodStatus("");
             }, 2000);
         }
+        setLoading(false)
     };
 
     return (
@@ -161,8 +165,8 @@ function AddCustomer() {
 
                     </form>
 
-                    <div className='flex justify-center  mt-6'>
-                        <button type="submit" onClick={(e) => handleOnSubmit(e)} className="w-full sm:w-auto flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Customer</button>
+                    <div className='flex justify-center mt-6'>
+                        <button type="submit" onClick={(e) => handleOnSubmit(e)} className="w-[10rem] flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<img className='h-6 rounded-full' src={loder} alt="" />:"Add Customer"}</button>
                     </div>
                     <div id='info' className='w-full text-center text-xl font-bold text-green-800 mt-2'>{uploadStatus}</div>
 

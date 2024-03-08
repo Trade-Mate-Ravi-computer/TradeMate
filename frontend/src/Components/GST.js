@@ -3,9 +3,11 @@ import axios from 'axios'
 import { NavLink } from 'react-router-dom';
 import LeftSidbar from './LeftSidbar';
 import RightSidebar from './RightSidebar';
+import loder from './loader.gif'
 
 function GST() {
     const currentDate = new Date();
+    const [loading, setLoading] = useState(true)
     const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth() + 1)
     const currentYear = currentDate.getFullYear()
     const [year, setYear] = useState(currentYear)
@@ -85,7 +87,7 @@ function GST() {
         const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/companyByNameEmail`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
-                email:JSON.parse(localStorage.getItem('login')).user
+                email: JSON.parse(localStorage.getItem('login')).user
             },
             {
                 headers: {
@@ -97,6 +99,7 @@ function GST() {
         setCompanyDetails(companyDetail.data)
     }
     const loadSumOfQuart = async () => {
+        setLoading(true)
         try {
             const sumofQuart = await axios.post('https://tradematebackend-production.up.railway.app/sales/quart',
                 quaterMonthFInder(month, year),
@@ -109,15 +112,18 @@ function GST() {
             )
             setQuartSum(sumofQuart.data)
             document.getElementById('compositionGst').innerHTML = `Rs. ${sumofQuart.data * 1 / 100}`
+
         }
         catch (e) {
             if (document.getElementById('compositionGst')) {
                 document.getElementById('compositionGst').innerHTML = "Choose Correct Quarter for Choosen Year"
             }
         }
+        setLoading(false)
     }
 
     const loadSumOfMonth = async () => {
+        setLoading(true)
         try {
             const sumofMonth = await axios.post('https://tradematebackend-production.up.railway.app/sales/monthsum',
                 {
@@ -135,12 +141,14 @@ function GST() {
             )
             setMonthSum(sumofMonth.data)
             document.getElementById('regularGst').innerHTML = `Rs. ${sumofMonth.data * 18 / 100}`;
+
         } catch (e) {
             if (document.getElementById('regularGst')) {
                 document.getElementById('regularGst').innerHTML = "Choose Correct Month for Choosen Year";
             }
 
         }
+        setLoading(false)
     }
 
     const selectValue = () => {
@@ -165,15 +173,17 @@ function GST() {
     }
 
     return (
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center sm:h-[36.35rem]">
             <div className='grid grid-cols-2 sm:grid-cols-4'>
                 <div className="border border-gray-100 hidden sm:flex flex-col mt-5">
                     <LeftSidbar />
                     <RightSidebar />
                 </div>
                 <div className='col-span-3'>
+               
                     <div className='m-2 pl-28 flex sm:hidden'><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-44 sm:w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
                     <div className='text-2xl font-bold text-gray-500 mt-10'>Your Payable GST Details:</div>
+                    
                     {companyDetails.gstType === "Composition" &&
                         <div className='mt-8 sm:flex justify-center flex-col  items-center'>
                             <div className='flex flex-col mx-4 sm:mx-8 mb-4 sm:mb-0 sm:w-1/4'>
@@ -244,8 +254,9 @@ function GST() {
                             </div>
                         }
                     </div>
-
+                    {loading ? <div className='w-full flex justify-center'><img className='' src={loder} alt="" /></div> : ''}
                 </div>
+               
             </div>
         </div>
 

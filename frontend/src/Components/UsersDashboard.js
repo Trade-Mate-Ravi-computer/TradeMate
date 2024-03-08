@@ -6,8 +6,11 @@ import UpdateCompany from './UpdateCompany';
 import crossImage from './cross.png';
 import CreateCOmpany from './CreateCOmpany';
 import loader from './loader.gif'
+import clickEffect from './clickOnButton.wav'
+
 
 function UsersDashboard() {
+   const clickSound= new Audio(clickEffect);
     const [update, setUpdate] = useState(false);
     const [id, setId] = useState(0);
     const [loading, setLoading]=useState(true)
@@ -42,6 +45,7 @@ function UsersDashboard() {
     };
 
     const handleClickOnCompany = (id) => {
+      clickSound.play()
         navigate(`/dashboard/${id}`);
         localStorage.setItem('companyName', JSON.stringify({ companyName: id }));
     };

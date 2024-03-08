@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
+import loder from './loader.gif'
 function AddExpence() {
+    const [loading,setLoading]=useState(false)
     const [expenseDetails, setExpenseDetails] = useState({
         name: '',
         expenseOn: '',
@@ -21,6 +23,7 @@ function AddExpence() {
         })
     }
     const handleOnSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
         try {
             const response = await fetch(`https://tradematebackend-production.up.railway.app/expense/add`, {
@@ -58,6 +61,7 @@ function AddExpence() {
             // Additional error handling if needed
 
         }
+        setLoading(false)
     };
 
     return (
@@ -99,8 +103,8 @@ function AddExpence() {
                             </div>
                         </div>
 
-                        <div>
-                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Expence</button>
+                        <div className='flex justify-center mt-6'>
+                            <button type="submit" className="flex w-[10rem] justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<div><img className='w-6 rounded-full' src={loder} alt="" /></div>:"Add Expence"}</button>
                         </div>
                         <div className='w-full text-center text-green-700 font-bold text-sm ' id='info'></div>
                     </form>

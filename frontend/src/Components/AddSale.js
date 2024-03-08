@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom';
+import loder from './loader.gif'
 
 
 function AddSale() {
+    const [loading,setLoading]=useState(false)
     const [sale, setSale] = useState(0);
     const [customerName,setCustomerName]= useState('')
     const [isOpen, steIsOpen] = useState(false)
@@ -119,6 +121,7 @@ function AddSale() {
 
     }
     const handleOnSubmit = (e) => {
+        setLoading(true)
         e.preventDefault()
         try {
             fetch('https://tradematebackend-production.up.railway.app/sales/addSale', {
@@ -158,6 +161,7 @@ function AddSale() {
                     // document.getElementById('uploadstatus').classList.add('text-red-600')
 
                 }
+                setLoading(false)
             })
         } catch (e) {
             failStatus();
@@ -177,6 +181,7 @@ function AddSale() {
                 </div>
                 <div className='border border-gray-100 justify-center col-span-3' onClick={handleOnClicks} >
                     <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Sale Entry</h1></div>
+                    {/* <div className='w-full flex justify-center h-10 '>{loading?<img className='h-10' src={loder} alt="" />:''}</div> */}
                     <form className="space-y-6 px-4 sm:px-60 py-2" onSubmit={(e) => handleOnSubmit(e)}>
                         <div>
                             <label htmlFor="Item Name" className="block text-sm font-medium leading-6 text-gray-900">Enter Customer's name</label>
@@ -243,7 +248,7 @@ function AddSale() {
                         </div>
 
                         <div>
-                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Sale</button>
+                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<div><img className='w-6 rounded-full' src={loder} alt="" /></div>:"Add Sale"}</button>
                         </div>
                         <div className='w-full text-center text-xl font-bold text-green-800'>{uploadStatus}</div>
                     </form>

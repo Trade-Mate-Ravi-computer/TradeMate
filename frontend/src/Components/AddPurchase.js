@@ -3,7 +3,9 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
+import loder from './loader.gif'
 function AddPurchase() {
+    const [loading,setLoading]=useState(false)
     const [sale, setSale] = useState();
     const [isOpen, steIsOpen] = useState(false)
     const itemNames = JSON.parse(localStorage.getItem('saleDetails'))
@@ -106,6 +108,7 @@ function AddPurchase() {
         });
     };
     const handleOnSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
         try {
             await axios.post('https://tradematebackend-production.up.railway.app/purchase/add',
@@ -122,6 +125,7 @@ function AddPurchase() {
             console.log("Some Error Occurs");
             failStatus();
         }
+        setLoading(false)
     }
     const handleUpdateStatus = () => {
         setUploadStatus('')
@@ -200,8 +204,8 @@ function AddPurchase() {
                                 <input id="amount" name="paidAmmount" type="number" min='0' value={purchaseDetails.paidAmmount} required onChange={(e) => handleOnChangeevent(e)} className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
-                        <div>
-                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >Add Purchase</button>
+                        <div className='flex justify-center'>
+                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" >{loading?<div><img className='w-6 rounded-full' src={loder} alt="" /></div>:"Add Purchase"}</button>
                         </div>
                         <div className='w-full text-center text-xl font-bold text-green-800'>{uploadStatus}</div>
                     </form>

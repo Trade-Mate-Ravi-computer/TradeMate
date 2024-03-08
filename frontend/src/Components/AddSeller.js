@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
+import loder from './loader.gif'
 function AddSeller() {
     const [uploadStatus, setUplaodStatus] = useState("")
+    const [loading,setLoading]=useState(false)
     const [sellerDetails, setSellerDetails] = useState({
         sellerName: '',
         address: '',
@@ -33,6 +35,7 @@ function AddSeller() {
         })
     }
     const handleOnSubmit = async (e) => {
+setLoading(true)
         e.preventDefault();
         try {
             const response = await fetch('https://tradematebackend-production.up.railway.app/seller/add', {
@@ -85,6 +88,7 @@ function AddSeller() {
                 setUplaodStatus("");
             }, 2000);
         }
+        setLoading(false)
     };
 
     return (
@@ -98,6 +102,7 @@ function AddSeller() {
                     <RightSidebar />
                 </div>
                 <div className='border border-gray-100 justify-center col-span-3 w-full '>
+                    <div className='w-full flex justify-center h-10 '>{loading?<img className='h-10' src={loder} alt="" />:''}</div>
                     <div><h1 className='flex justify-center text-3xl font-bold  text-green-600'>Add New seller</h1></div>
                     <form className="space-y-6 m-2 py-2 sm:pl-48" >
                         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>

@@ -3,7 +3,9 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
+import loder from './loader.gif'
 function AddProduct() {
+    const [loading,setLoading]=useState(false)
     useEffect(() => {
         loadUser()
         loadProducts()
@@ -55,6 +57,7 @@ function AddProduct() {
         localStorage.setItem('saleDetails', JSON.stringify(productDetails.data))
     }
     const handleOnSubmit = (e) => {
+        setLoading(true)
         e.preventDefault();
         fetch('https://tradematebackend-production.up.railway.app/stock/add', {
             method: "POST",
@@ -88,6 +91,7 @@ function AddProduct() {
                 // Handle error
                 failStatus()
             });
+            setLoading(false)
     };
 
     const loadUser = () => {
@@ -157,8 +161,8 @@ function AddProduct() {
                                 <input id="producttype" value={itemDetail.gstInPercent} onChange={(e) => handleOnChange(e)} name="gstInPercent" type="number" min="0" required className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
-                        <div>
-                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Product</button>
+                        <div className='flex justify-center mt-6'>
+                            <button type="submit" className="flex w-[10rem] justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<div><img className='w-6 rounded-full' src={loder} alt="" /></div>:"Add Product"}</button>
                         </div>
                         <div className='w-full text-center text-xl font-bold text-green-800'>{uploadStatus}</div>
                     </form>
