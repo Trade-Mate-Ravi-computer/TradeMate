@@ -152,7 +152,7 @@ function ForgotPassword() {
                                     </div>
                                     <div id="errorMsg" className='text-red-600 w-full text-center'></div>
                                     <div className="text-sm flex justify-end">
-                                        <p className='mx-2'>Back to sign in  </p><a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign in</a>
+                                        <p className='mx-2'>Back to  </p><a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign in</a>
                                     </div>
                                 </form>
 
