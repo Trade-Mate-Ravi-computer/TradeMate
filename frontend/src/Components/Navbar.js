@@ -99,7 +99,7 @@ function Navbar(props) {
             </div>
 
             <div className="relative ml-3">
-              <div>
+              <div className='flex'>
                 <button
                   type="button"
                   onClick={handleOnClick}
@@ -119,6 +119,7 @@ function Navbar(props) {
                     ''
                   )}
                 </button>
+               {store?'': <NavLink to="/signin" className='relative bg-blue-300 py-2 px-4 flex border hover:border-blue-300 hover:text-white rounded-xl hover:bg-blue-400 transition-all'>Sign in</NavLink>}
               </div>
             </div>
           </div>

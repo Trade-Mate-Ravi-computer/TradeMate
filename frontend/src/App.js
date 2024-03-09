@@ -30,6 +30,8 @@ import SellerList from './Components/SellerList';
 import CustomerList from './Components/CustomerList';
 import ExpenseList from './Components/ExpenseList';
 import ForgotPassword from './Components/ForgotPassword';
+import LandingPage from './Components/LandingPage';
+import Signin from './Components/Signin';
 
 
 function App() {
@@ -43,10 +45,11 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route exact path="/"  element={stores?<Dashboard/>:<Home />}></Route>
+          <Route exact path="/"  element={stores?<Dashboard/>:<LandingPage />}></Route>
           <Route exact path="/dashboard/:id" element={<Dashboard  />}></Route>
           <Route exact path="/addsale/:companyName" element={<AddSale />} />
           <Route exact path="/addemployee/:companyName" element={<Signup />} />
+          <Route exact path="/signin" element={<Home/>}/>
           <Route exact path="/addcustomer/:companyName" element={<AddCustomer />} />
           <Route exact path="/addpurchase/:companyName" element={<AddPurchase />} />
           <Route exact path="/addexpense" element={<AddExpence />} />
@@ -73,6 +76,7 @@ function App() {
           <Route exact path='/sellers/:companyName' element={<SellerList/>} />
           <Route exact path='/expenselist' element={<ExpenseList/>} />
           <Route exact path='/forgotpassword' element={<ForgotPassword/>} />
+          <Route exact path='/landing' element={<LandingPage/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

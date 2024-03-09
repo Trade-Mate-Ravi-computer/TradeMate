@@ -24,6 +24,9 @@ function Remaining() {
         });
         return sum;
     }
+    const handleClickSendMessage=(sale)=>{
+        console.log('Message Sent to',sale.customerName)
+    }
     const loadSaleDetails = async () => {
         const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
@@ -179,6 +182,7 @@ function Remaining() {
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(saleDetails[i].id, saleDetails[i].customerName)}>Received</NavLink>
+                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to=''>Send Reminder</NavLink>
 
                                         </td>
                                     </tr> : ''
