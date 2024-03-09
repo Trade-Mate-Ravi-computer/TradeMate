@@ -70,7 +70,7 @@ function LandingPage() {
     </div>
     <div className="bg-blue-100 rounded-lg shadow-md p-6 hover:bg-blue-200 transition duration-300">
       <h3 className="font-bold text-lg mb-2 text-blue-800">Get your Daily report</h3>
-      <p className="text-blue-700">Get your daily report pf your business and analyze the profit loass sale purchasea..</p>
+      <p className="text-blue-700">Get your daily report pf your business and analyze the profit loss, sale </p>
     </div>
   </div>
 </div>
