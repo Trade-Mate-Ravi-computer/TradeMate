@@ -182,13 +182,14 @@ function Remaining() {
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(saleDetails[i].id, saleDetails[i].customerName)}>Received</NavLink>
-                                            {/* <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' to=''>Send Reminder</NavLink> */}
+                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all'target='_blank' to={`https://wa.me/918604275934/?text=Hi ${saleDetails[i].customerName},\n This is ${saleDetails[i].companyName}. We hope you're doing well! \n This is a friendly remainder \n We wanted to inform you that you have a remaining balance of  ₹${saleDetails[i].remaining} with us.\n Please pay as soon as possible \n Thank You!\n Best regards,\n ${saleDetails[i].companyName}  `}>Send Reminder</NavLink>
 
                                         </td>
                                     </tr> : ''
                                 );
 
-
+                               
+                                
 
                             }
                             return items;
