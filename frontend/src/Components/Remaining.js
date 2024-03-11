@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
+import whats from './whats.png'
 
 function Remaining() {
     const [saleDetails, setSaleDetails] = useState([])
@@ -12,6 +13,7 @@ function Remaining() {
     const [itemName, setItemName] = useState('')
     const [itemId, setItemId] = useState(0)
     const [loading, setLoading] = useState(true)
+    const navigate =useNavigate();
 
     const remainings = []
     useEffect(() => {
@@ -24,8 +26,8 @@ function Remaining() {
         });
         return sum;
     }
-    const handleClickSendMessage=(sale)=>{
-        console.log('Message Sent to',sale.customerName)
+    const handleClickSendMessage = (sale) => {
+        console.log('Message Sent to', sale.customerName)
     }
     const loadSaleDetails = async () => {
         const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
@@ -53,20 +55,24 @@ function Remaining() {
         setUpdate(false)
         loadSaleDetails()
     }
+    const sendWhastapp =(e)=>{
+        e.preventDefault()
+        navigate('https://wa.me/6393703051')
+    }
     return (
         <div className=' sm:px-10 h-[60rem]'>
             <div className='w-full font-bold text-3xl text-green-600 underline text-center'>Remaing Details</div>
             <div className="w-full  flex sm:justify-between flex-col sm:flex-row pr-20 items-center">
                 <div className='m-2 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
-                 <div className='m-2 pl-28 '>
+                <div className='m-2 pl-28 '>
                     <span className='mr-4 font-semibold text-md'>Search By Name</span>
                     <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
                 </div>
 
             </div>
             {update && (
-                            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
-                        )}
+                <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
+            )}
             {/* UpdateSale component */}
             {update &&
                 <div className="fixed flex justify-center top-40 left-1/2 bg-white border border-black shadow-md rounded-md z-50">
@@ -182,20 +188,19 @@ function Remaining() {
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(saleDetails[i].id, saleDetails[i].customerName)}>Received</NavLink>
-                                            <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all'target='_blank' to={`https://wa.me/918604275934/?text=Hi ${saleDetails[i].customerName},\n This is ${saleDetails[i].companyName}. We hope you're doing well! \n This is a friendly remainder \n We wanted to inform you that you have a remaining balance of  ₹${saleDetails[i].remaining} with us.\n Please pay as soon as possible \n Thank You!\n Best regards,\n ${saleDetails[i].companyName}  `}>Send Reminder</NavLink>
-
+                                            <NavLink target='_blank' className='ml-1 border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`https://wa.me/6393703051/?text=Hi ${saleDetails[i].customerName},\n This is ${saleDetails[i].companyName}. We hope you're doing well! \n This is a friendly remainder \n We wanted to inform you that you have a remaining balance of  ₹${saleDetails[i].remaining} with us.\n Please pay as soon as possible \n Thank You!\n Best regards,\n ${saleDetails[i].companyName}  `}>Whatsapp</NavLink>
                                         </td>
                                     </tr> : ''
                                 );
 
-                               
-                                
+
+                                // ><img className='w-8 rounded-full hover:shadow-stone-50' src={whats} />
 
                             }
                             return items;
 
                         })()}
-                      
+
                     </tbody>
                 </table>
                 <div className='w-full flex justify-center'> {
