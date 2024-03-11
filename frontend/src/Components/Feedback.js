@@ -27,7 +27,7 @@ const Feedback = () => {
     const handleOnClick = async (e) => {
         setInfo(true)
         e.preventDefault()
-        const response = await axios.post('http://localhost:8080/sales/feedback', feedback, {
+        const response = await axios.post('https://tradematebackend-production.up.railway.app/sales/feedback', feedback, {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
             }
