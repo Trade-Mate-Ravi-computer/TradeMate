@@ -71,7 +71,7 @@ function Remaining() {
                 </div>
 
             </div>
-            <div className='text-red-600 text-center pl-28 font-semibold'><span className='bg-red-600 text-white rounded-xl p-2'>!Importent to Send whatsapp remainder please use Your samrt phone</span> </div>
+            <div className='text-red-600 text-center pl-28 font-semibold hidden sm:block'><span className='bg-red-600 text-white rounded-xl p-2'>!Importent to Send whatsapp remainder please use Your samrt phone</span> </div>
             {update && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
             )}
