@@ -64,12 +64,14 @@ function Remaining() {
             <div className='w-full font-bold text-3xl text-green-600 underline text-center'>Remaing Details</div>
             <div className="w-full  flex sm:justify-between flex-col sm:flex-row pr-20 items-center">
                 <div className='m-2 pl-28 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
+            
                 <div className='m-2 pl-28 '>
                     <span className='mr-4 font-semibold text-md'>Search By Name</span>
                     <input type='text' className='border border-blue-600 rounded-md m-1 p-1' placeholder='Enter Customer Name' value={shortData} onChange={(e) => shortEvent(e)}></input>
                 </div>
 
             </div>
+            <div className='text-red-600 text-center pl-28 font-semibold'><span className='bg-red-600 text-white rounded-xl p-2'>!Importent to Send whatsapp remainder please use Your samrt phone</span> </div>
             {update && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" onClick={handleOnclickBody}></div>
             )}
