@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NavLink, json } from 'react-router-dom';
 import loder from './loader.gif'
 function MonthlyReport() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [currentMonthData, setCurrentMonthData] = useState({});
     const [previousMonthData, setPreviousMonthData] = useState({});
     const [dailyData, setDailyData] = useState({
@@ -106,7 +106,7 @@ function MonthlyReport() {
     const loadMonthlyData = async () => {
         setLoading(true)
         try {
-            const data = await axios.post('https://tradematebackend-production.up.railway.app/sales/dailyReport', {
+            const data = await axios.post('http://localhost:8080/sales/dailyReport', {
                 day: date.getDate(),
                 month: currenMonth,
                 year: date.getFullYear(),
