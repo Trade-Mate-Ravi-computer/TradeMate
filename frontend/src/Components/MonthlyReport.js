@@ -106,7 +106,7 @@ function MonthlyReport() {
     const loadMonthlyData = async () => {
         setLoading(true)
         try {
-            const data = await axios.post('http://localhost:8080/sales/dailyReport', {
+            const data = await axios.post('https://tradematebackend-production.up.railway.app/sales/dailyReport', {
                 day: date.getDate(),
                 month: currenMonth,
                 year: date.getFullYear(),
