@@ -137,7 +137,7 @@ function AddSale() {
                         item: {
                             itemName: ""
                         },
-                        itemName: '',
+                        itemName:'',
                         quantity: 0,
                         date: '',
                         customerName: "",

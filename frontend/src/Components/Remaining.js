@@ -118,13 +118,13 @@ function Remaining() {
                     <tbody className='border border-x-2 my-1'>
                         {(() => {
                             const items = []
-                            let j = 0;
-                            let k = 0
+                            let j = 1;
+                            let k = 1;
                             for (let i = saleDetails.length - 1; i >= 0; i--) {
                                 if (i === 0 && loading !== false) {
                                     setLoading(false)
                                 }
-                                if (saleDetails[i].remaining > 0) {
+                                if (saleDetails[i].remaining >0 && saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user ) {
                                     k++
                                     if (shortData && saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase())) {
                                         remainings.push(saleDetails[i].remaining)
@@ -132,10 +132,10 @@ function Remaining() {
                                     }
                                 }
 
-                                items.push(saleDetails[i].remaining > 0 ? shortData ? !saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
+                                items.push(saleDetails[i].remaining > 0 && saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user ? shortData ? !saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
                                     <tr className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {shortData ? j : k}
+                                            {saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user?j++:j}
                                         </th>
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {saleDetails[i].customerName.length > 25 ? saleDetails[i].customerName.slice(0, 22) + "..." : saleDetails[i].customerName}
@@ -166,7 +166,7 @@ function Remaining() {
                                     :
                                     <tr className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
-                                            {shortData ? j : k}
+                                            {saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user?j++:j}
                                         </th>
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {saleDetails[i].customerName.length > 25 ? saleDetails[i].customerName.slice(0, 22) + "..." : saleDetails[i].customerName}

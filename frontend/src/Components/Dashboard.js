@@ -16,7 +16,8 @@ function Dashboard() {
     const loadProducts = async () => {
         const productDetails = await axios.post(
             "https://tradematebackend-production.up.railway.app/stock/all",
-            { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
+            { companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+        email:JSON.parse(localStorage.getItem('login')).user },
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
