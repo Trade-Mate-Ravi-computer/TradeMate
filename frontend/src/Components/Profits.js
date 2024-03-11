@@ -25,14 +25,11 @@ function Profits() {
     function changeNumberToMonth(currentMonth) {
         let month = "";
         switch (currentMonth) {
-            case 0:
-                month = "January";
-                break;
             case 1:
-                month = "February";
+                month = "January";
                 break;
             case 2:
-                month = "January";
+                month = "February";
                 break;
             case 3:
                 month = "March";

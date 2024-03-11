@@ -32,6 +32,8 @@ import ExpenseList from './Components/ExpenseList';
 import ForgotPassword from './Components/ForgotPassword';
 import LandingPage from './Components/LandingPage';
 import Signin from './Components/Signin';
+import MonthlyReport from './Components/MonthlyReport';
+import Feedback from './Components/Feedback';
 
 
 function App() {
@@ -77,6 +79,8 @@ function App() {
           <Route exact path='/expenselist' element={<ExpenseList/>} />
           <Route exact path='/forgotpassword' element={<ForgotPassword/>} />
           <Route exact path='/landing' element={<LandingPage/>} />
+          <Route exact path='/report' element={<MonthlyReport/>}/>\
+          <Route exact path='/feedback' element={<Feedback/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

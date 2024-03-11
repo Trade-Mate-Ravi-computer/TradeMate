@@ -12,8 +12,9 @@ function RightSidebar() {
                 <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' to={`/purchase/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>Purchase List</NavLink>
                 <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' to={`/customers/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>Customer List</NavLink>
                 <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' to={`/sellers/${JSON.parse(localStorage.getItem('companyName')).companyName}`}>Seller List</NavLink>
-                <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' >Help</NavLink>
-                <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100'>feedback</NavLink>
+                <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' to="/report">Daily/Monthly Report</NavLink>
+                {/* <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' >Help</NavLink> */}
+                <NavLink className='border border-blue-100 sm:w-full w-80 justify-center flex hover:border-blue-300 hover:font-semibold hover:bg-blue-100' to="/feedback">feedback</NavLink>
             </div>
         </div>
     )
