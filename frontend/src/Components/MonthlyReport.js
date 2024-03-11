@@ -180,7 +180,7 @@ function MonthlyReport() {
         <div className="container mx-auto p-4">
             <div className='m-3 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 w-44  sm:w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
             <div>
-                <div className='w-full text-center text-2xl font-bold underline'>Daily Report</div>
+                <div className='w-full text-center text-2xl font-bold underline'>Daily Report (Today)</div>
                 <div className="bg-white rounded-lg shadow p-4">
                     <h2 className="text-xl font-semibold mb-2">Financial Summary</h2>
                    {loading?<div className='flex justify-center'><img src={loder} alt="" /></div>: <div className="grid grid-cols-2 gap-2">
@@ -204,7 +204,7 @@ function MonthlyReport() {
                     </div>}
                 </div>
             </div>
-            <h1 className="text-3xl font-semibold mb-4 text-center underline mt-2">Monthly Business Report - {changeNumberToMonth(currenMonth)} {date.getFullYear()}</h1>
+            <h1 className="text-3xl font-semibold mb-4 text-center underline mt-2">Monthly Business Report - {changeNumberToMonth(currenMonth-1)} {date.getFullYear()}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg shadow p-4">
                     <h2 className="text-xl font-semibold mb-2">Financial Summary</h2>
