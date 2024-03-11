@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NavLink, json } from 'react-router-dom';
 import loder from './loader.gif'
 function MonthlyReport() {
-    const [loading,setLoading] =useState(true)
+    const [loading, setLoading] = useState(true)
     const [currentMonthData, setCurrentMonthData] = useState({});
     const [previousMonthData, setPreviousMonthData] = useState({});
     const [dailyData, setDailyData] = useState({
@@ -113,14 +113,14 @@ function MonthlyReport() {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
             },
-            {
-                headers: {
-                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
-                }
-            });
-    
+                {
+                    headers: {
+                        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
+                    }
+                });
+
             // Process the response data here
-          setDailyData(data.data)
+            setDailyData(data.data)
         } catch (error) {
             // Handle error
             console.error('Error:', error.message);
@@ -129,7 +129,7 @@ function MonthlyReport() {
         }
         setLoading(false)
     }
-    
+
 
 
     const loadData = async () => {
@@ -176,6 +176,7 @@ function MonthlyReport() {
             console.error('Error:', error);
         }
     }
+    console.log(customerList.topItemsModel.topItemModelList.length)
     return (
         <div className="container mx-auto p-4">
             <div className='m-3 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 w-44  sm:w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
@@ -183,8 +184,8 @@ function MonthlyReport() {
                 <div className='w-full text-center text-2xl font-bold underline'>Daily Report (Today)</div>
                 <div className="bg-white rounded-lg shadow p-4">
                     <h2 className="text-xl font-semibold mb-2">Financial Summary</h2>
-                   {loading?<div className='flex justify-center'><img src={loder} alt="" /></div>: <div className="grid grid-cols-2 gap-2">
-                    
+                    {loading ? <div className='flex justify-center'><img src={loder} alt="" /></div> : <div className="grid grid-cols-2 gap-2">
+
                         <div>
                             <p className="text-gray-600">Total Revenue:</p>
                             <p className="text-gray-900">₹{dailyData.totalRevenue}</p>
@@ -204,7 +205,7 @@ function MonthlyReport() {
                     </div>}
                 </div>
             </div>
-            <h1 className="text-3xl font-semibold mb-4 text-center underline mt-2">Monthly Business Report - {changeNumberToMonth(currenMonth-1)} {date.getFullYear()}</h1>
+            <h1 className="text-3xl font-semibold mb-4 text-center underline mt-2">Monthly Business Report - {changeNumberToMonth(currenMonth - 1)} {date.getFullYear()}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg shadow p-4">
                     <h2 className="text-xl font-semibold mb-2">Financial Summary</h2>
@@ -250,31 +251,34 @@ function MonthlyReport() {
                 </div>
             </div>
             <div className="mt-4">
-                <h2 className="text-xl font-semibold mb-2">Sales Performance</h2>
+
                 <div className="grid grid-cols-2 gap-4">
                     <div className="bg-white rounded-lg shadow p-4">
-                        <p className="text-gray-600">1. {customerList.topItemsModel.topItemModelList[0].itemName}: {customerList.topItemsModel.topItemModelList[0].quantity} pieces</p>
-                        <p className="text-gray-600">2. {customerList.topItemsModel.topItemModelList[1].itemName}: {customerList.topItemsModel.topItemModelList[1].quantity} pieces</p>
+                    <h2 className="text-xl font-semibold mb-2">Sales Performance(Top selling product)</h2>
+                        {
+                            customerList.topItemsModel.topItemModelList.map((item, index) => (
+                                <p key={index} className="text-gray-600">
+                                    {index + 1}. {item.itemName}: {item.quantity} pieces
+                                </p>
+                            ))
+                        }
                     </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <p className="text-gray-600">3. {customerList.topItemsModel.topItemModelList[2].itemName}: {customerList.topItemsModel.topItemModelList[2].quantity} pieces</p>
-                        <p className="text-gray-600">4. {customerList.topItemsModel.topItemModelList[3].itemName}: {customerList.topItemsModel.topItemModelList[3].quantity} pieces</p>
+                    <div className=" bg-white rounded-lg shadow p-4">
+                        <h2 className="text-xl font-semibold mb-2">Top Customers</h2>
+                        <ul className="">
+                            {
+                                customerList.topCustomersModel.customerSaleModels.map((customer, index) => (
+                                    <li key={index} className="text-gray-600 list-none">{index + 1}. {customer.customerName} : ₹{customer.totalSale}</li>
+                                ))
+                            }
+
+
+
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div className="mt-4">
-                <h2 className="text-xl font-semibold mb-2">Top Customers</h2>
-                <ul className="list-disc list-inside">
-                    {
-                        customerList.topCustomersModel.customerSaleModels.map((customer, index) => (
-                            <li key={index} className="text-gray-600 list-none">{index + 1}. {customer.customerName} : ₹{customer.totalSale}</li>
-                        ))
-                    }
 
-
-
-                </ul>
-            </div>
         </div>
     );
 }
