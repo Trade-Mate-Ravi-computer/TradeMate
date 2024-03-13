@@ -6,7 +6,7 @@ import loder from './loader.gif'
 
 function Signin() {
   const navigate = useNavigate();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
   const [loginDetails, setLoginDetails] = useState({
     email: '',
     password: '',
@@ -97,13 +97,13 @@ function Signin() {
       document.getElementById('errorInfo').innerHTML = "! Server Not responding try again later";
       setLoading(false)
     });
-    
+
   };
 
 
   return (
     <div className='mt-2 pb-3'>
-    
+
       <form className="space-y-6 sm:w-full" onSubmit={(e) => handleOnClick(e)}>
         <div>
           <label htmlFor="email" className="block text-sm font-medium leading-6 text-blue-900">Email address</label>
@@ -125,7 +125,7 @@ function Signin() {
         </div>
 
         <div>
-          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<img className='h-6 rounded-full' src={loder} alt="" />:"Sign in"}</button>
+          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <img className='h-6 rounded-full' src={loder} alt="" /> : "Sign in"}</button>
         </div>
         <div className="text-sm flex justify-end">
           {/* <p className='mx-2'>Don't have an account? </p><a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500 underline underline-offset-4">Sign up</a> */}

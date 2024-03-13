@@ -133,7 +133,7 @@ function Remaining() {
                                 }
 
                                 items.push(saleDetails[i].remaining > 0 && saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user ? shortData ? !saleDetails[i].customerName.toLowerCase().includes(shortData.toLowerCase()) ? '' :
-                                    <tr className="border-b border-blue-200 dark:border-blue-700">
+                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user?j++:j}
                                         </th>
@@ -164,7 +164,7 @@ function Remaining() {
 
 
                                     :
-                                    <tr className="border-b border-blue-200 dark:border-blue-700">
+                                    <tr key={i} className="border-b border-blue-200 dark:border-blue-700">
                                         <th scope="row" className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             {saleDetails[i].email===JSON.parse(localStorage.getItem('login')).user?j++:j}
                                         </th>
