@@ -75,7 +75,8 @@ function Invoice() {
             const customerDetails = await axios.post(`https://tradematebackend-production.up.railway.app/customer/bynamecompany`,
                 {
                     customerName: invoiceDetail.data[0].customerName,
-                    companyName: JSON.parse(localStorage.getItem('companyName')).companyName
+                    companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+                    email: JSON.parse(localStorage.getItem('login')).user
                 },
                 {
                     headers: {
