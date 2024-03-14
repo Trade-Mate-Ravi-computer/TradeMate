@@ -190,7 +190,7 @@ function AddSale() {
 
                                 <ul style={isOpenCust ? { maxHeight: 300 } : null} className='overflow-y-auto'>
                                     {isOpenCust && customers.map((customer, index) => (
-                                      (customer.companyName===JSON.parse(localStorage.getItem('companyName')).companyName)?  customer.customerName.toLowerCase().includes(customerName ? customerName.toLowerCase() : '') ? <button key={index} className='list-none border border-x-2 w-full flex justify-center hover:bg-blue-200' onClick={() => handlOnClickCustomerName(customer.customerName)}>
+                                      (customer.companyName===JSON.parse(localStorage.getItem('companyName')).companyName && customer.email===JSON.parse(localStorage.getItem('login')).user)?  customer.customerName.toLowerCase().includes(customerName ? customerName.toLowerCase() : '') ? <button key={index} className='list-none border border-x-2 w-full flex justify-center hover:bg-blue-200' onClick={() => handlOnClickCustomerName(customer.customerName)}>
                                       {customer.customerName}
                                   </button> : '':''
                                     ))}
@@ -215,9 +215,9 @@ function AddSale() {
 
                                 <ul style={isOpen ? { maxHeight: 300 } : null} className='overflow-y-auto'>
                                     {isOpen && itemNames.map((item, index) => (
-                                        item.itemName.toLowerCase().includes(sale ? sale.toLowerCase() : '') ? <button key={index} className='list-none border border-x-2 w-full flex justify-center hover:bg-blue-200' onClick={() => handlOnClickItemName(item.itemName)}>
-                                            {item.itemName}
-                                        </button> : ''
+                                       (item.email===JSON.parse(localStorage.getItem('login')).user)? item.itemName.toLowerCase().includes(sale ? sale.toLowerCase() : '') ? <button key={index} className='list-none border border-x-2 w-full flex justify-center hover:bg-blue-200' onClick={() => handlOnClickItemName(item.itemName)}>
+                                       {item.itemName}
+                                   </button> : '':''
                                     ))}
                                 </ul>
                             </div>
