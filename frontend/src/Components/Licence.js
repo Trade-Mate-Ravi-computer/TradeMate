@@ -12,7 +12,7 @@ function Licence() {
   const [days, setDays] = useState(30)
   const updatePaymentOnServer = async (orderId, status,days) => {
    try{
-    const response = await axios.post('http://localhost:8080/auth/updateOrder', {
+    const response = await axios.post('https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/updateOrder', {
       order_id: orderId,
       status: status,
       days:days,

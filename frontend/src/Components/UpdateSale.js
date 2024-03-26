@@ -19,7 +19,7 @@ function UpdateSale(props) {
     const { id } = useParams()
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/editsale/${props.id}`, {
+        fetch(`https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/editsale/${props.id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

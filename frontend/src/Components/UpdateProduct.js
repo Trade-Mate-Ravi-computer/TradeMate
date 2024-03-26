@@ -23,7 +23,7 @@ function UpdateProduct(props) {
     // console.log(id)
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/stock/updateStock`, {
+        fetch(`https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/stock/updateStock`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

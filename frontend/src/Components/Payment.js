@@ -11,7 +11,7 @@ function Payment() {
     const handleOnSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/create_order', {
+        axios.post('https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/create_order', {
             amount: amount,
             info: "Order_request"
         })

@@ -56,7 +56,7 @@ function AddSale() {
 
     const loadUser = () => {
         try {
-            fetch('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail', {
+            fetch('https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail', {
                 "method": "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ function AddSale() {
         setLoading(true)
         e.preventDefault()
         try {
-            fetch('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/addSale', {
+            fetch('https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/addSale', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

@@ -38,7 +38,7 @@ function AddSeller() {
 setLoading(true)
         e.preventDefault();
         try {
-            const response = await fetch('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/seller/add', {
+            const response = await fetch('https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/seller/add', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

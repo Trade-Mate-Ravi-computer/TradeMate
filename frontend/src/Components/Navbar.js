@@ -25,7 +25,7 @@ function Navbar(props) {
   };
   const loadCompany = () => {
     try {
-        fetch(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
+        fetch(`https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
             method: "GET",
             headers: { // Corrected typo: 'headers' instead of 'header'
               'Content-Type': 'application/json',

@@ -29,7 +29,7 @@ function Invoice() {
     }, [])
     const loadCompanyDetails = async () => {
         try {
-            const companyDetail = await axios.post(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/company/companyByNameEmail`,
+            const companyDetail = await axios.post(`https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/company/companyByNameEmail`,
              {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email:JSON.parse(localStorage.getItem('login')).user
@@ -49,7 +49,7 @@ function Invoice() {
 
     }
     const loadInvoiceDetails = async () => {
-        const invoiceDetail = await axios.post(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/byid/${id}`,
+        const invoiceDetail = await axios.post(`https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/byid/${id}`,
             {},
             {
                 headers: {
@@ -72,7 +72,7 @@ function Invoice() {
         setTotalGst(gst)
         
         const loadCustomer = async () => {
-            const customerDetails = await axios.post(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/customer/bynamecompany`,
+            const customerDetails = await axios.post(`https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/customer/bynamecompany`,
                 {
                     customerName: invoiceDetail.data[0].customerName,
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
