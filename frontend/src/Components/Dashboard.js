@@ -25,7 +25,7 @@ function Dashboard() {
         try {
             // Make the Axios POST request
             const loadedUser = await axios.get(
-                `https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,
+                `http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -67,7 +67,7 @@ function Dashboard() {
 
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/stock/all",
+            "http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/stock/all",
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -82,7 +82,7 @@ function Dashboard() {
     };
     const loadCustomers = async () => {
         const customers = await axios.get(
-            "https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/customer/all",
+            "http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/customer/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -93,7 +93,7 @@ function Dashboard() {
     };
     const loadSeller = async () => {
         const sellers = await axios.get(
-            "https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/seller/all",
+            "http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/seller/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`

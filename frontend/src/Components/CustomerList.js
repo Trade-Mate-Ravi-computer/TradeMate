@@ -24,7 +24,7 @@ function CustomerList() {
         return sum;
     }
     const loadcustomerDetails = async () => {
-        const saleDetail = await axios.get("https://ec2-34-230-10-177.compute-1.amazonaws.com:8080/customer/all",
+        const saleDetail = await axios.get("http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/customer/all",
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
