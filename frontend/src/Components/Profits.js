@@ -76,7 +76,7 @@ function Profits() {
     const loadData = async () => {
         try {
             const profits = await axios.post(
-                `https://tradematebackend-production.up.railway.app/sales/profit`,
+                `http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/profit`,
                 dateState,
                 {
                     headers: {
@@ -93,7 +93,7 @@ function Profits() {
     const loadYearData = async () => {
         try {
             const response = await axios.post(
-                `https://tradematebackend-production.up.railway.app/sales/byyear`,
+                `http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/byyear`,
                 dateState,
                 {
                     headers: {
@@ -110,7 +110,7 @@ function Profits() {
     const loadAllReport = async () => {
         try {
             const response = await axios.post(
-                'https://tradematebackend-production.up.railway.app/sales/totalsum',
+                'http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/totalsum',
                 dateState,
                 {
                     headers: {

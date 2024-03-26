@@ -47,7 +47,7 @@ function AddProduct() {
         }))
     }
     const loadProducts = async () => {
-        const productDetails = await axios.post("https://tradematebackend-production.up.railway.app/stock/all",
+        const productDetails = await axios.post("http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/stock/all",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -59,7 +59,7 @@ function AddProduct() {
     const handleOnSubmit = (e) => {
         setLoading(true)
         e.preventDefault();
-        fetch('https://tradematebackend-production.up.railway.app/stock/add', {
+        fetch('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/stock/add', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function AddProduct() {
     };
 
     const loadUser = () => {
-        fetch(`https://tradematebackend-production.up.railway.app/user/byemail`, {
+        fetch(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail`, {
             "method": "POST",
             headers: {
                 'Content-Type': 'application/json',

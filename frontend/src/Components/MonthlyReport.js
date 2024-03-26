@@ -106,7 +106,7 @@ function MonthlyReport() {
     const loadMonthlyData = async () => {
         setLoading(true)
         try {
-            const data = await axios.post('https://tradematebackend-production.up.railway.app/sales/dailyReport', {
+            const data = await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/dailyReport', {
                 day: date.getDate(),
                 month: currenMonth,
                 year: date.getFullYear(),
@@ -135,7 +135,7 @@ function MonthlyReport() {
     const loadData = async () => {
         try {
 
-            const data = await axios.post('https://tradematebackend-production.up.railway.app/sales/monthlyReport', {
+            const data = await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/monthlyReport', {
                 month: currenMonth,
                 year: date.getFullYear(),
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
@@ -158,7 +158,7 @@ function MonthlyReport() {
     const loadPreviouseData = async () => {
         try {
 
-            const data = await axios.post('https://tradematebackend-production.up.railway.app/sales/monthlyReport', {
+            const data = await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/monthlyReport', {
                 month: currenMonth - 1,
                 year: date.getFullYear(),
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,

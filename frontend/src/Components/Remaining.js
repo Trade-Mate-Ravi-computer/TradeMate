@@ -30,7 +30,7 @@ function Remaining() {
         console.log('Message Sent to', sale.customerName)
     }
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
+        const saleDetail = await axios.post("http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/allsaledetails",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -190,7 +190,7 @@ function Remaining() {
 
                                         <td className={` px-6 py-4 font-medium ${saleDetails[i].remaining > 0 ? 'text-white' : 'text-green-600'} ${saleDetails[i].remaining > 0 ? 'bg-red-600' : 'bg-white'} text-center`}>
                                             <NavLink className='border border-x-2 py-2 px-4 rounded-xl bg-red-300 hover:bg-green-600 hover:text-white transition-all' onClick={() => handleOnClickUpdate(saleDetails[i].id, saleDetails[i].customerName)}>Received</NavLink>
-                                            <NavLink target='_blank' className='ml-1 border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`https://wa.me/91${saleDetails[i].customerMobile}/?text=Hi ${saleDetails[i].customerName},\n This is ${saleDetails[i].companyName}. We hope you're doing well! \n This is a friendly remainder \n We wanted to inform you that you have a remaining balance of  ₹${saleDetails[i].remaining} with us.\n Please pay as soon as possible \n Thank You!\n Best regards,\n ${saleDetails[i].companyName}  `}>Whatsapp</NavLink>
+                                            <NavLink target='_blank' className='ml-1 border border-x-2 py-2 px-4 rounded-xl  bg-red-300 hover:bg-green-600 hover:text-white transition-all' to={`https://wa.me/91${saleDetails[i].customer.mobile}/?text=Hi ${saleDetails[i].customerName},\n This is ${saleDetails[i].companyName}. We hope you're doing well! \n This is a friendly remainder \n We wanted to inform you that you have a remaining balance of  ₹${saleDetails[i].remaining} with us.\n Please pay as soon as possible \n Thank You!\n Best regards,\n ${saleDetails[i].companyName}  `}>Whatsapp</NavLink>
                                         </td>
                                     </tr> : ''
                                 );

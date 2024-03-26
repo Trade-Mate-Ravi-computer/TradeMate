@@ -19,7 +19,7 @@ function Contact() {
         setLoading(true)
         e.preventDefault()
         try {
-            const contactResponse = await axios.post('https://tradematebackend-production.up.railway.app/auth/contact', contactInfo)
+            const contactResponse = await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/contact', contactInfo)
             document.getElementById('submitInfo').innerHTML = contactResponse.data
             document.getElementById('submitInfo').classList.remove("text-red-600")
             document.getElementById('submitInfo').classList.add("text-green-600")

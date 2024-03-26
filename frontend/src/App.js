@@ -34,6 +34,8 @@ import LandingPage from './Components/LandingPage';
 import Signin from './Components/Signin';
 import MonthlyReport from './Components/MonthlyReport';
 import Feedback from './Components/Feedback';
+import Licence from './Components/Licence';
+import Payment from './Components/Payment';
 
 
 function App() {
@@ -81,6 +83,8 @@ function App() {
           <Route exact path='/landing' element={<LandingPage/>} />
           <Route exact path='/report' element={<MonthlyReport/>}/>\
           <Route exact path='/feedback' element={<Feedback/>}/>
+          <Route exact path='/licence' element={<Licence/>}/>
+          <Route exact path='/payment' element={<Payment/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

@@ -25,7 +25,7 @@ function SellerList() {
         return sum;
     }
     const loadsellerDetails = async () => {
-        const saleDetail = await axios.get("https://tradematebackend-production.up.railway.app/seller/all",
+        const saleDetail = await axios.get("http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/seller/all",
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`

@@ -15,12 +15,12 @@ function LandingPage() {
 
       <section className="p-4 grid sm:grid-cols-2 grid-cols-1">
       <div className=''>
-          <div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <h1 class="text-3xl font-semibold mb-4">Introducing Trademate: Your Business Companion</h1>
-            <p class="text-gray-600 mb-6">Simplify your business tasks and take control with Trademate.</p>
+          <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+            <h1 className="text-3xl font-semibold mb-4">Introducing Trademate: Your Business Companion</h1>
+            <p className="text-gray-600 mb-6">Simplify your business tasks and take control with Trademate.</p>
 
-            <h2 class="text-xl font-semibold mb-2">Key Features:</h2>
-            <ul class="list-disc pl-6 mb-6">
+            <h2 className="text-xl font-semibold mb-2">Key Features:</h2>
+            <ul className="list-disc pl-6 mb-6">
               <li className='list-none'>📈 Sales Tracking: Monitor sales transactions and customer details.</li>
               <li className='list-none'>📦 Purchase Management: Organize purchases and track inventory.</li>
               <li className='list-none'>💸 Expense Tracking: Categorize and manage expenses.</li>
@@ -29,15 +29,15 @@ function LandingPage() {
               <li className='list-none'>📦 Stock Management: Optimize inventory levels.</li>
             </ul>
 
-            <h2 class="text-xl font-semibold mb-2">Why Choose Trademate?</h2>
-            <ul class="list-disc pl-6 mb-6">
+            <h2 className="text-xl font-semibold mb-2">Why Choose Trademate?</h2>
+            <ul className="list-disc pl-6 mb-6">
               <li className='list-none'>🚀 User-Friendly: Clean and simple interface.</li>
               <li className='list-none'>⏱️ Efficient Workflow: Quick data entry and automation.</li>
               <li className='list-none'>🔒 Secure: Encrypted data protection.</li>
               <li className='list-none'>💰 Affordable: Competitive pricing plans.</li>
             </ul>
 
-            <p class="text-gray-600">Visit <a href="https://www.trademate.com" class="text-blue-500 hover:underline">Trademate</a> and take your business to new heights!</p>
+            <p className="text-gray-600">Visit <a href="https://www.trademate.com" className="text-blue-500 hover:underline">Trademate</a> and take your business to new heights!</p>
           </div>
         </div>
         <div className='max-w-3xl mx-auto p-6 rounded-lg shadow-md ml-1  bg-blue-400'>

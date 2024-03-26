@@ -26,7 +26,7 @@ function CreateCOmpany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('https://tradematebackend-production.up.railway.app/company/add',
+        await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/company/add',
             formData,
             {
                 headers: {

@@ -27,7 +27,7 @@ function GST() {
     }, [])
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.post(`https://tradematebackend-production.up.railway.app/sales/date`,
+            const minYearValue = await axios.post(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/date`,
                 {
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                     email: JSON.parse(localStorage.getItem('login')).user
@@ -84,7 +84,7 @@ function GST() {
 
     }
     const loadCompanyDetail = async () => {
-        const companyDetail = await axios.post(`https://tradematebackend-production.up.railway.app/company/companyByNameEmail`,
+        const companyDetail = await axios.post(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/company/companyByNameEmail`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -101,7 +101,7 @@ function GST() {
     const loadSumOfQuart = async () => {
         setLoading(true)
         try {
-            const sumofQuart = await axios.post('https://tradematebackend-production.up.railway.app/sales/quart',
+            const sumofQuart = await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/quart',
                 quaterMonthFInder(month, year),
                 {
                     headers: {
@@ -125,7 +125,7 @@ function GST() {
     const loadSumOfMonth = async () => {
         setLoading(true)
         try {
-            const sumofMonth = await axios.post('https://tradematebackend-production.up.railway.app/sales/monthsum',
+            const sumofMonth = await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/monthsum',
                 {
                     month: regMonth,
                     year: parseInt(year),

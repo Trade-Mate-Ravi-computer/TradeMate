@@ -25,7 +25,7 @@ function Navbar(props) {
   };
   const loadCompany = () => {
     try {
-        fetch(`https://tradematebackend-production.up.railway.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
+        fetch(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
             method: "GET",
             headers: { // Corrected typo: 'headers' instead of 'header'
               'Content-Type': 'application/json',
@@ -92,6 +92,12 @@ function Navbar(props) {
                     className="text-blue-500 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     About
+                  </NavLink>
+                  <NavLink
+                    to="/licence"
+                    className="text-blue-500 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  >
+                    Pricing
                   </NavLink>
                 </div>
               </div>

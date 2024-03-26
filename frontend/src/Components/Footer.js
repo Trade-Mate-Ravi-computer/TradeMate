@@ -30,7 +30,7 @@ export default function Footer() {
               </svg>
             </a>
             <a className="ml-3 text-blue-500" href='https://www.youtube.com/channel/UC6tRrpNI2Rdct_zAVJMfKwQ' target='_blank'>
-              <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+              <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22 3.51c-.26-.97-1.03-1.74-2-2C18.21 1 12 1 12 1S5.79 1 4 1.51c-.97.26-1.74 1.03-2 2C1 5.79 1 12 1 12s0 6.21.51 7.99c.26.97 1.03 1.74 2 2C5.79 23 12 23 12 23s6.21 0 7.99-.51c.97-.26 1.74-1.03 2-2C23 18.21 23 12 23 12s0-6.21-.51-7.99zM10 15V9l5.2 3-5.2 3z" />
               </svg>
 

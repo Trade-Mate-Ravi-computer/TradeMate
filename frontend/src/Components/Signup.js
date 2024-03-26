@@ -15,7 +15,7 @@ function Signup() {
         confirmPassword: ''
     })
     const emailContent = {
-        message: `https://tradematebackend-production.up.railway.app/auth/setverify/${singupDetails.email}`,
+        message: `http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/setverify/${singupDetails.email}`,
         email: singupDetails.email,
         name: singupDetails.name
     }
@@ -42,14 +42,13 @@ function Signup() {
         setLoading(true)
         e.preventDefault()
         if (singupDetails.password === singupDetails.confirmPassword) {
-            fetch('https://tradematebackend-production.up.railway.app/auth/sign-up', {
+            fetch('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/sign-up', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(singupDetails),
             }).then((resp) => {
-                console.log(resp)
                 if (resp.ok) {
                     setSignupStatus(true)
                     // sendMail(e)

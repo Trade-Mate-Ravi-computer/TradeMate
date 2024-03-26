@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import { NavLink } from 'react-router-dom';
 function VerificationAlert() {
     const emailContent = {
-        message: `https://tradematebackend-production.up.railway.app/auth/setverify/${JSON.parse(localStorage.getItem('login')).user}`,
+        message: `http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/auth/setverify/${JSON.parse(localStorage.getItem('login')).user}`,
         email: JSON.parse(localStorage.getItem('login')).user,
      
     }
