@@ -59,7 +59,7 @@ function SaleDetails() {
         loadSaleDetails();
     }, [])
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/allsaledetails",
+        const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -76,7 +76,7 @@ function SaleDetails() {
         const confirm = window.confirm("Are you Sure to Delete")
         console.log(confirm)
         if (confirm) {
-            await axios.delete(`http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/sales/delete/${id}`, {
+            await axios.delete(`https://tradematebackend-production.up.railway.app/sales/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }

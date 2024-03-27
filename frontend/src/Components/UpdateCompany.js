@@ -25,7 +25,7 @@ function UpdateCompany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.put('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/company/update',
+        await axios.put('https://tradematebackend-production.up.railway.app/company/update',
             formData,
             {
                 headers: {

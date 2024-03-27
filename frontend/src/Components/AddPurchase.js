@@ -111,7 +111,7 @@ function AddPurchase() {
         setLoading(true)
         e.preventDefault();
         try {
-            await axios.post('http://ec2-34-230-10-177.compute-1.amazonaws.com:8080/purchase/add',
+            await axios.post('https://tradematebackend-production.up.railway.app/purchase/add',
                 purchaseDetails,
                 {
                     headers: {
