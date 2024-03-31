@@ -257,9 +257,9 @@ function MonthlyReport() {
                     <h2 className="text-xl font-semibold mb-2">Sales Performance(Top selling product)</h2>
                         {
                             customerList.topItemsModel.topItemModelList.map((item, index) => (
-                                <p key={index} className="text-gray-600">
-                                    {index + 1}. {item.itemName}: {item.quantity} pieces
-                                </p>
+                                index>3?'':<p key={index} className="text-gray-600">
+                               {index + 1}. {item.itemName}: {item.quantity} pieces
+                           </p>
                             ))
                         }
                     </div>
@@ -268,7 +268,7 @@ function MonthlyReport() {
                         <ul className="">
                             {
                                 customerList.topCustomersModel.customerSaleModels.map((customer, index) => (
-                                    <li key={index} className="text-gray-600 list-none">{index + 1}. {customer.customerName} : ₹{customer.totalSale}</li>
+                                    index>3?'':<li key={index} className="text-gray-600 list-none">{index + 1}. {customer.customerName} : ₹{customer.totalSale}</li>
                                 ))
                             }
 

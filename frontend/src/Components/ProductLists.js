@@ -40,12 +40,12 @@ function ProductLists() {
         loadProducts()
     }
     return (
-        <div className='grid grid-cols-4 pt-10 h-[44.8rem]'>
+        <div className='grid grid-cols-4 pt-10'>
           <div className="border border-gray-100 hidden sm:flex flex-col">
                     <LeftSidbar openaddcustomer="bold" />
                     <RightSidebar />
                 </div>
-            <div className='w-full col-span-3 sm:px-10 '>
+            <div className='w-full col-span-3 sm:px-10 h-[34.8rem] '>
                 <div className='m-3 pl-28  '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black flex w-44 sm:hidden rounded-md sm:px-3 p-2 text-sm font-medium bg-blue-800 text-white border border-blue-200 sm:w-10">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
                 <div className='flex justify-center w-full ml-16 sm:ml-0 text-3xl  text-green-800 font-bold'>Stock Item List</div>
                 <div className="h-10 m-6 sm:m-1">
@@ -65,7 +65,7 @@ function ProductLists() {
                         </div>
                     </div> : ''}
 
-                <div className='m-2 w-[24.7rem] sm:w-full overflow-y-auto '>
+                <div className='m-2 w-[24.7rem] sm:w-full h-[28rem] overflow-y-auto'>
                     <table className="text-sm text-left rtl:text-right text-blue-500 dark:text-blue-400 border border-black">
                         <thead className="text-xs text-blue-700 uppercase z-10 sticky top-0">
                             <tr>
@@ -90,7 +90,8 @@ function ProductLists() {
                             </tr>
                         </thead>
                         {productDetailss.reverse().map((productDetails, index) => (
-                            shortData ? !productDetails.itemName.toLowerCase().includes(shortData.toLowerCase()) ? '' : <tbody key={index + 1} className='border border-x-2 my-10'>
+                            shortData ? !productDetails.itemName.toLowerCase().includes(shortData.toLowerCase()) ? '' : 
+                            <tbody key={index + 1} className='border border-x-2 my-10'>
                                 <tr className="border border-blue-200 align-middle">
                                     <td scope="row" className={`border border-x-2 px-6 py-2 text-center font-medium ${productDetails.quantity > 3 ? "bg-white" : "bg-red-500 text-white"} `}>
                                         {index + 1}
@@ -112,7 +113,8 @@ function ProductLists() {
                                     </td>
                                 </tr>
 
-                            </tbody> : <tbody key={index + 1} className='border border-x-2 my-10'>
+                            </tbody> : 
+                            <tbody key={index + 1} className='border border-x-2 my-10'>
                                 <tr className="border border-blue-200 align-middle">
                                     <td scope="row" className={`border border-x-2 px-6 py-2 text-center font-medium ${productDetails.quantity > 3 ? "bg-white" : "bg-red-500 text-white"} `}>
                                         {index + 1}
