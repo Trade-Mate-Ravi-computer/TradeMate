@@ -153,6 +153,13 @@ function Navbar(props) {
                 >
                   About
                 </NavLink>
+                <NavLink
+                  to="/licence"
+                  onClick={() => setShowDropdown(false)}
+                  className="text-blue-500 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  Pricing
+                </NavLink>
               </div>
             </div>
           )}
