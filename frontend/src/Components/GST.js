@@ -198,8 +198,8 @@ function GST() {
                                 <label className='font-bold rounded-lg w-full text-blue-600' htmlFor="Quarter">Select Quarter</label>
                                 <select onChange={selectValue} name="quarter" className='border border-blue-600 p-2 rounded-lg w-full' id="quarter">
                                     <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="4">Quarter 1 (April-June)</option>
-                                    <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="7">Quarter 2 (July-Sep)</option>
-                                    <option disabled={currentMonth < 4 && currentYear === parseInt(year)} value="10">Quarter 3 (Oct-Dec)</option>
+                                    <option disabled={currentMonth < 7 && currentYear === parseInt(year)} value="7">Quarter 2 (July-Sep)</option>
+                                    <option disabled={currentMonth < 10 && currentYear === parseInt(year)} value="10">Quarter 3 (Oct-Dec)</option>
                                     <option value="1">Quarter 4 (Jan-March)</option>
                                 </select>
                             </div>
