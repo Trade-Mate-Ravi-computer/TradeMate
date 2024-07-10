@@ -101,7 +101,7 @@ function Profits() {
     }
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.post(`https://tradematebackend-production.up.railway.app/sales/date`,
+            const minYearValue = await axios.post(`https://tradematebackend-mdsd.onrender.com/sales/date`,
                 {
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                     email: JSON.parse(localStorage.getItem('login')).user
@@ -120,7 +120,7 @@ function Profits() {
         // console.log("Date state ", dateState)
         try {
             const profits = await axios.post(
-                `https://tradematebackend-production.up.railway.app/sales/profit`,
+                `https://tradematebackend-mdsd.onrender.com/sales/profit`,
                 dateState,
                 {
                     headers: {
@@ -138,7 +138,7 @@ function Profits() {
     const loadYearData = async () => {
         try {
             const response = await axios.post(
-                `https://tradematebackend-production.up.railway.app/sales/byyear`,
+                `https://tradematebackend-mdsd.onrender.com/sales/byyear`,
                 dateState,
                 {
                     headers: {
@@ -155,7 +155,7 @@ function Profits() {
     const loadAllReport = async () => {
         try {
             const response = await axios.post(
-                'https://tradematebackend-production.up.railway.app/sales/totalsum',
+                'https://tradematebackend-mdsd.onrender.com/sales/totalsum',
                 dateState,
                 {
                     headers: {

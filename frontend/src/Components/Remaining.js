@@ -30,7 +30,7 @@ function Remaining() {
         console.log('Message Sent to', sale.customerName)
     }
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("https://tradematebackend-production.up.railway.app/sales/allsaledetails",
+        const saleDetail = await axios.post("https://tradematebackend-mdsd.onrender.com/sales/allsaledetails",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {

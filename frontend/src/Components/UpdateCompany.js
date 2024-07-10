@@ -25,7 +25,7 @@ function UpdateCompany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.put('https://tradematebackend-production.up.railway.app/company/update',
+        await axios.put('https://tradematebackend-mdsd.onrender.com/company/update',
             formData,
             {
                 headers: {

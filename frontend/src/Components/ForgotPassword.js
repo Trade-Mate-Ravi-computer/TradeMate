@@ -28,7 +28,7 @@ function ForgotPassword() {
             setLoading(true)
             try {
                 console.log(newPasswordDetails)
-                const response = await axios.post('https://tradematebackend-production.up.railway.app/auth/updatepassword', newPasswordDetails);
+                const response = await axios.post('https://tradematebackend-mdsd.onrender.com/auth/updatepassword', newPasswordDetails);
                 setLoading(false)
                 setOtpStatus(response.data)
                 setTimeout(() => {
@@ -45,7 +45,7 @@ function ForgotPassword() {
             setLoading(true)
 
             try {
-                const response = await axios.post(`https://tradematebackend-production.up.railway.app/auth/otp/${newPasswordDetails.email}`, {});
+                const response = await axios.post(`https://tradematebackend-mdsd.onrender.com/auth/otp/${newPasswordDetails.email}`, {});
                 setLoading(false)
                 setOtpStatus(response.data)
 

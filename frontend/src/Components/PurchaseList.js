@@ -62,7 +62,7 @@ function PurchaseList() {
         loadPurchaseDetails();
     }, [])
     const loadPurchaseDetails = async () => {
-        const purchaseDetail = await axios.post("https://tradematebackend-production.up.railway.app/purchase/getbycompany",
+        const purchaseDetail = await axios.post("https://tradematebackend-mdsd.onrender.com/purchase/getbycompany",
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -79,7 +79,7 @@ function PurchaseList() {
         const confirm = window.confirm("Are you Sure to Delete")
         console.log(confirm)
         if (confirm) {
-            await axios.delete(`https://tradematebackend-production.up.railway.app/sales/delete/${id}`, {
+            await axios.delete(`https://tradematebackend-mdsd.onrender.com/sales/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }

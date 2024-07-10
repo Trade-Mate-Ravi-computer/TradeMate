@@ -4,6 +4,7 @@ import RightSidebar from './RightSidebar'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateSale(props) {
+    const date = new Date();
     const navigate = useNavigate()
     const [updateStatus,setUpdateStatus]=useState('')
     const [saleDetail, setSaleDetail] = useState({
@@ -19,7 +20,7 @@ function UpdateSale(props) {
     const { id } = useParams()
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://tradematebackend-production.up.railway.app/sales/editsale/${props.id}`, {
+        fetch(`https://tradematebackend-mdsd.onrender.com/sales/editsale/${props.id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

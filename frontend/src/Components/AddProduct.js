@@ -47,7 +47,7 @@ function AddProduct() {
     }
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "https://tradematebackend-production.up.railway.app/stock/all",
+            "https://tradematebackend-mdsd.onrender.com/stock/all",
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -63,7 +63,7 @@ function AddProduct() {
     const handleOnSubmit = (e) => {
         setLoading(true)
         e.preventDefault();
-        fetch('https://tradematebackend-production.up.railway.app/stock/add', {
+        fetch('https://tradematebackend-mdsd.onrender.com/stock/add', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function AddProduct() {
     };
 
     const loadUser = () => {
-        fetch(`https://tradematebackend-production.up.railway.app/user/byemail`, {
+        fetch(`https://tradematebackend-mdsd.onrender.com/user/byemail`, {
             "method": "POST",
             headers: {
                 'Content-Type': 'application/json',

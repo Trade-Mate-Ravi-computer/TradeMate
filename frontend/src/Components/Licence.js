@@ -12,7 +12,7 @@ function Licence() {
   const [days, setDays] = useState(30)
   const updatePaymentOnServer = async (orderId, status,days) => {
    try{
-    const response = await axios.post('https://tradematebackend-production.up.railway.app/auth/updateOrder', {
+    const response = await axios.post('https://tradematebackend-mdsd.onrender.com/auth/updateOrder', {
       order_id: orderId,
       status: status,
       days:days,
@@ -94,7 +94,7 @@ function Licence() {
 
     if (localStorage.getItem('login')) {
 
-      axios.post('https://tradematebackend-production.up.railway.app/auth/create_order', {
+      axios.post('https://tradematebackend-mdsd.onrender.com/auth/create_order', {
         amount: month,
         info: "Order_request",
         email: JSON.parse(localStorage.getItem('login')).user

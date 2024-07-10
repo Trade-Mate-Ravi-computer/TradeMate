@@ -28,7 +28,7 @@ function UsersDashboard() {
     const loadCompany = async () => {
         try {
             const response = await axios.post(
-                `https://tradematebackend-production.up.railway.app/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
+                `https://tradematebackend-mdsd.onrender.com/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
                 {},
                 {
                     headers: {

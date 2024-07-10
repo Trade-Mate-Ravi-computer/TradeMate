@@ -25,7 +25,7 @@ function Dashboard() {
         try {
             // Make the Axios POST request
             const loadedUser = await axios.get(
-                `https://tradematebackend-production.up.railway.app/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,
+                `https://tradematebackend-mdsd.onrender.com/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -67,7 +67,7 @@ function Dashboard() {
 
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "https://tradematebackend-production.up.railway.app/stock/all",
+            "https://tradematebackend-mdsd.onrender.com/stock/all",
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -82,7 +82,7 @@ function Dashboard() {
     };
     const loadCustomers = async () => {
         const customers = await axios.get(
-            "https://tradematebackend-production.up.railway.app/customer/all",
+            "https://tradematebackend-mdsd.onrender.com/customer/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -93,7 +93,7 @@ function Dashboard() {
     };
     const loadSeller = async () => {
         const sellers = await axios.get(
-            "https://tradematebackend-production.up.railway.app/seller/all",
+            "https://tradematebackend-mdsd.onrender.com/seller/all",
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`

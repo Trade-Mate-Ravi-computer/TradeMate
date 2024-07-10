@@ -11,7 +11,7 @@ function Payment() {
     const handleOnSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('https://tradematebackend-production.up.railway.app/auth/create_order', {
+        axios.post('https://tradematebackend-mdsd.onrender.com/auth/create_order', {
             amount: amount,
             info: "Order_request"
         })

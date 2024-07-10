@@ -23,7 +23,7 @@ function UpdatePurchase(props) {
     const handleOnSubmit =async (e) => {
         e.preventDefault()
        try{
-        await fetch('https://tradematebackend-production.up.railway.app/purchase/update',
+        await fetch('https://tradematebackend-mdsd.onrender.com/purchase/update',
         
         {
             method:"POST",

@@ -24,7 +24,7 @@ function CustomerList() {
         return sum;
     }
     const loadcustomerDetails = async () => {
-        const saleDetail = await axios.get("https://tradematebackend-production.up.railway.app/customer/all",
+        const saleDetail = await axios.get("https://tradematebackend-mdsd.onrender.com/customer/all",
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`

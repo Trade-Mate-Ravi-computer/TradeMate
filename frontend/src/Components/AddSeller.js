@@ -38,7 +38,7 @@ function AddSeller() {
 setLoading(true)
         e.preventDefault();
         try {
-            const response = await fetch('https://tradematebackend-production.up.railway.app/seller/add', {
+            const response = await fetch('https://tradematebackend-mdsd.onrender.com/seller/add', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

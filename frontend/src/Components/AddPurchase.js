@@ -111,7 +111,7 @@ function AddPurchase() {
         setLoading(true)
         e.preventDefault();
         try {
-            await axios.post('https://tradematebackend-production.up.railway.app/purchase/add',
+            await axios.post('https://tradematebackend-mdsd.onrender.com/purchase/add',
                 purchaseDetails,
                 {
                     headers: {
