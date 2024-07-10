@@ -130,7 +130,7 @@ function Dashboard() {
                     <div className="mb-4 flex  justify-center items-center bg-gradient-to-r from-sky-400 to-violet-500 text-white font-semibold rounded-lg p-4 shadow-md">
                         <h1 className="text-3xl">Welcome to</h1>
                         <div className="text-white bg-blue-900 px-3 py-1 ml-4 rounded-md">
-                            <span className="text-lg">{`${JSON.parse(localStorage.getItem('companyName')).companyName}`}</span>
+                            <span className="text-lg">{`${localStorage.getItem("login")?JSON.parse(localStorage.getItem('companyName')).companyName:""}`}</span>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-4">

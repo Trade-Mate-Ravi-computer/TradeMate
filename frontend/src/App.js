@@ -13,7 +13,7 @@ import Signup from './Components/Signup';
 import Footer from './Components/Footer';
 import SaleDetails from './Components/SaleDetails';
 import UpdateSale from './Components/UpdateSale';
-import Test from './Components/Test';
+// import Test from './Components/Test';
 import Profits from './Components/Profits';
 import ProductLists from './Components/ProductLists';
 import Invoice from './Components/Invoice';
@@ -65,7 +65,7 @@ function App() {
           <Route exact path="/profits/:companyName" element={<Profits />} />
           <Route exact path="/stocks/:companyName" element={<ProductLists />} />
           <Route exact path="/invoice/:id" element={<Invoice />} />
-          <Route exact path="/test" element={<Test />} />
+          {/* <Route exact path="/test" element={<Test />} /> */}
           <Route exact path="/usersDashboard" element={<UsersDashboard />}/>
           <Route exact path="/remaining/:companyName" element={<Remaining />}/>
           <Route exact path="/createCompany" element={<CreateCOmpany />}/>
