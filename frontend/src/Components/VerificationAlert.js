@@ -1,9 +1,10 @@
 import React from 'react'
 import emailjs from "@emailjs/browser";
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from './AuthContext';
 function VerificationAlert() {
     const emailContent = {
-        message: `https://tradematebackend-mdsd.onrender.com/auth/setverify/${JSON.parse(localStorage.getItem('login')).user}`,
+        message: `${BASE_URL}/auth/setverify/${JSON.parse(localStorage.getItem('login')).user}`,
         email: JSON.parse(localStorage.getItem('login')).user,
      
     }

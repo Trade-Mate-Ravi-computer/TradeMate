@@ -2,6 +2,7 @@ import React from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
+import { BASE_URL } from './AuthContext'
 function AddEmployee() {
     return (
         <div className='sm:h-[32.7rem]'>

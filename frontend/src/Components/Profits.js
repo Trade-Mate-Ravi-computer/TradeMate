@@ -4,6 +4,7 @@ import RightSidebar from './RightSidebar';
 import axios from 'axios';
 import ProfitCard from './ProfitCard';
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from './AuthContext';
 
 
 
@@ -101,7 +102,7 @@ function Profits() {
     }
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.post(`https://tradematebackend-mdsd.onrender.com/sales/date`,
+            const minYearValue = await axios.post(`${BASE_URL}/sales/date`,
                 {
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                     email: JSON.parse(localStorage.getItem('login')).user
@@ -120,7 +121,7 @@ function Profits() {
         // console.log("Date state ", dateState)
         try {
             const profits = await axios.post(
-                `https://tradematebackend-mdsd.onrender.com/sales/profit`,
+                `${BASE_URL}/sales/profit`,
                 dateState,
                 {
                     headers: {
@@ -138,7 +139,7 @@ function Profits() {
     const loadYearData = async () => {
         try {
             const response = await axios.post(
-                `https://tradematebackend-mdsd.onrender.com/sales/byyear`,
+                `${BASE_URL}/sales/byyear`,
                 dateState,
                 {
                     headers: {
@@ -155,7 +156,7 @@ function Profits() {
     const loadAllReport = async () => {
         try {
             const response = await axios.post(
-                'https://tradematebackend-mdsd.onrender.com/sales/totalsum',
+                `${BASE_URL}/sales/totalsum`,
                 dateState,
                 {
                     headers: {

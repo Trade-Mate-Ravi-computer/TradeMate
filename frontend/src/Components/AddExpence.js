@@ -3,14 +3,16 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext'
+import { toast, ToastContainer } from 'react-toastify'
 function AddExpence() {
-    const [loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
     const [expenseDetails, setExpenseDetails] = useState({
         name: '',
         expenseOn: '',
-        date:'',
+        date: '',
         amount: 0,
-        email:JSON.parse(localStorage.getItem('login')).user,
+        email: JSON.parse(localStorage.getItem('login')).user,
         companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
         company: {
             companyId: 0
@@ -26,7 +28,7 @@ function AddExpence() {
         setLoading(true)
         e.preventDefault();
         try {
-            const response = await fetch(`https://tradematebackend-mdsd.onrender.com/expense/add`, {
+            const response = await fetch(`${BASE_URL}/expense/add`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,27 +41,13 @@ function AddExpence() {
                 throw new Error('Failed to add Expense item');
             }
 
-            document.getElementById('info').innerHTML = "Expense Added";
-            document.getElementById('info').classList.remove('text-red-700')
-            document.getElementById('info').classList.add('text-green-700')
-            setTimeout(() => {
-                document.getElementById('info').innerHTML = "";
-            }, 2000);
+            toast.success("Expense Added")
+
 
             const result = await response.json();
             // Handle response data if needed
-        } catch (error) {
-            // Handle fetch error
-            document.getElementById('info').innerHTML = "Something Wrong try Again";
-            document.getElementById('info').classList.remove('text-green-700')
-            document.getElementById('info').classList.add('text-red-700')
-            setTimeout(() => {
-                document.getElementById('info').innerHTML = "";
-                
-            }, 3000);
-            console.error('Error adding Expense item:', error);
-            // Additional error handling if needed
-
+        } catch (error){
+            toast.error("Some error occurs")
         }
         setLoading(false)
     };
@@ -104,7 +92,7 @@ function AddExpence() {
                         </div>
 
                         <div className='flex justify-center mt-6'>
-                            <button type="submit" className="flex w-[10rem] justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<div><img className='w-6 rounded-full' src={loder} alt="" /></div>:"Add Expence"}</button>
+                            <button type="submit" className="flex w-[10rem] justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <div><img className='w-6 rounded-full' src={loder} alt="" /></div> : "Add Expence"}</button>
                         </div>
                         <div className='w-full text-center text-green-700 font-bold text-sm ' id='info'></div>
                     </form>
@@ -112,6 +100,7 @@ function AddExpence() {
                 </div>
 
             </div>
+            <ToastContainer/>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { NavLink, json } from 'react-router-dom';
 import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 function SaleDetails() {
     const [saleDetails, setSaleDetails] = useState([])
     const [shortData, setShortData] = useState('')
@@ -59,7 +60,7 @@ function SaleDetails() {
         loadSaleDetails();
     }, [])
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("https://tradematebackend-mdsd.onrender.com/sales/allsaledetails",
+        const saleDetail = await axios.post(`${BASE_URL}/sales/allsaledetails`,
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -76,7 +77,7 @@ function SaleDetails() {
         const confirm = window.confirm("Are you Sure to Delete")
         console.log(confirm)
         if (confirm) {
-            await axios.delete(`https://tradematebackend-mdsd.onrender.com/sales/delete/${id}`, {
+            await axios.delete(`${BASE_URL}/sales/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }

@@ -5,6 +5,7 @@ import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
 import whats from './whats.png'
+import { BASE_URL } from './AuthContext';
 
 function Remaining() {
     const [saleDetails, setSaleDetails] = useState([])
@@ -30,7 +31,7 @@ function Remaining() {
         console.log('Message Sent to', sale.customerName)
     }
     const loadSaleDetails = async () => {
-        const saleDetail = await axios.post("https://tradematebackend-mdsd.onrender.com/sales/allsaledetails",
+        const saleDetail = await axios.post(`${BASE_URL}/sales/allsaledetails`,
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {

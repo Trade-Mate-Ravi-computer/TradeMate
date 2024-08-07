@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { BASE_URL } from './AuthContext'
 
 function UpdatePurchase(props) {
     const navigate = useNavigate()
@@ -23,7 +24,7 @@ function UpdatePurchase(props) {
     const handleOnSubmit =async (e) => {
         e.preventDefault()
        try{
-        await fetch('https://tradematebackend-mdsd.onrender.com/purchase/update',
+        await fetch(`${BASE_URL}/purchase/update`,
         
         {
             method:"POST",

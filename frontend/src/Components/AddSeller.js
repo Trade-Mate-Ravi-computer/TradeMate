@@ -3,6 +3,8 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext'
+import { toast, ToastContainer } from 'react-toastify'
 function AddSeller() {
     const [uploadStatus, setUplaodStatus] = useState("")
     const [loading,setLoading]=useState(false)
@@ -38,7 +40,7 @@ function AddSeller() {
 setLoading(true)
         e.preventDefault();
         try {
-            const response = await fetch('https://tradematebackend-mdsd.onrender.com/seller/add', {
+            const response = await fetch(`${BASE_URL}/seller/add`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,9 +51,7 @@ setLoading(true)
 
             if (response.ok) {
                
-                document.getElementById('info').classList.remove('text-red-800')
-                document.getElementById('info').classList.add('text-green-800')
-                setUplaodStatus("seller Added");
+               toast.success("Seller Added")
                 setSellerDetails({
                     sellerName: '',
                     address: '',
@@ -67,26 +67,13 @@ setLoading(true)
                         companyId: 0
                     }
                 })
-                setTimeout(() => {
-                    setUplaodStatus("");
-                }, 2000);
+               
 
             } else {
-                console.log(response.data)
-                document.getElementById('info').classList.remove('text-green-800')
-                document.getElementById('info').classList.add('text-red-800')
-                setUplaodStatus("Something went wrong");
-                setTimeout(() => {
-                    setUplaodStatus("");
-                }, 2000);
+               toast.error("Some error occurs")
             }
         } catch (error) {
-            document.getElementById('info').classList.remove('text-green-800')
-            document.getElementById('info').classList.add('text-red-800')
-            setUplaodStatus("Server not responding try again later");
-            setTimeout(() => {
-                setUplaodStatus("");
-            }, 2000);
+          toast.error("Server not responding try again later")
         }
         setLoading(false)
     };
@@ -173,7 +160,7 @@ setLoading(true)
                     <div id='info' className='w-full text-center text-xl font-bold text-green-800 mt-2'>{uploadStatus}</div>
 
                 </div>
-
+<ToastContainer/>
             </div>
         </div>
     )

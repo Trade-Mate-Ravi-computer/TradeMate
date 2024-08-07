@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 
 function SellerList() {
 
@@ -25,7 +26,7 @@ function SellerList() {
         return sum;
     }
     const loadsellerDetails = async () => {
-        const saleDetail = await axios.get("https://tradematebackend-mdsd.onrender.com/seller/all",
+        const saleDetail = await axios.get(`${BASE_URL}/seller/all`,
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`

@@ -3,6 +3,8 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext'
+import { toast, ToastContainer } from 'react-toastify'
 function AddCustomer() {
     const [uploadStatus, setUplaodStatus] = useState("")
     const [loading,setLoading]=useState(false)
@@ -38,7 +40,7 @@ function AddCustomer() {
         setLoading(true)
         e.preventDefault();
         try {
-            const response = await fetch('https://tradematebackend-mdsd.onrender.com/customer/add', {
+            const response = await fetch(`${BASE_URL}/customer/add`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,9 +50,7 @@ function AddCustomer() {
             });
 
             if (response.ok) {
-                document.getElementById('info').classList.remove('text-red-800')
-                document.getElementById('info').classList.add('text-green-800')
-                setUplaodStatus("Customer Added");
+                toast("Customer added")
                 setCustomerDetails({
                     customerName: '',
                     address: '',
@@ -72,20 +72,12 @@ function AddCustomer() {
 
             } else {
                 
-                document.getElementById('info').classList.remove('text-green-800')
-                document.getElementById('info').classList.add('text-red-800')
-                setUplaodStatus("Something went wrong");
-                setTimeout(() => {
-                    setUplaodStatus("");
-                }, 2000);
+               toast.error("Something went wrong")
+             
             }
         } catch (error) {
-            document.getElementById('info').classList.remove('text-green-800')
-            document.getElementById('info').classList.add('text-red-800')
-            setUplaodStatus("Server not responding try again later");
-            setTimeout(() => {
-                setUplaodStatus("");
-            }, 2000);
+           toast.error("Server not responding")
+            
         }
         setLoading(false)
     };
@@ -172,7 +164,7 @@ function AddCustomer() {
 
                 </div>
 
-            </div>
+            </div><ToastContainer/>
         </div>
     )
 }

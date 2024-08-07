@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { NavLink, json } from 'react-router-dom';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 function MonthlyReport() {
     const [loading, setLoading] = useState(false)
     const [currentMonthData, setCurrentMonthData] = useState({});
@@ -106,7 +107,7 @@ function MonthlyReport() {
     const loadMonthlyData = async () => {
         setLoading(true)
         try {
-            const data = await axios.post('https://tradematebackend-mdsd.onrender.com/sales/dailyReport', {
+            const data = await axios.post(`${BASE_URL}/sales/dailyReport`, {
                 day: date.getDate(),
                 month: currenMonth,
                 year: date.getFullYear(),
@@ -135,7 +136,7 @@ function MonthlyReport() {
     const loadData = async () => {
         try {
 
-            const data = await axios.post('https://tradematebackend-mdsd.onrender.com/sales/monthlyReport', {
+            const data = await axios.post(`${BASE_URL}/sales/monthlyReport`, {
                 month: currenMonth,
                 year: date.getFullYear(),
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
@@ -158,7 +159,7 @@ function MonthlyReport() {
     const loadPreviouseData = async () => {
         try {
 
-            const data = await axios.post('https://tradematebackend-mdsd.onrender.com/sales/monthlyReport', {
+            const data = await axios.post(`${BASE_URL}/sales/monthlyReport`, {
                 month: currenMonth - 1,
                 year: date.getFullYear(),
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,

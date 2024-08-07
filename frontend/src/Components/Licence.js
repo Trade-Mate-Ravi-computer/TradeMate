@@ -4,6 +4,7 @@ import logo from './favicon.png'
 import loader from './loader.gif'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from './AuthContext'
 
 function Licence() {
   const [month, setMonth] = useState(350)
@@ -12,7 +13,7 @@ function Licence() {
   const [days, setDays] = useState(30)
   const updatePaymentOnServer = async (orderId, status,days) => {
    try{
-    const response = await axios.post('https://tradematebackend-mdsd.onrender.com/auth/updateOrder', {
+    const response = await axios.post(`${BASE_URL}/auth/updateOrder`, {
       order_id: orderId,
       status: status,
       days:days,
@@ -94,7 +95,7 @@ function Licence() {
 
     if (localStorage.getItem('login')) {
 
-      axios.post('https://tradematebackend-mdsd.onrender.com/auth/create_order', {
+      axios.post(`${BASE_URL}/auth/create_order`, {
         amount: month,
         info: "Order_request",
         email: JSON.parse(localStorage.getItem('login')).user

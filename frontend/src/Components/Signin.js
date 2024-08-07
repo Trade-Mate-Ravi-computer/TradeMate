@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 // import { NavLink } from 'react-router-dom'
 
 function Signin() {
@@ -26,7 +27,7 @@ function Signin() {
 
   const loadUser = async () => {
     try {
-      const loadedUser = await axios.get(`https://tradematebackend-mdsd.onrender.com/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
+      const loadedUser = await axios.get(`${BASE_URL}/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
 
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('login')).token}`,
@@ -48,7 +49,7 @@ function Signin() {
   const handleOnClick = (e) => {
     setLoading(true)
     e.preventDefault();
-    fetch('https://tradematebackend-mdsd.onrender.com/auth/login', {
+    fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

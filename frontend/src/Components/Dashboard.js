@@ -6,6 +6,7 @@ import Home from './Home';
 import LoginSuggetion from './LoginSuggetion';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from './AuthContext';
 
 function Dashboard() {
     let store = JSON.parse(localStorage.getItem('login'));
@@ -25,7 +26,7 @@ function Dashboard() {
         try {
             // Make the Axios POST request
             const loadedUser = await axios.get(
-                `https://tradematebackend-mdsd.onrender.com/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,
+                `${BASE_URL}/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -67,7 +68,7 @@ function Dashboard() {
 
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "https://tradematebackend-mdsd.onrender.com/stock/all",
+            `${BASE_URL}/stock/all`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -82,7 +83,7 @@ function Dashboard() {
     };
     const loadCustomers = async () => {
         const customers = await axios.get(
-            "https://tradematebackend-mdsd.onrender.com/customer/all",
+            `${BASE_URL}/customer/all`,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
@@ -93,7 +94,7 @@ function Dashboard() {
     };
     const loadSeller = async () => {
         const sellers = await axios.get(
-            "https://tradematebackend-mdsd.onrender.com/seller/all",
+            `${BASE_URL}/seller/all`,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`

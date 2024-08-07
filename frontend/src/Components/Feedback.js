@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from './AuthContext';
 const Feedback = () => {
     const [info,setInfo]=useState(false)
     const [rating, setRating] = useState(0);
@@ -27,7 +28,7 @@ const Feedback = () => {
     const handleOnClick = async (e) => {
         setInfo(true)
         e.preventDefault()
-        const response = await axios.post('https://tradematebackend-mdsd.onrender.com/sales/feedback', feedback, {
+        const response = await axios.post(`${BASE_URL}/sales/feedback`, feedback, {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
             }

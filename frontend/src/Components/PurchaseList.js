@@ -5,6 +5,7 @@ import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
 import UpdatePurchase from './UpdatePurchase';
+import { BASE_URL } from './AuthContext';
 function PurchaseList() {
     const [purchaseDetails, setPurchaseDetails] = useState([])
     const [shortData, setShortData] = useState('')
@@ -62,7 +63,7 @@ function PurchaseList() {
         loadPurchaseDetails();
     }, [])
     const loadPurchaseDetails = async () => {
-        const purchaseDetail = await axios.post("https://tradematebackend-mdsd.onrender.com/purchase/getbycompany",
+        const purchaseDetail = await axios.post(`${BASE_URL}/purchase/getbycompany`,
             { companyName: JSON.parse(localStorage.getItem('companyName')).companyName },
             {
                 headers: {
@@ -79,7 +80,7 @@ function PurchaseList() {
         const confirm = window.confirm("Are you Sure to Delete")
         console.log(confirm)
         if (confirm) {
-            await axios.delete(`https://tradematebackend-mdsd.onrender.com/sales/delete/${id}`, {
+            await axios.delete(`${BASE_URL}/sales/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`
                 }

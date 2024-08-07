@@ -7,6 +7,7 @@ import crossImage from './cross.png';
 import CreateCOmpany from './CreateCOmpany';
 import loader from './loader.gif'
 import clickEffect from './clickOnButton.wav'
+import { BASE_URL } from './AuthContext';
 
 
 function UsersDashboard() {
@@ -28,7 +29,7 @@ function UsersDashboard() {
     const loadCompany = async () => {
         try {
             const response = await axios.post(
-                `https://tradematebackend-mdsd.onrender.com/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
+                `${BASE_URL}/company/byuser/${JSON.parse(localStorage.getItem('login')).user}`,
                 {},
                 {
                     headers: {

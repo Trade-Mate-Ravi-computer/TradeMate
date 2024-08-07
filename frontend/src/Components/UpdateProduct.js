@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { useNavigate, useParams } from 'react-router-dom'
+import { BASE_URL } from './AuthContext'
 
 function UpdateProduct(props) {
     const navigate = useNavigate()
@@ -23,7 +24,7 @@ function UpdateProduct(props) {
     // console.log(id)
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://tradematebackend-mdsd.onrender.com/stock/updateStock`, {
+        fetch(`${BASE_URL}/stock/updateStock`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

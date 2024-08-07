@@ -4,6 +4,8 @@ import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
 function AddPurchase() {
     const [loading,setLoading]=useState(false)
     const [sale, setSale] = useState();
@@ -21,16 +23,10 @@ function AddPurchase() {
         setNameSeller(name)
     }
     const upStatus = () => {
-        setUploadStatus("Purchase Added")
-        setTimeout(() => {
-            setUploadStatus("")
-        }, 3000);
+       toast.success("Purchase Added")
     }
     const failStatus = () => {
-        setUploadStatus("Something went wrong")
-        setTimeout(() => {
-            setUploadStatus("")
-        }, 3000);
+      toast.error("Some error occurs")
     }
     const [purchaseDetails, setPurchaseDetails] = useState({
         sellerName: '',
@@ -111,25 +107,21 @@ function AddPurchase() {
         setLoading(true)
         e.preventDefault();
         try {
-            await axios.post('https://tradematebackend-mdsd.onrender.com/purchase/add',
+            await axios.post(`${BASE_URL}/purchase/add`,
                 purchaseDetails,
                 {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`
                     }
                 }).then((resp) => {
-                    console.log(resp)
                     upStatus();
                 })
         } catch (e) {
-            console.log("Some Error Occurs");
             failStatus();
         }
         setLoading(false)
     }
-    const handleUpdateStatus = () => {
-        setUploadStatus('')
-    }
+ 
     return (
         <div className='h-[45rem]  sm:h-screen'>
 
@@ -213,6 +205,7 @@ function AddPurchase() {
                 </div>
 
             </div>
+            <ToastContainer/>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import Carasoul from './Carasoul'
 import { NavLink, useNavigate } from 'react-router-dom'
 import emailjs from "@emailjs/browser";
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 
 function Signup() {
     const navigate = useNavigate()
@@ -42,7 +43,7 @@ function Signup() {
         setLoading(true)
         e.preventDefault()
         if (singupDetails.password === singupDetails.confirmPassword) {
-            fetch('https://tradematebackend-mdsd.onrender.com/auth/sign-up', {
+            fetch(`${BASE_URL}/auth/sign-up`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -112,7 +113,7 @@ function Signup() {
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium leading-6 text-blue-900">Enter Your Name</label>
                                     <div className="mt-2">
-                                        <input id="name" name="name" type="text" value={singupDetails.name} onChange={(e) => handleOnChange(e)} autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        <input id="name" name="name" type="text" value={singupDetails.name} onChange={(e) => handleOnChange(e)} required className="block w-full rounded-md border-0 p-1.5 text-blue-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-blue-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
 

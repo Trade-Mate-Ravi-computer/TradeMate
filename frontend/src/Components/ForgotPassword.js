@@ -3,6 +3,7 @@ import Carasoul from './Carasoul'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext'
 
 
 function ForgotPassword() {
@@ -28,7 +29,7 @@ function ForgotPassword() {
             setLoading(true)
             try {
                 console.log(newPasswordDetails)
-                const response = await axios.post('https://tradematebackend-mdsd.onrender.com/auth/updatepassword', newPasswordDetails);
+                const response = await axios.post(`${BASE_URL}/auth/updatepassword`, newPasswordDetails);
                 setLoading(false)
                 setOtpStatus(response.data)
                 setTimeout(() => {
@@ -45,7 +46,7 @@ function ForgotPassword() {
             setLoading(true)
 
             try {
-                const response = await axios.post(`https://tradematebackend-mdsd.onrender.com/auth/otp/${newPasswordDetails.email}`, {});
+                const response = await axios.post(`${BASE_URL}/auth/otp/${newPasswordDetails.email}`, {});
                 setLoading(false)
                 setOtpStatus(response.data)
 

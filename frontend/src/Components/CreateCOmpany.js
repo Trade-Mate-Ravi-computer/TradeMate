@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { BASE_URL } from './AuthContext';
 function CreateCOmpany(props) {
     const [formData, setFormData] = useState({
         companyName: '',
@@ -26,7 +27,7 @@ function CreateCOmpany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('https://tradematebackend-mdsd.onrender.com/company/add',
+        await axios.post(`${BASE_URL}/company/add`,
             formData,
             {
                 headers: {

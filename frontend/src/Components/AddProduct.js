@@ -4,8 +4,11 @@ import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function AddProduct() {
-    const [loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         loadUser()
         loadProducts()
@@ -20,22 +23,16 @@ function AddProduct() {
         purchasePrice: 0,
         category: '',
         companyName: '',
-        email:JSON.parse(localStorage.getItem('login')).user,
+        email: JSON.parse(localStorage.getItem('login')).user,
         company: {
             companyId: 0
         }
     })
     const upStatus = () => {
-        setUploadStatus("Item Added ")
-        setTimeout(() => {
-            setUploadStatus("")
-        }, 3000);
+       toast.success("Product added")
     }
     const failStatus = () => {
-        setUploadStatus("Something went wrong")
-        setTimeout(() => {
-            setUploadStatus("")
-        }, 3000);
+     toast.error("Faild to add product")
     }
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -47,7 +44,7 @@ function AddProduct() {
     }
     const loadProducts = async () => {
         const productDetails = await axios.post(
-            "https://tradematebackend-mdsd.onrender.com/stock/all",
+            `${BASE_URL}/stock/all`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -63,7 +60,7 @@ function AddProduct() {
     const handleOnSubmit = (e) => {
         setLoading(true)
         e.preventDefault();
-        fetch('https://tradematebackend-mdsd.onrender.com/stock/add', {
+        fetch(`${BASE_URL}/stock/add`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -80,10 +77,10 @@ function AddProduct() {
                 setItemDetail({
                     itemName: '',
                     purchasePrice: 0,
-                    quantity:0,
+                    quantity: 0,
                     companyName: '',
-                    email:JSON.parse(localStorage.getItem('login')).user,
-                    gstInPercent:0,
+                    email: JSON.parse(localStorage.getItem('login')).user,
+                    gstInPercent: 0,
                     company: {
                         companyId: 0
                     }
@@ -95,11 +92,11 @@ function AddProduct() {
                 // Handle error
                 failStatus()
             });
-            setLoading(false)
+        setLoading(false)
     };
 
     const loadUser = () => {
-        fetch(`https://tradematebackend-mdsd.onrender.com/user/byemail`, {
+        fetch(`${BASE_URL}/user/byemail`, {
             "method": "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -117,12 +114,10 @@ function AddProduct() {
             })
         })
     }
-    const handleUpdateStatus = () => {
-        setUploadStatus('')
-    }
+  
     return (
         <div className='my-3 h-[45.4rem] sm:h-[41.7rem]'>
-          
+
 
             <div className='m-3 '><NavLink to={`/dashboard/${JSON.parse(localStorage.getItem('companyName')).companyName}`} className=" hover:bg-blue-400 hover:text-black rounded-md px-3 py-2 text-sm font-medium bg-blue-800 text-white border border-gray-200 sm:w-10 w-44 sm:hidden flex">{localStorage.getItem('login') ? "⇐ Company Dashboard" : "Home"}</NavLink></div>
             <div className=' grid grid-cols-1 sm:grid-cols-4 '>
@@ -166,13 +161,13 @@ function AddProduct() {
                             </div>
                         </div>
                         <div className='flex justify-center mt-6'>
-                            <button type="submit" className="flex w-[10rem] justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading?<div><img className='w-6 rounded-full' src={loder} alt="" /></div>:"Add Product"}</button>
+                            <button type="submit" className="flex w-[10rem] justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{loading ? <div><img className='w-6 rounded-full' src={loder} alt="" /></div> : "Add Product"}</button>
                         </div>
-                        <div className='w-full text-center text-xl font-bold text-green-800'>{uploadStatus}</div>
+                       
                     </form>
 
                 </div>
-
+                <ToastContainer />
             </div>
         </div>
     )

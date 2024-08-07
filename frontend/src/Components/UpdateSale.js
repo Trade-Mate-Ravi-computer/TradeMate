@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { useNavigate, useParams } from 'react-router-dom'
+import { BASE_URL } from './AuthContext';
 
 function UpdateSale(props) {
     const date = new Date();
@@ -20,7 +21,7 @@ function UpdateSale(props) {
     const { id } = useParams()
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://tradematebackend-mdsd.onrender.com/sales/editsale/${props.id}`, {
+        fetch(`${BASE_URL}/sales/editsale/${props.id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

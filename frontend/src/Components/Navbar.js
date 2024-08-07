@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, json, useNavigate } from 'react-router-dom';
 import favicon from './favicon.png';
 import logout from './logout.png';
+import { BASE_URL } from './AuthContext';
 
 function Navbar(props) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -25,7 +26,7 @@ function Navbar(props) {
   };
   const loadCompany = () => {
     try {
-        fetch(`https://tradematebackend-mdsd.onrender.com/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
+        fetch(`${BASE_URL}/user/byemail/${JSON.parse(localStorage.getItem('login')).user}`, {
             method: "GET",
             headers: { // Corrected typo: 'headers' instead of 'header'
               'Content-Type': 'application/json',

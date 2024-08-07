@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import logo from './favicon.png'
+import { BASE_URL } from './AuthContext'
 // import Razorpay from 'razorpay'
 
 function Payment() {
@@ -11,7 +12,7 @@ function Payment() {
     const handleOnSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('https://tradematebackend-mdsd.onrender.com/auth/create_order', {
+        axios.post(`${BASE_URL}/auth/create_order`, {
             amount: amount,
             info: "Order_request"
         })

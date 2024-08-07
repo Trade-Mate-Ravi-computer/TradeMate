@@ -4,6 +4,7 @@ import axios from 'axios'
 import html2pdf from 'html2pdf.js';
 import RightSidebar from './RightSidebar';
 import LeftSidbar from './LeftSidbar';
+import { BASE_URL } from './AuthContext';
 function Invoice() {
     const [invoiceDetails, setInvoiceDetails] = useState([])
     const [gst, setGst] = useState(false)
@@ -30,7 +31,7 @@ function Invoice() {
     }, [])
     const loadCompanyDetails = async () => {
         try {
-            const companyDetail = await axios.post(`https://tradematebackend-mdsd.onrender.com/company/companyByNameEmail`,
+            const companyDetail = await axios.post(`${BASE_URL}/company/companyByNameEmail`,
                 {
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                     email: JSON.parse(localStorage.getItem('login')).user
@@ -50,7 +51,7 @@ function Invoice() {
 
     }
     const loadInvoiceDetails = async () => {
-        const invoiceDetail = await axios.post(`https://tradematebackend-mdsd.onrender.com/sales/byid/${id}`,
+        const invoiceDetail = await axios.post(`${BASE_URL}/sales/byid/${id}`,
             {},
             {
                 headers: {
@@ -73,7 +74,7 @@ function Invoice() {
         setTotalGst(gst)
 
         const loadCustomer = async () => {
-            const customerDetails = await axios.post(`https://tradematebackend-mdsd.onrender.com/customer/bynamecompany`,
+            const customerDetails = await axios.post(`${BASE_URL}/customer/bynamecompany`,
                 {
                     customerName: invoiceDetail.data[0].customerName,
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,

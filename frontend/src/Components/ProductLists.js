@@ -6,6 +6,7 @@ import RightSidebar from './RightSidebar';
 import UpdateProduct from './UpdateProduct';
 import crossImage from './cross.png';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 
 function ProductLists() {
     const [productDetailss, setProductDetails] = useState([])
@@ -21,7 +22,7 @@ function ProductLists() {
         loadProducts();
     }, [])
     const loadProducts = async () => {
-        const productDetails = await axios.post("https://tradematebackend-mdsd.onrender.com/stock/all", { companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
+        const productDetails = await axios.post(`${BASE_URL}/stock/all`, { companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
     email:JSON.parse(localStorage.getItem('login')).user }, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')).token : ""}`

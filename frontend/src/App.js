@@ -37,6 +37,7 @@ import Feedback from './Components/Feedback';
 import Licence from './Components/Licence';
 import Payment from './Components/Payment';
 
+import { AuthProvider } from './Components/AuthContext'; // Import AuthProvider
 
 function App() {
   let stores = JSON.parse(localStorage.getItem('login'))
@@ -44,12 +45,11 @@ function App() {
   // const url ="http://localhost:8080"
   // const url="https://trade-mate-pearl.vercel.app/"
   return (
-    <>
- 
+    <AuthProvider> {/* Wrap the application with AuthProvider */}
       <BrowserRouter>
-      <Navbar/>
+        <Navbar/>
         <Routes>
-          <Route exact path="/"  element={stores?<Dashboard/>:<LandingPage />}></Route>
+          <Route exact path="/" element={stores ? <Dashboard/> : <LandingPage />}></Route>
           <Route exact path="/dashboard/:id" element={<Dashboard  />}></Route>
           <Route exact path="/addsale/:companyName" element={<AddSale />} />
           <Route exact path="/addemployee/:companyName" element={<Signup />} />
@@ -81,14 +81,14 @@ function App() {
           <Route exact path='/expenselist' element={<ExpenseList/>} />
           <Route exact path='/forgotpassword' element={<ForgotPassword/>} />
           <Route exact path='/landing' element={<LandingPage/>} />
-          <Route exact path='/report' element={<MonthlyReport/>}/>\
+          <Route exact path='/report' element={<MonthlyReport/>}/>
           <Route exact path='/feedback' element={<Feedback/>}/>
           <Route exact path='/licence' element={<Licence/>}/>
           <Route exact path='/payment' element={<Payment/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>
-    </>
+    </AuthProvider> 
   );
 }
 

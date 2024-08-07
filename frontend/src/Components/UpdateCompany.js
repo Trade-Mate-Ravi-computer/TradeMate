@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { BASE_URL } from './AuthContext';
 
 function UpdateCompany(props) {
     const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ function UpdateCompany(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.put('https://tradematebackend-mdsd.onrender.com/company/update',
+        await axios.put(`${BASE_URL}/company/update`,
             formData,
             {
                 headers: {

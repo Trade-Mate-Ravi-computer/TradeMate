@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import crossImage from './cross.png'
 import UpdateSale from './UpdateSale';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 
 function ExpenseList() {
     const [expenseDetails, setExpenseDetails] = useState([])
@@ -24,7 +25,7 @@ function ExpenseList() {
         return sum;
     }
     const loadExpenseDetails = async () => {
-        const saleDetail = await axios.get("https://tradematebackend-mdsd.onrender.com/expense/all",
+        const saleDetail = await axios.get(`${BASE_URL}/expense/all`,
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('login')).token}`

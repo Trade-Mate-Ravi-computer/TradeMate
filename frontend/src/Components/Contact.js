@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext'
 function Contact() {
     const [loading, setLoading] = useState(false)
     const [contactInfo, setContactInfo] = useState({
@@ -19,7 +20,7 @@ function Contact() {
         setLoading(true)
         e.preventDefault()
         try {
-            const contactResponse = await axios.post('https://tradematebackend-mdsd.onrender.com/auth/contact', contactInfo)
+            const contactResponse = await axios.post(`${BASE_URL}/auth/contact`, contactInfo)
             document.getElementById('submitInfo').innerHTML = contactResponse.data
             document.getElementById('submitInfo').classList.remove("text-red-600")
             document.getElementById('submitInfo').classList.add("text-green-600")

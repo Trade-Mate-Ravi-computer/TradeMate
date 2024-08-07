@@ -3,6 +3,8 @@ import LeftSidbar from './LeftSidbar'
 import RightSidebar from './RightSidebar'
 import { NavLink } from 'react-router-dom';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 function AddSale() {
@@ -56,7 +58,7 @@ function AddSale() {
 
     const loadUser = () => {
         try {
-            fetch('https://tradematebackend-mdsd.onrender.com/user/byemail', {
+            fetch(`${BASE_URL}/user/byemail`, {
                 "method": "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,16 +79,10 @@ function AddSale() {
     // console.log("Id set to :-", id)
     const [uploadStatus, setUploadStatus] = useState("")
     const upStatus = () => {
-        setUploadStatus("Sale Added")
-        setTimeout(() => {
-            setUploadStatus("")
-        }, 3000);
+        toast.success("Sale Added")
     }
     const failStatus = () => {
-        setUploadStatus("Something went wrong")
-        setTimeout(() => {
-            setUploadStatus("")
-        }, 1000);
+     toast.error("Some Error Occurs")
     }
     const [saleDetail, setSaleDetail] = useState({
         item: {
@@ -124,7 +120,7 @@ function AddSale() {
         setLoading(true)
         e.preventDefault()
         try {
-            fetch('https://tradematebackend-mdsd.onrender.com/sales/addSale', {
+            fetch(`${BASE_URL}/sales/addSale`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,14 +148,8 @@ function AddSale() {
                         }
                     })
                     upStatus();
-                    // document.getElementById('uploadstatus').classList.remove('text-red-600')
-                    // document.getElementById('uploadstatus').classList.add('text-green-600')
-                    // window.location.reload()
                 } else {
                     failStatus();
-                    // document.getElementById('uploadstatus').classList.remove('text-green-600')
-                    // document.getElementById('uploadstatus').classList.add('text-red-600')
-
                 }
                 setLoading(false)
             })
@@ -167,9 +157,7 @@ function AddSale() {
             failStatus();
         }
     }
-    const handleUpdateStatus = () => {
-        setUploadStatus('')
-    }
+ 
     console.log(saleDetail.date, typeof(saleDetail.date))
     return (
         <div className='h-[46rem] sm:h-screen'>
@@ -257,7 +245,7 @@ function AddSale() {
                 </div>
 
             </div>
-           
+           <ToastContainer/>
         </div>
     )
 }

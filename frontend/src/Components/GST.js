@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LeftSidbar from './LeftSidbar';
 import RightSidebar from './RightSidebar';
 import loder from './loader.gif'
+import { BASE_URL } from './AuthContext';
 
 function GST() {
     const currentDate = new Date();
@@ -27,7 +28,7 @@ function GST() {
     }, [])
     const loadMinYear = async () => {
         try {
-            const minYearValue = await axios.post(`https://tradematebackend-mdsd.onrender.com/sales/date`,
+            const minYearValue = await axios.post(`${BASE_URL}/sales/date`,
                 {
                     companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                     email: JSON.parse(localStorage.getItem('login')).user
@@ -84,7 +85,7 @@ function GST() {
 
     }
     const loadCompanyDetail = async () => {
-        const companyDetail = await axios.post(`https://tradematebackend-mdsd.onrender.com/company/companyByNameEmail`,
+        const companyDetail = await axios.post(`${BASE_URL}/company/companyByNameEmail`,
             {
                 companyName: JSON.parse(localStorage.getItem('companyName')).companyName,
                 email: JSON.parse(localStorage.getItem('login')).user
@@ -101,7 +102,7 @@ function GST() {
     const loadSumOfQuart = async () => {
         setLoading(true)
         try {
-            const sumofQuart = await axios.post('https://tradematebackend-mdsd.onrender.com/sales/quart',
+            const sumofQuart = await axios.post(`${BASE_URL}/sales/quart`,
                 quaterMonthFInder(month, year),
                 {
                     headers: {
@@ -125,7 +126,7 @@ function GST() {
     const loadSumOfMonth = async () => {
         setLoading(true)
         try {
-            const sumofMonth = await axios.post('https://tradematebackend-mdsd.onrender.com/sales/monthsum',
+            const sumofMonth = await axios.post(`${BASE_URL}/sales/monthsum`,
                 {
                     month: regMonth,
                     year: parseInt(year),
